@@ -12,6 +12,8 @@ import {
   Setting,
   SignUpPage,
 } from "./pages";
+import { ToastContainerCustomer } from "./components";
+import "react-toastify/dist/ReactToastify.css";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Theme dataTheme="dark">
       <RouterProvider router={router} />
+      <ToastContainerCustomer />
     </Theme>
   </React.StrictMode>
 );
