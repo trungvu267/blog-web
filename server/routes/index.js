@@ -1,9 +1,10 @@
-import express from "express";
-var router = express.Router();
-
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.json({ message: "helo from index" });
+import { Router as ExpressRouter } from "express";
+// import userRouter from """
+import userRouter from "./user.route.js";
+import authentication from "../middleware/auth.js";
+const Router = ExpressRouter();
+Router.get("/", (req, res) => {
+  res.json({ message: "Hello from Blog app 💓" });
 });
-
-export default router;
+Router.use("/users", userRouter);
+export default Router;
