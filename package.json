@@ -6,9 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn dev",
-    "server": "cd server && yarn dev"
+    "server": "cd server && yarn dev",
+    "prepush": "./.git/hooks/pre-push"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.3"
+  }
 }
