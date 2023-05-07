@@ -6,13 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn dev",
-    "server": "cd server && yarn dev",
-    "prepush": "./.husky/pre-push"
+    "server": "cd server && yarn dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "husky": "^8.0.3"
-  }
+  "devDependencies": {}
 }
