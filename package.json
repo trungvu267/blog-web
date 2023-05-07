@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn dev",
     "server": "cd server && yarn dev",
-    "prepush": "./.husky/pre-push"
+    "prepush": "./.git/hooks/pre-push"
   },
   "keywords": [],
   "author": "",
