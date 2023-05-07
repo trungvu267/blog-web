@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn dev",
-    "server": "cd server && yarn dev",
-    "prepush": "./.git/hooks/pre-push"
+    "server": "cd server && yarn dev"
   },
   "keywords": [],
   "author": "",
