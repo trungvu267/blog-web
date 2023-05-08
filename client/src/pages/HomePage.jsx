@@ -1,8 +1,10 @@
 import { Button } from "react-daisyui";
+import { NavbarBlog } from "../components";
 import { successToast } from "../utils/toast";
 const HomePage = () => {
   return (
     <div>
+      <NavbarBlog />
       HomePage
       <Button
         onClick={() => {
