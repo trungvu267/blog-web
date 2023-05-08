@@ -1,10 +1,9 @@
 import { Button } from "react-daisyui";
-import { NavbarBlog } from "../components";
+import { Layout } from "../components";
 import { successToast } from "../utils/toast";
 const HomePage = () => {
   return (
-    <div>
-      <NavbarBlog />
+    <Layout>
       HomePage
       <Button
         onClick={() => {
@@ -13,7 +12,7 @@ const HomePage = () => {
       >
         Hello
       </Button>
-    </div>
+    </Layout>
   );
 };
 
