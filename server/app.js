@@ -9,6 +9,8 @@ import route from "./routes/index.js";
 
 const app = express();
 
+// NOTE: test tạo pr
+
 app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
