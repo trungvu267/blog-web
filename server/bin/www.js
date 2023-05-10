@@ -1,13 +1,22 @@
 import app from "../app.js";
 import debug from "debug";
 import http from "http";
+import db from "../config/db.js";
 
 const server = http.createServer(app);
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 const debugServer = debug("server:server");
-server.listen(port);
+db.connect()
+  .then(() => {
+    server.listen(port, () => {
+      console.log(`Server is listening to port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 server.on("error", onError);
 server.on("listening", onListening);
 
