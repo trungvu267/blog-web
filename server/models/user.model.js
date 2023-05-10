@@ -25,7 +25,11 @@ const UserSchema = new Schema(
       required: [true, "you must be provide password"],
       minlength: 6,
     },
-    // TODO: add role
+    role: {
+      type: String,
+      enum: ["editor", "administrator"],
+      default: "editor",
+    },
   },
   { timestamps: true }
 );
