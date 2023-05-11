@@ -7,10 +7,12 @@ import notFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
 import route from "./routes/index.js";
 import dotenv from "dotenv";
+import passport from "passport";
+import { bearerAuth } from "./config/passport.js";
 dotenv.config();
 
 const app = express();
-
+app.use(passport.initialize());
 app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
@@ -21,7 +23,7 @@ app.use(cookieParser());
 // app.use(function (req, res, next) {
 //   next(createError(404));
 // });
-
+passport.use(bearerAuth);
 app.use("/", route);
 
 // error handler
