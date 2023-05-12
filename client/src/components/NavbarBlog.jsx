@@ -3,7 +3,7 @@ import { Navbar, Button, Form, Input, Swap } from "react-daisyui";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
-
+import { Logo } from "./common";
 const NavbarBlog = () => {
   const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
   const handleToggleTheme = () => {
@@ -23,9 +23,7 @@ const NavbarBlog = () => {
   return (
     <Navbar className="bg-primary px-28 space-x-4">
       <div>
-        <Button className="text-xl normal-case border-2" variant="outline">
-          DEV
-        </Button>
+        <Logo />
       </div>
       <div className="flex-1 gap-2">
         <Form>

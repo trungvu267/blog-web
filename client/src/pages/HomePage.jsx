@@ -6,6 +6,8 @@ const HomePage = () => {
     <Layout>
       HomePage
       <Button
+        variant="outline"
+        color="primary"
         onClick={() => {
           successToast("Test 🐊");
         }}
