@@ -1,15 +1,24 @@
 import { Logo } from "../components/common";
-import { Button, Tabs, Menu, Breadcrumbs, Input } from "react-daisyui";
+import { Button, Input } from "react-daisyui";
 import { FiX } from "react-icons/fi";
-import { TextEditor, ConfirmModal } from "../components";
+import { ConfirmModal } from "../components";
+import {
+  TextEditor,
+  Tag,
+  CustomTabs,
+  SelectTag,
+  Tooltips,
+} from "../components/createPostPage";
 import { useNavigate } from "react-router-dom";
+import useTextEditor from "../hooks/useTextEditor";
+import useSelectedPostVariant from "../hooks/useSelectedPostVariant";
+import { MotionContainer } from "../components/motions";
 const CreatePost = () => {
   const navigate = useNavigate();
   const handleAccess = () => {
     navigate("/");
   };
-  // TODO: Thêm tooltip
-  // TODO: Xử lý logic phần Edit và preview
+  const { selectedPostVariant } = useSelectedPostVariant();
   return (
     <div className="max-w-5xl mx-auto mt-2 grid grid-cols-3">
       <div className="col-span-3 flex justify-between items-center mb-4">
@@ -24,23 +33,50 @@ const CreatePost = () => {
           <FiX />
         </ConfirmModal>
       </div>
+      {selectedPostVariant === "edit" ? <EditVariant /> : <PreviewVariant />}
+    </div>
+  );
+};
+
+export default CreatePost;
+
+const EditVariant = () => {
+  const { handleToolTipEditor, setIsVisible } = useTextEditor();
+
+  return (
+    <>
       <div className="col-span-2">
         <div
-          className="overflow-y-scroll rounded-md space-y-2"
+          className="overflow-y-scroll rounded-md space-y-1"
           style={{ height: " 80vh", backgroundColor: "#252525" }}
         >
           <Button variant="outline" size="sm" className="my-4 mx-8">
             Thêm ảnh chủ đề bài viết
           </Button>
-
           <Input
             placeholder="Title"
             border="false"
             size="lg"
             color="primary"
-            className="w-full bg-transparent focus:outline-none active:bg-transparent padding-0 margin-0 text-6xl border-none"
+            className="w-full bg-transparent focus:outline-none active:bg-transparent padding-0 margin-0 text-5xl border-none"
+            onClick={() => {
+              setIsVisible("title");
+              handleToolTipEditor("title");
+            }}
           />
-          <div className="mt-4 mx-8">List tag</div>
+          <div
+            className="mt-4 mx-8 py-2 flex space-x-2 items-center"
+            onClick={() => {
+              setIsVisible("tag");
+
+              handleToolTipEditor("tag");
+            }}
+          >
+            <Tag />
+            <Tag />
+            <Tag />
+            <SelectTag />
+          </div>
           <TextEditor />
         </div>
         <div className="space-x-2 flex mt-2">
@@ -56,22 +92,13 @@ const CreatePost = () => {
           </ConfirmModal>
         </div>
       </div>
-      <div className="col-span-1">2</div>
-    </div>
+      <div className="col-span-1">
+        <Tooltips />
+      </div>
+    </>
   );
 };
 
-export default CreatePost;
-
-const CustomTabs = () => {
-  return (
-    <div className="mr-auto space-x-2">
-      <Button variant="outline" size="sm">
-        Edit
-      </Button>
-      <Button variant="outline" size="sm">
-        Preview
-      </Button>
-    </div>
-  );
+const PreviewVariant = () => {
+  return <div>Preview</div>;
 };
