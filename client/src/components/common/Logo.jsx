@@ -1,7 +1,15 @@
 import { Button } from "react-daisyui";
+import { useNavigate } from "react-router-dom";
 const Logo = () => {
+  const navigate = useNavigate();
   return (
-    <Button className="text-xl normal-case border-2" variant="outline">
+    <Button
+      onClick={() => {
+        navigate("/");
+      }}
+      className="text-xl normal-case border-2"
+      variant="outline"
+    >
       DEV
     </Button>
   );

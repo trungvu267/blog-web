@@ -4,8 +4,10 @@ import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
 import { Logo } from "./common";
+import { useNavigate } from "react-router-dom";
 const NavbarBlog = () => {
   const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
+  const navigate = useNavigate();
   const handleToggleTheme = () => {
     setIsDarkTheme((preTheme) => !preTheme);
   };
@@ -37,7 +39,14 @@ const NavbarBlog = () => {
         </Form>
       </div>
       <div>
-        <Button color="ghost" className="avatar border-2" variant="outline">
+        <Button
+          color="ghost"
+          className="avatar border-2"
+          variant="outline"
+          onClick={() => {
+            navigate("/posts/create");
+          }}
+        >
           Create Post
         </Button>
       </div>
