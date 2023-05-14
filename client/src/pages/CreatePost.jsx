@@ -12,7 +12,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import useTextEditor from "../hooks/useTextEditor";
 import useSelectedPostVariant from "../hooks/useSelectedPostVariant";
-import { MotionContainer } from "../components/motions";
 const CreatePost = () => {
   const navigate = useNavigate();
   const handleAccess = () => {
