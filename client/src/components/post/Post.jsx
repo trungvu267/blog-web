@@ -1,4 +1,4 @@
-const Auth = () => {
+const Post = () => {
   return (
     <div className="border rounded-lg mb-3 border-slate-200">
       <div className="auth flex p-3 gap-2">
@@ -81,4 +81,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Post;

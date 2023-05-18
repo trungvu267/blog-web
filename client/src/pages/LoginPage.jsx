@@ -1,11 +1,12 @@
-import { Input } from "react-daisyui";
-import { Layout } from "../components";
-import Button from "../components/button/Button";
+import { Button, Input } from "react-daisyui";
+import { Layout, NavbarBlog } from "../components";
+
 import Lable from "../components/lable/Lable";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
-    <Layout>
+    <NavbarBlog>
       <div className=" p-3">
         <form
           action=""
@@ -39,7 +40,10 @@ const LoginPage = () => {
           </Button>
           <div className="text-center relative p-3 ">
             <span className="">
-              Have a password? Continue with your email address
+              Don't have an account yet?{" "}
+              <Link className="text-blue-600" to={"/signup"}>
+                Register
+              </Link>
             </span>
             <p className="absolute border z-[-1] border-slate-200 top-[50%] w-full left-0 "></p>
           </div>
@@ -63,7 +67,7 @@ const LoginPage = () => {
           </span>
         </form>
       </div>
-    </Layout>
+    </NavbarBlog>
   );
 };
 

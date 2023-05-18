@@ -3,9 +3,11 @@ import { Navbar, Button, Form, Input, Swap } from "react-daisyui";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
+import { Link, useNavigate } from "react-router-dom";
 
-const NavbarBlog = () => {
+const NavbarBlog = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
+  const navigate = useNavigate();
 
   const handleToggleTheme = () => {
     setIsDarkTheme((preTheme) => !preTheme);
@@ -22,58 +24,63 @@ const NavbarBlog = () => {
         };
   }, []);
   return (
-    <Navbar className="bg-white flex justify-between border-b space-x-3 w-full px-[16%]  mx-auto">
-      <div className="gap-x-5">
-        <Button className="text-xl normal-case border-2" variant="outline">
-          DEV
-        </Button>
+    <>
+      <Navbar className="bg-white flex justify-between border-b space-x-3 w-full px-[16%]  mx-auto">
+        <div className="gap-x-5">
+          <Link to={"/"}>
+            <Button className="text-xl normal-case border-2" variant="outline">
+              DEV
+            </Button>
+          </Link>
 
-        <div className="flex-1 gap-2">
-          <Form>
-            <Input
-              bordered
-              type="text"
-              placeholder="Search"
-              size="md"
-              className="w-96"
-            />
-          </Form>
+          <div className="flex-1 gap-2">
+            <Form>
+              <Input
+                bordered
+                type="text"
+                placeholder="Search"
+                size="md"
+                className="w-96"
+              />
+            </Form>
+          </div>
         </div>
-      </div>
-      <div>
-        <Button color="ghost" className="avatar border-2" variant="outline">
-          Create Post
-        </Button>
+        <div>
+          <Button color="ghost" className="avatar border-2" variant="outline">
+            Create Post
+          </Button>
 
-        <Swap
-          className="w-[50px]"
-          rotate
-          onElement={
-            isDarkTheme ? (
-              <FiMoon size={"2rem"} onClick={handleToggleTheme} />
-            ) : (
-              <FiSun size={"2rem"} onClick={handleToggleTheme} />
-            )
-          }
-          offElement={
-            isDarkTheme ? (
-              <FiMoon size={"2rem"} onClick={handleToggleTheme} />
-            ) : (
-              <FiSun size={"2rem"} onClick={handleToggleTheme} />
-            )
-          }
-        />
+          <Swap
+            className="w-[50px]"
+            rotate
+            onElement={
+              isDarkTheme ? (
+                <FiMoon size={"2rem"} onClick={handleToggleTheme} />
+              ) : (
+                <FiSun size={"2rem"} onClick={handleToggleTheme} />
+              )
+            }
+            offElement={
+              isDarkTheme ? (
+                <FiMoon size={"2rem"} onClick={handleToggleTheme} />
+              ) : (
+                <FiSun size={"2rem"} onClick={handleToggleTheme} />
+              )
+            }
+          />
 
-        <Button
-          color="ghost"
-          className="avatar border-2"
-          shape="circle"
-          variant="outline"
-        >
-          T
-        </Button>
-      </div>
-    </Navbar>
+          <Button
+            color="ghost"
+            className="avatar border-2"
+            shape="circle"
+            variant="outline"
+          >
+            T
+          </Button>
+        </div>
+      </Navbar>
+      {children}
+    </>
   );
 };
 export default NavbarBlog;
