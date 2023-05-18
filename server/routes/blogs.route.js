@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-
+import asyncWrapper from "../middleware/asyncWrapper.js";
 import {
   getAllBlog,
   getOne,
@@ -12,33 +12,29 @@ import {
 const router = express.Router();
 
 router.get(
-  "/getall",
+  "/",
   passport.authenticate("bearer", { session: false }),
-  getAllBlog
+  asyncWrapper(getAllBlog)
 );
 
-router.get(
-  "/getone/:id",
-  passport.authenticate("bearer", { session: false }),
-  getOne
-);
+router.get("/:id", passport.authenticate("bearer", { session: false }), getOne);
 
 router.put(
-  "/update/:id",
+  "/:id",
   passport.authenticate("bearer", { session: false }),
-  updateBlog
+  asyncWrapper(updateBlog)
 );
 
 router.post(
-  "/create",
+  "/",
   passport.authenticate("bearer", { session: false }),
-  createBlog
+  asyncWrapper(createBlog)
 );
 
 router.delete(
-  "/delete/:id",
+  "/:id",
   passport.authenticate("bearer", { session: false }),
-  deleteBlog
+  asyncWrapper(deleteBlog)
 );
 
 export default router;
