@@ -11,26 +11,18 @@ import {
 
 const router = express.Router();
 
-router.get(
-  "/",
-  passport.authenticate("bearer", { session: false }),
-  asyncWrapper(getAllBlog)
-);
-
-router.get("/:id", passport.authenticate("bearer", { session: false }), getOne);
-
+router.get("/", asyncWrapper(getAllBlog));
+router.get("/:id", asyncWrapper(getOne));
 router.put(
   "/:id",
   passport.authenticate("bearer", { session: false }),
   asyncWrapper(updateBlog)
 );
-
 router.post(
   "/",
   passport.authenticate("bearer", { session: false }),
   asyncWrapper(createBlog)
 );
-
 router.delete(
   "/:id",
   passport.authenticate("bearer", { session: false }),

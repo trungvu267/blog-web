@@ -1,17 +1,20 @@
 import Blog from "../models/blog.model.js";
 import { StatusCodes } from "http-status-codes";
 
-const getAllBlog = async (req, res) => {
-  const blog = await Blog.find({ author: req.user.userId }).populate("author", [
-    "name",
-  ]);
-  res.json({ success: true, blog });
+const getAllBlog = async (req, res, next) => {
+  const blogs = await Blog.find();
+  res.jsonp(blogs);
+};
+
+const getAllBlogByAuthor = async (req, res) => {
+  const { userId } = req.params;
+  const blogs = await Blog.find({ author: userId });
+  res.json(blogs);
 };
 
 const getOne = async (req, res) => {
-  const blogCondition = { _id: req.params.id, author: req.user.userId };
+  const blogCondition = { _id: req.params.id };
   const blog = await Blog.findOne(blogCondition);
-
   if (!blog) {
     return res
       .status(StatusCodes.NOT_FOUND)
@@ -36,12 +39,6 @@ const createBlog = async (req, res) => {
       .json({ success: false, message: "you must be provide content" });
   }
 
-  if (!(req.user.role === "administrator")) {
-    return res
-      .status(StatusCodes.FORBIDDEN)
-      .json({ success: false, message: "You do not have permission to edit" });
-  }
-
   const newBlog = new Blog({
     title,
     content,
@@ -57,33 +54,10 @@ const createBlog = async (req, res) => {
   });
 };
 const updateBlog = async (req, res) => {
-  const { title, content, published } = req.body;
-
-  // Simple validation
-  if (!title) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ success: false, message: "you must be provide title" });
-  }
-  if (!(content.length > 6)) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ success: false, message: "you must be provide content" });
-  }
-  if (!(req.user.role === "administrator")) {
-    return res
-      .status(StatusCodes.FORBIDDEN)
-      .json({ success: false, message: "You do not have permission to edit" });
-  }
-
   let updatedBlog = {
-    title,
-    content,
-    published: published ? published : false,
+    ...req.body,
   };
-
   const blogUpdateCondition = { _id: req.params.id, author: req.user.userId };
-
   const blog = await Blog.findOne(blogUpdateCondition);
   if (!blog) {
     return res
@@ -135,5 +109,16 @@ const deleteBlog = async (req, res) => {
     blog: deletedBlog,
   });
 };
-
-export { getAllBlog, getOne, createBlog, updateBlog, deleteBlog };
+// chỉ có admin mới có quyền publish
+const publishedBlog = (req, res) => {
+  res.json({ message: "Post published" });
+};
+export {
+  getAllBlog,
+  getOne,
+  createBlog,
+  updateBlog,
+  publishedBlog,
+  deleteBlog,
+  getAllBlogByAuthor,
+};
