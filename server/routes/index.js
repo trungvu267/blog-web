@@ -1,10 +1,8 @@
 import { Router as ExpressRouter } from "express";
 import passport from "passport";
-// import userRouter from """
-import pkg from "passport-http-bearer";
-
 import userRouter from "./user.route.js";
-import authentication from "../middleware/auth.js";
+import blogsRouter from "./blogs.route.js";
+
 const Router = ExpressRouter();
 Router.get("/", (req, res) => {
   res.json({ message: "Hello from Blog app 💓" });
@@ -18,4 +16,5 @@ Router.get(
   }
 );
 Router.use("/users", userRouter);
+Router.use("/blogs", blogsRouter);
 export default Router;

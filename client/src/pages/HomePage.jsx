@@ -1,19 +1,16 @@
-import { Button } from "react-daisyui";
 import { Layout } from "../components";
-import { successToast } from "../utils/toast";
+import { Menu, Posts, TitlePost } from "../components/HomePage";
+
 const HomePage = () => {
   return (
     <Layout>
-      HomePage
-      <Button
-        variant="outline"
-        color="primary"
-        onClick={() => {
-          successToast("Test 🐊");
-        }}
-      >
-        Hello
-      </Button>
+      <div className="flex">
+        <Menu></Menu>
+        <div className="w-[56%]   p-5">
+          <Posts></Posts>
+        </div>
+        <TitlePost></TitlePost>
+      </div>
     </Layout>
   );
 };

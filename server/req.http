@@ -1,0 +1,59 @@
+GET http://localhost:5556
+
+###
+GET http://localhost:5556/test
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzOWYyOTkwODI4ZTk0YmJlY2ZiNzYiLCJuYW1lIjoidHJ1b25nMyIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjg0MjUyMzI5LCJleHAiOjE3MTQyNTIzMjl9.acLI4KX-7NqC6cSVoXR3TaDYjJNdHQc7fa4psUBThL0
+
+
+
+
+###
+POST http://localhost:5556/users/sign-up
+Content-Type: application/json
+
+{
+    "name": "devphamtruong1",
+    "email": "dev1@gmail.com",
+    "password":"1234567",
+    "role": "administrator"
+}
+
+###
+POST http://localhost:5556/users/sign-in
+Content-Type: application/json
+
+{
+    "email": "dev1@gmail.com",
+    "password":"1234567",
+}
+
+###
+POST http://localhost:5556/blogs/create
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzOWYyOTkwODI4ZTk0YmJlY2ZiNzYiLCJuYW1lIjoidHJ1b25nMyIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjg0MjU1NTc4LCJleHAiOjE3MTQyNTU1Nzh9.rGTzIdYqlu7kgoc2bH_YXUvBzv2oAyZRrbjwGQ6t-3Q
+
+{
+    "title": "Hoc de ra truong 3", 
+    "content": "BTL chuy nganh 01"
+}
+
+
+###
+GET  http://localhost:5556/blogs/getall
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzOWYyOTkwODI4ZTk0YmJlY2ZiNzYiLCJuYW1lIjoidHJ1b25nMyIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjg0MjU0OTI4LCJleHAiOjE3MTQyNTQ5Mjh9.bP1AdvLKwIePDY7jsE44h8ZokQ9N3yb_7q2yrNlKC_o
+
+
+###
+GET  http://localhost:5556/blogs/getone/6463a7277007a53b66ebaa30
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzOWYyOTkwODI4ZTk0YmJlY2ZiNzYiLCJuYW1lIjoidHJ1b25nMyIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjg0MjU0OTI4LCJleHAiOjE3MTQyNTQ5Mjh9.bP1AdvLKwIePDY7jsE44h8ZokQ9N3yb_7q2yrNlKC_o
+
+
+###
+PUT http://localhost:5556/blogs/update
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzOWYyOTkwODI4ZTk0YmJlY2ZiNzYiLCJuYW1lIjoidHJ1b25nMyIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjg0MjU1NTc4LCJleHAiOjE3MTQyNTU1Nzh9.rGTzIdYqlu7kgoc2bH_YXUvBzv2oAyZRrbjwGQ6t-3Q
+
+{
+    "title": "Hoc de ra truong 3 update", 
+    "content": "BTL chuy nganh 01 update"
+}

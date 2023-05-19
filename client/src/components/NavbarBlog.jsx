@@ -1,13 +1,15 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Navbar, Button, Form, Input, Swap } from "react-daisyui";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
 import { Logo } from "./common";
-import { useNavigate } from "react-router-dom";
-const NavbarBlog = () => {
+import { Link, useNavigate } from "react-router-dom";
+
+const NavbarBlog = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
   const navigate = useNavigate();
+
   const handleToggleTheme = () => {
     setIsDarkTheme((preTheme) => !preTheme);
   };
