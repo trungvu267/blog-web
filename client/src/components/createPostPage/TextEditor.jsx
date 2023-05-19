@@ -3,9 +3,11 @@ import { useAtom } from "jotai";
 import { textEditorAtom } from "../../states/textEditor";
 import useTextEditor from "../../hooks/useTextEditor";
 import "../../styles/editor.css";
+import { darkThemeAtom } from "../../states/theme";
 const TextEditor = () => {
   const [editorState, setEditorState] = useAtom(textEditorAtom);
   const { handleToolTipEditor } = useTextEditor();
+  const [isDarkTheme] = useAtom(darkThemeAtom);
   const modules = {
     toolbar: {
       container: [
@@ -14,9 +16,6 @@ const TextEditor = () => {
         [{ header: [1, 2, 3, false] }],
         [{ font: [] }],
       ],
-      styles: {
-        background: "red",
-      },
     },
   };
   return (
@@ -26,7 +25,9 @@ const TextEditor = () => {
         value={editorState}
         onChange={setEditorState}
         modules={modules}
-        className="custom-quill-editor"
+        className={`custom-quill-editor ${
+          isDarkTheme ? "dark-mode" : "light-mode"
+        }`}
       />
     </div>
   );

@@ -1,2 +1,3 @@
 import Logo from "./Logo";
-export { Logo };
+import Avatar from "./Avatar";
+export { Logo, Avatar };

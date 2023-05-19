@@ -8,6 +8,7 @@ import {
   CreatePost,
   Setting,
   SignUpPage,
+  DashboardPage,
 } from "./pages";
 import { ToastContainerCustomer } from "./components";
 import "react-toastify/dist/ReactToastify.css";
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/posts/create",
     element: <CreatePost />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardPage />,
   },
   {
     path: "/login",

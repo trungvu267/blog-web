@@ -8,6 +8,7 @@ const CustomTabs = () => {
       <Button
         variant="outline"
         size="sm"
+        className="bg-base-100"
         onClick={setEditVariant}
         color={selectedPostVariant === "edit" && "primary"}
       >
@@ -16,6 +17,7 @@ const CustomTabs = () => {
       <Button
         variant="outline"
         size="sm"
+        className="bg-base-100"
         onClick={setPreviewVariant}
         color={selectedPostVariant === "preview" && "primary"}
       >

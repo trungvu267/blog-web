@@ -5,6 +5,7 @@ import ViewPost from "./ViewPost";
 import CreatePost from "./CreatePost";
 import Setting from "./Setting";
 import SignUpPage from "./SignUpPage";
+import DashboardPage from "./DashboardPage";
 
 export {
   HomePage,
@@ -14,4 +15,5 @@ export {
   CreatePost,
   Setting,
   SignUpPage,
+  DashboardPage,
 };

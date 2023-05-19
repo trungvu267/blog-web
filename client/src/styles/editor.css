@@ -1,5 +1,4 @@
 .custom-quill-editor .ql-toolbar {
-  background-color: #f0f0f0;
   /* color: #f0f0f0; */
   border: none;
   border-radius: 4px;
@@ -15,4 +14,13 @@
 }
 .custom-quill-editor .ql-container {
   border: none;
+}
+
+.dark-mode .ql-toolbar {
+  background-color: #f0f0f0;
+}
+
+.light-mode .ql-toolbar .ql-snow {
+  background-color: #252525;
+  color: "red" !important;
 }
