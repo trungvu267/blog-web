@@ -2,7 +2,7 @@ import { Navbar, Button, Form, Input } from "react-daisyui";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
-import { Logo } from "./common";
+import { Logo, Avatar } from "./common";
 import { useNavigate } from "react-router-dom";
 
 const NavbarBlog = () => {
@@ -39,13 +39,7 @@ const NavbarBlog = () => {
         <ToggleThemeBtn />
       </div>
       <div>
-        <Button
-          className="avatar border-2 bg-base-300 border-none"
-          shape="circle"
-          variant="outline"
-        >
-          T
-        </Button>
+        <Avatar />
       </div>
     </Navbar>
   );
