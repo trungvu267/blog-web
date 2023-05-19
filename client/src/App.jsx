@@ -60,7 +60,6 @@ const router = createBrowserRouter([
 ]);
 const App = () => {
   const [isDarkTheme] = useAtom(darkThemeAtom);
-  console.log(isDarkTheme);
   return (
     <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
       <RouterProvider router={router} />
