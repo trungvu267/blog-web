@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const Menu = () => {
   return (
     <div className="w-[22%] mt-5">
-      <div className=" bg-slate-100 border  py-3 px-5 rounded-lg">
-        <h1 className="text-black text-lg font-bold mb-3">
+      <div className=" bg-primary border  py-3 px-5 rounded-lg">
+        <h1 className="text-lg font-bold mb-3">
           DEV Community is a community of 1,062,194 amazing developers
         </h1>
         <span>
@@ -14,8 +14,7 @@ const Menu = () => {
           careers.
         </span>
         <Button
-          color="ghost"
-          className="w-full border-blue-500 border hover:text-white hover:bg-blue-600 text-blue-500 font-semibold mt-3"
+          className="w-full bg-base-200 border hover:text-white hover:bg-base-300  font-semibold mt-3"
           variant="outline"
         >
           Create account

@@ -58,7 +58,7 @@ const Posts = (props) => {
           alt="imgbanner"
         />
 
-        <h1 className="px-8 text-2xl mb-2 font-bold text-black hover:text-[#3b49df] ">
+        <h1 className="px-8 text-2xl mb-2 font-bold  hover:text-primary cursor-pointer">
           Need to stay up-to-date with the most relevant trends in software,
           such as AI, cloud computing, and all things frontend?
         </h1>
@@ -68,7 +68,7 @@ const Posts = (props) => {
             You can do so much more once you <b>create your account</b>. Follow
             the devs and topics you care about, and keep up-to-date.
           </div>
-          <span className="text-3xl font-bold mb-5 text-[#3b49df]">
+          <span className="text-3xl font-bold mb-5 text-primary">
             Start now
           </span>
           <div className="mt-5">Happy coding ❤️</div>
