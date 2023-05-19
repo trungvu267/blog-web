@@ -8,36 +8,25 @@ const Post = () => {
           alt=""
         />
         <div>
-          <h2 className=" text-slate-900 font-medium ">Daniel Reis</h2>
+          <h2 className=" text-primary font-medium ">Daniel Reis</h2>
           <span className=" text-start text-sm">May 8</span>
         </div>
       </div>
-      <h1 className="px-8 text-2xl mb-2 font-bold text-black hover:text-[#3b49df] ">
+      <h1 className="px-8 text-2xl mb-2 font-bold hover:text-primary cursor-pointer">
         Database 101: How social media “likes” are stored in a database
       </h1>
       <div className="flex px-8 mb-3">
-        <span className="p-2 rounded-lg text-sm hover:bg-slate-100 cursor-pointer">
-          # webdev
-        </span>
-        <span className="p-2 rounded-lg text-sm hover:bg-slate-100 cursor-pointer">
-          # webdev
-        </span>
-        <span className="p-2 rounded-lg text-sm hover:bg-slate-100 cursor-pointer">
-          # webdev
-        </span>
-        <span className="p-2 rounded-lg text-sm hover:bg-slate-100 cursor-pointer">
-          # webdev
-        </span>
-        <span className="p-2 rounded-lg text-sm hover:bg-slate-100 cursor-pointer">
-          # webdev
-        </span>
+        <Tag />
+        <Tag />
+        <Tag />
+        <Tag />
       </div>
       <div className="flex  px-8 mb-5 justify-between">
         <div className="flex gap-3  text-sm">
-          <span className="px-5 py-2 rounded-lg hover:bg-slate-200">
+          <span className="px-5 py-2 rounded-lg hover:bg-base-200 cursor-pointer">
             325 reactions
           </span>
-          <div className="flex gap-1 px-5 py-2 rounded-lg hover:bg-slate-200">
+          <div className="flex gap-1 px-5 py-2 rounded-lg hover:bg-base-200 cursor-pointer">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +48,7 @@ const Post = () => {
         </div>
         <div className="flex gap-3">
           <span className="text-xs translate-y-3">6 min read</span>
-          <span className="px-1 py-3 rounded-lg hover:bg-slate-200">
+          <span className="px-1 py-3 rounded-lg hover:bg-base-200 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -82,3 +71,11 @@ const Post = () => {
 };
 
 export default Post;
+
+const Tag = () => {
+  return (
+    <span className="p-2 rounded-lg text-sm hover:bg-base-200 cursor-pointer">
+      # webdev
+    </span>
+  );
+};

@@ -1,12 +1,12 @@
 import { Button } from "react-daisyui";
 import { iconFollow } from "../../utils/constant";
 import { Link } from "react-router-dom";
-
+import { MdAlternateEmail, MdOutlineHome } from "react-icons/md";
 const Menu = () => {
   return (
     <div className="w-[22%] mt-5">
-      <div className=" bg-slate-100 border  py-3 px-5 rounded-lg">
-        <h1 className="text-black text-lg font-bold mb-3">
+      <div className=" bg-primary border  py-3 px-5 rounded-lg">
+        <h1 className="text-lg font-bold mb-3">
           DEV Community is a community of 1,062,194 amazing developers
         </h1>
         <span>
@@ -14,8 +14,7 @@ const Menu = () => {
           careers.
         </span>
         <Button
-          color="ghost"
-          className="w-full border-blue-500 border hover:text-white hover:bg-blue-600 text-blue-500 font-semibold mt-3"
+          className="w-full bg-base-200 border hover:text-white hover:bg-base-300  font-semibold mt-3"
           variant="outline"
         >
           Create account
@@ -31,59 +30,34 @@ const Menu = () => {
       <div className="flex flex-col mt-5 mb-5">
         <Button
           color="ghost"
-          className={"text-black text-start p-2 w-full group hover:bg-blue-100"}
+          className={"text-black text-start p-2 w-full group hover:bg-base-300"}
         >
           <div className="flex gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6 text-slate-600"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-              />
-            </svg>
-
-            <span className="group-hover:text-blue-800 translate-y-1 font-semibold text-slate-600">
-              Home
+            <MdOutlineHome
+              size={"1.5rem"}
+              className="text-primary group-hover:text-blue-800"
+            />
+            <span className="group-hover:text-blue-800 translate-y-1 font-semibold text-primary">
+              Trang chủ
             </span>
           </div>
         </Button>
-        <Button
-          color="ghost"
-          className={
-            "text-black text-start p-2  w-full group hover:bg-blue-100"
-          }
-        >
-          <div className="flex gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6 text-slate-600"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+        <Link to={"/tags"}>
+          <Button
+            color="ghost"
+            className={"text-start p-2  w-full group hover:bg-base-300"}
+          >
+            <div className="flex gap-2">
+              <MdAlternateEmail
+                size={"1.5rem"}
+                className="text-primary group-hover:text-blue-800"
               />
-            </svg>
-
-            <Link
-              to={"/tags"}
-              className="group-hover:text-blue-800 font-semibold translate-y-1 text-slate-600"
-            >
-              Tags
-            </Link>
-          </div>
-        </Button>{" "}
+              <span className="group-hover:text-blue-800 font-semibold translate-y-1 text-primary">
+                Danh mục bài viết
+              </span>
+            </div>
+          </Button>{" "}
+        </Link>
       </div>
 
       <div className="flex gap-3 mb-5">
