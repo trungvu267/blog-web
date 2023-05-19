@@ -19,12 +19,17 @@ const login = async (req, res, next) => {
     return;
   }
   const token = user.createJWT();
-  res.status(200).json({ userName: user.name, email: user.email, token });
+  res
+    .status(200)
+    .json({ userName: user.name, email: user.email, token, role: user.role });
 };
 const register = async (req, res, next) => {
-  const user = await User.create(req.body);
+  const { email, password, name } = req.body;
+  const user = new User({ email, name, password, role: "editor" });
   const token = user.createJWT();
-  res.status(200).json({ userName: user.name, email: user.email, token });
+  res
+    .status(200)
+    .json({ userName: user.name, email: user.email, role: user.role, token });
 };
 
 export { login, register };

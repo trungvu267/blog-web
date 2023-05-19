@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import { StatusCodes } from "http-status-codes";
+import passport from "passport";
 
+//NOTE: ko sử dụng hàm này
 const authentication = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -21,4 +23,5 @@ const authentication = (req, res, next) => {
   }
 };
 
-export default authentication;
+const auth = passport.authenticate("bearer", { session: false });
+export { authentication, auth };
