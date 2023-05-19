@@ -1,5 +1,5 @@
 import { Button } from "react-daisyui";
-import { iconFollow } from "../utils/constant";
+import { iconFollow } from "../../utils/constant";
 import { Link } from "react-router-dom";
 
 const Menu = () => {

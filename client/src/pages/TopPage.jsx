@@ -1,10 +1,10 @@
 import { Layout } from "../components";
-import Posts from "../components/Posts";
 
 const TopPage = () => {
   return (
     <Layout>
-      <Posts></Posts>
+      {/* <Posts></Posts> */}
+      top-page
     </Layout>
   );
 };

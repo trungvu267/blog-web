@@ -1,4 +1,4 @@
-const Lable = ({ children }) => {
+const Label = ({ children }) => {
   return (
     <label className="text-black font-medium text-xl" htmlFor="">
       {children}
@@ -6,4 +6,4 @@ const Lable = ({ children }) => {
   );
 };
 
-export default Lable;
+export default Label;

@@ -1,17 +1,16 @@
-import { Button } from "react-daisyui";
 import { Layout } from "../components";
-import { successToast } from "../utils/toast";
-import Post from "../components/post/Post";
-import TitleInformation from "../components/information/TitleInformation";
-// import Button from "../components/button/Button";
-import { iconFollow } from "../utils/constant";
-import { Link } from "react-router-dom";
-import Menu from "../components/Menu";
-import Posts from "../components/Posts";
+import { Menu, Posts, TitlePost } from "../components/HomePage";
+
 const HomePage = () => {
   return (
     <Layout>
-      <Posts></Posts>
+      <div className="flex">
+        <Menu></Menu>
+        <div className="w-[56%]   p-5">
+          <Posts></Posts>
+        </div>
+        <TitlePost></TitlePost>
+      </div>
     </Layout>
   );
 };

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Post from "./post/Post";
+import Post from "./Post";
 
 const Posts = (props) => {
   return (

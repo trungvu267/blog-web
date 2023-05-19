@@ -1,5 +1,5 @@
 import { Button } from "react-daisyui";
-import TitleInformation from "./information/TitleInformation";
+import TitleInformation from "./TitleInformation";
 
 const TitlePost = () => {
   return (
