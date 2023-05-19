@@ -13,10 +13,25 @@ import { ToastContainerCustomer } from "./components";
 import "react-toastify/dist/ReactToastify.css";
 import { darkThemeAtom } from "./states/theme";
 import { useAtom } from "jotai/react";
+import Tags from "./pages/Tags";
+import LatestPage from "./pages/LatestPage";
+import TopPage from "./pages/TopPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path: "/latest",
+    element: <LatestPage />,
+  },
+  {
+    path: "/top",
+    element: <TopPage />,
+  },
+  {
+    path: "/tags",
+    element: <Tags />,
   },
   {
     path: "/posts/:postId",
@@ -31,7 +46,7 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/sign-up",
+    path: "/signup",
     element: <SignUpPage />,
   },
   {

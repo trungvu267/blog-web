@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+input {
+  width: 540px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
