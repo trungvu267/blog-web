@@ -25,7 +25,11 @@ const UserSchema = new Schema(
       required: [true, "you must be provide password"],
       minlength: 6,
     },
-    // TODO: add role
+    role: {
+      type: String,
+      enum: ["editor", "administrator"],
+      default: "editor",
+    },
   },
   { timestamps: true }
 );
@@ -38,7 +42,7 @@ UserSchema.pre("save", async function (next) {
 
 UserSchema.methods.createJWT = function () {
   return jwt.sign(
-    { userId: this._id, name: this.name },
+    { userId: this._id, name: this.name, role: this.role },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_TIME_LIFE }
   );
