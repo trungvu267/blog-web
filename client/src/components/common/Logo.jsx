@@ -7,7 +7,7 @@ const Logo = () => {
       onClick={() => {
         navigate("/");
       }}
-      className="text-xl normal-case border-2"
+      className="text-xl normal-case border-2 border-base-300 text-base-300"
       variant="outline"
     >
       DEV

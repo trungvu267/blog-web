@@ -1,29 +1,13 @@
-import { useMemo } from "react";
-import { Navbar, Button, Form, Input, Swap } from "react-daisyui";
+import { Navbar, Button, Form, Input } from "react-daisyui";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
 import { Logo } from "./common";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const NavbarBlog = ({ children }) => {
-  const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
+const NavbarBlog = () => {
   const navigate = useNavigate();
 
-  const handleToggleTheme = () => {
-    setIsDarkTheme((preTheme) => !preTheme);
-  };
-  const element = useMemo(() => {
-    return isDarkTheme
-      ? {
-          on: <FiSun size={"2rem"} onClick={handleToggleTheme} />,
-          off: <FiMoon size={"2rem"} onClick={handleToggleTheme} />,
-        }
-      : {
-          on: <FiMoon size={"2rem"} onClick={handleToggleTheme} />,
-          off: <FiSun size={"2rem"} onClick={handleToggleTheme} />,
-        };
-  }, []);
   return (
     <Navbar className="bg-primary px-28 space-x-4">
       <div>
@@ -42,8 +26,7 @@ const NavbarBlog = ({ children }) => {
       </div>
       <div>
         <Button
-          color="ghost"
-          className="avatar border-2"
+          className="avatar border-2 border-base-300 text-base-300"
           variant="outline"
           onClick={() => {
             navigate("/posts/create");
@@ -53,28 +36,11 @@ const NavbarBlog = ({ children }) => {
         </Button>
       </div>
       <div>
-        <Swap
-          rotate
-          onElement={
-            isDarkTheme ? (
-              <FiMoon size={"2rem"} onClick={handleToggleTheme} />
-            ) : (
-              <FiSun size={"2rem"} onClick={handleToggleTheme} />
-            )
-          }
-          offElement={
-            isDarkTheme ? (
-              <FiMoon size={"2rem"} onClick={handleToggleTheme} />
-            ) : (
-              <FiSun size={"2rem"} onClick={handleToggleTheme} />
-            )
-          }
-        />
+        <ToggleThemeBtn />
       </div>
       <div>
         <Button
-          color="ghost"
-          className="avatar border-2"
+          className="avatar border-2 bg-base-300 border-none"
           shape="circle"
           variant="outline"
         >
@@ -85,3 +51,27 @@ const NavbarBlog = ({ children }) => {
   );
 };
 export default NavbarBlog;
+
+const ToggleThemeBtn = () => {
+  const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
+  const handleToggleTheme = () => {
+    setIsDarkTheme((preTheme) => !preTheme);
+  };
+  return (
+    <Button className="border-none  bg-transparent hover:bg-transparent focus:bg-transparent">
+      {isDarkTheme ? (
+        <FiMoon
+          size={"2rem"}
+          onClick={handleToggleTheme}
+          className="text-base-300"
+        />
+      ) : (
+        <FiSun
+          size={"2rem"}
+          onClick={handleToggleTheme}
+          className="text-base-300"
+        />
+      )}
+    </Button>
+  );
+};
