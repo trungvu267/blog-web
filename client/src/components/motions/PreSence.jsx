@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import useTextEditor from "../../hooks/useTextEditor";
 const Presence = ({ isVisible, children, rest }) => {
   const { toolTipEditor } = useTextEditor();
-  console.log(isVisible);
-  console.log(toolTipEditor);
   return (
     isVisible === toolTipEditor && (
       <motion.div

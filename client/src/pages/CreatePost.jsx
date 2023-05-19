@@ -19,21 +19,25 @@ const CreatePost = () => {
   };
   const { selectedPostVariant } = useSelectedPostVariant();
   return (
-    <div className="max-w-5xl mx-auto mt-2 grid grid-cols-3">
-      <div className="col-span-3 flex justify-between items-center mb-4">
-        <Logo />
-        <div className="ml-6 mr-auto">Tạo bài viết mới</div>
-        <CustomTabs />
-        <ConfirmModal
-          color="ghost"
-          textHeader={"Bạn muốm quay lại trang chủ"}
-          handleAccess={handleAccess}
-        >
-          <FiX />
-        </ConfirmModal>
+    <>
+      <div className="bg-primary">
+        <div className="max-w-5xl mx-auto col-span-3 flex justify-between items-center mb-4 py-2 ">
+          <Logo />
+          <div className="ml-6 mr-auto">Tạo bài viết mới</div>
+          <CustomTabs />
+          <ConfirmModal
+            color="ghost"
+            textHeader={"Bạn muốm quay lại trang chủ"}
+            handleAccess={handleAccess}
+          >
+            <FiX />
+          </ConfirmModal>
+        </div>
       </div>
-      {selectedPostVariant === "edit" ? <EditVariant /> : <PreviewVariant />}
-    </div>
+      <div className="max-w-5xl mx-auto mt-2 grid grid-cols-3">
+        {selectedPostVariant === "edit" ? <EditVariant /> : <PreviewVariant />}
+      </div>
+    </>
   );
 };
 
@@ -46,10 +50,15 @@ const EditVariant = () => {
     <>
       <div className="col-span-2">
         <div
-          className="overflow-y-scroll rounded-md space-y-1"
-          style={{ height: " 80vh", backgroundColor: "#252525" }}
+          className="overflow-y-scroll rounded-md space-y-1 bg-base-200"
+          style={{ height: " 80vh" }}
         >
-          <Button variant="outline" size="sm" className="my-4 mx-8">
+          <Button
+            variant="outline"
+            size="sm"
+            className="my-4 mx-8"
+            color="primary"
+          >
             Thêm ảnh chủ đề bài viết
           </Button>
           <Input
