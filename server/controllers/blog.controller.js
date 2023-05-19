@@ -13,15 +13,7 @@ const getAllBlogByAuthor = async (req, res) => {
 };
 
 const getOne = async (req, res) => {
-  const blogCondition = { _id: req.params.id };
-  const blog = await Blog.findOne(blogCondition);
-  if (!blog) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ success: false, message: "post not found" });
-  }
-
-  res.json({ success: true, message: "fin post success", blog: blog });
+  res.json({ success: true, message: "find post success", blog: req.blog });
 };
 
 // Create a new blog
@@ -57,20 +49,24 @@ const updateBlog = async (req, res) => {
   let updatedBlog = {
     ...req.body,
   };
-  const blogUpdateCondition = { _id: req.params.id, author: req.user.userId };
+  const published = req.body?.published;
+  const blogUpdateCondition = { _id: req.blog._id, author: req.user.userId };
   const blog = await Blog.findOne(blogUpdateCondition);
   if (!blog) {
     return res
       .status(StatusCodes.NOT_FOUND)
       .json({ success: false, message: "post not found" });
   }
-
+  if (req.user.role === "editor" && !!published) {
+    return res
+      .status(StatusCodes.NOT_MODIFIED)
+      .json({ success: false, message: "you are not Permissions" });
+  }
   const newUpdatedBlog = await Blog.findOneAndUpdate(
     blogUpdateCondition,
     updatedBlog,
     { new: true }
   );
-
   // User not authorised to update post or post not found
   if (!newUpdatedBlog)
     return res.status(StatusCodes.FORBIDDEN).json({
@@ -85,7 +81,7 @@ const updateBlog = async (req, res) => {
   });
 };
 const deleteBlog = async (req, res) => {
-  const blogDeleteCondition = { _id: req.params.id, author: req.user.userId };
+  const blogDeleteCondition = { _id: req.blog.id, author: req.user.userId };
   const blog = await Blog.findOne(blogDeleteCondition);
 
   if (!blog) {
@@ -96,7 +92,6 @@ const deleteBlog = async (req, res) => {
 
   const deletedBlog = await Blog.findOneAndDelete(blogDeleteCondition);
 
-  // User not authorised or post not found
   if (!deletedBlog)
     return res.status(StatusCodes.NOT_FOUND).json({
       success: false,
@@ -109,16 +104,25 @@ const deleteBlog = async (req, res) => {
     blog: deletedBlog,
   });
 };
-// chỉ có admin mới có quyền publish
-const publishedBlog = (req, res) => {
-  res.json({ message: "Post published" });
+
+const getBlogById = (req, res, next, id) => {
+  Blog.findById(id)
+    .then((blog) => {
+      req.blog = blog;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      const notFound = new Error("Blog not found");
+      next(notFound);
+    });
 };
 export {
   getAllBlog,
   getOne,
   createBlog,
   updateBlog,
-  publishedBlog,
   deleteBlog,
   getAllBlogByAuthor,
+  getBlogById,
 };

@@ -1,5 +1,4 @@
 import express from "express";
-import passport from "passport";
 import asyncWrapper from "../middleware/asyncWrapper.js";
 import {
   getAllBlog,
@@ -7,26 +6,16 @@ import {
   createBlog,
   updateBlog,
   deleteBlog,
+  getBlogById,
 } from "../controllers/blog.controller.js";
-
+import { auth } from "../middleware/auth.js";
 const router = express.Router();
 
 router.get("/", asyncWrapper(getAllBlog));
-router.get("/:id", asyncWrapper(getOne));
-router.put(
-  "/:id",
-  passport.authenticate("bearer", { session: false }),
-  asyncWrapper(updateBlog)
-);
-router.post(
-  "/",
-  passport.authenticate("bearer", { session: false }),
-  asyncWrapper(createBlog)
-);
-router.delete(
-  "/:id",
-  passport.authenticate("bearer", { session: false }),
-  asyncWrapper(deleteBlog)
-);
-
+router.post("/", auth, asyncWrapper(createBlog));
+router.get("/:blogId", asyncWrapper(getOne));
+router.put("/:blogId", auth, asyncWrapper(updateBlog));
+router.delete("/:blogId", auth, asyncWrapper(deleteBlog));
+router.param("blogId", getBlogById);
+// TODO: Thêm route lấy blog của từng user /profile/:userId/blogs
 export default router;
