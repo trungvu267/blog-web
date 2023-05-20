@@ -13,18 +13,22 @@ const Menu = () => {
           We're a place where coders share, stay up-to-date and grow their
           careers.
         </span>
-        <Button
-          className="w-full bg-base-200 border hover:text-white hover:bg-base-300  font-semibold mt-3"
-          variant="outline"
-        >
-          Create account
-        </Button>
-        <Button
-          color="ghost"
-          className="w-full hover:bg-slate-300 text-slate-800 hover:text-blue-800 border-2 mt-3"
-        >
-          Login
-        </Button>
+        <Link to={"signup"}>
+          <Button
+            className="w-full bg-base-200 border hover:text-white hover:bg-base-300  font-semibold mt-3"
+            variant="outline"
+          >
+            Create account
+          </Button>
+        </Link>
+        <Link to={"/login"}>
+          <Button
+            color="ghost"
+            className="w-full hover:bg-slate-300 text-slate-800 hover:text-blue-800 border-2 mt-3"
+          >
+            Login
+          </Button>
+        </Link>
       </div>
 
       <div className="flex flex-col mt-5 mb-5">
