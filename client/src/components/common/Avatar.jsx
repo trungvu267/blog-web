@@ -20,7 +20,9 @@ const Avatar = () => {
         <Dropdown.Item>
           <Link to={"/posts/create"}>Tạo bài viết</Link>
         </Dropdown.Item>
-        <Dropdown.Item>Danh sách bài viết</Dropdown.Item>
+        <Dropdown.Item>
+          <Link to={"/readinglist"}>Danh sách bài viết</Link>
+        </Dropdown.Item>
         <Dropdown.Item>Đăng xuất</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

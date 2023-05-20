@@ -5,7 +5,6 @@ import { darkThemeAtom } from "../states/theme";
 import { Logo, Avatar } from "./common";
 import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
 const NavbarBlog = ({ children }) => {
   const navigate = useNavigate();
 

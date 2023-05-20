@@ -17,6 +17,7 @@ import { useAtom } from "jotai/react";
 import Tags from "./pages/Tags";
 import LatestPage from "./pages/LatestPage";
 import TopPage from "./pages/TopPage";
+import ReadingListPage from "./pages/ReadingListPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,9 +43,14 @@ const router = createBrowserRouter([
     path: "/posts/create",
     element: <CreatePost />,
   },
+
   {
     path: "/dashboard",
     element: <DashboardPage />,
+  },
+  {
+    path: "/readinglist",
+    element: <ReadingListPage />,
   },
   {
     path: "/login",
