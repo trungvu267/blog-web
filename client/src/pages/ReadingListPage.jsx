@@ -1,13 +1,13 @@
 import { Button, Input } from "react-daisyui";
-import { NavbarBlog } from "../components";
+import { Layout } from "../components";
 import { Link } from "react-router-dom";
 
 const ReadingListPage = () => {
   return (
-    <NavbarBlog>
-      <div className="container">
+    <Layout>
+      <div className="container min-h-full">
         <div className="flex justify-between text-center mt-5">
-          <h2 className="text-3xl font-bold text-black">
+          <h2 className="text-3xl font-bold ">
             Reading list <span>(0)</span>
           </h2>
           <div className="gap-5 flex">
@@ -18,12 +18,12 @@ const ReadingListPage = () => {
         <div className="flex mt-5 gap-5">
           <div className="w-[20%]">
             <Link to={"/"}>
-              <div className="w-full bg-slate-100 p-3 rounded-lg">All tags</div>
+              <div className="w-full bg-base-300 p-3 rounded-lg">All tags</div>
             </Link>
           </div>
           <div className="flex-1">
-            <div className=" text-center py-32 rounded-lg h-[400px] bg-slate-50">
-              <div className="text-xl font-bold text-black mb-2">
+            <div className=" text-center py-32 rounded-lg h-[400px] bg-base-300">
+              <div className="text-xl font-bold mb-2">
                 Your reading list is empty
               </div>
               <span>
@@ -34,7 +34,7 @@ const ReadingListPage = () => {
           </div>
         </div>
       </div>
-    </NavbarBlog>
+    </Layout>
   );
 };
 
