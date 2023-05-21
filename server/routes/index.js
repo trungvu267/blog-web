@@ -2,6 +2,7 @@ import { Router as ExpressRouter } from "express";
 import passport from "passport";
 import userRouter from "./user.route.js";
 import blogsRouter from "./blogs.route.js";
+import commentRouter from "./comment.route.js";
 
 const Router = ExpressRouter();
 Router.get("/", (req, res) => {
@@ -17,4 +18,6 @@ Router.get(
 );
 Router.use("/users", userRouter);
 Router.use("/blogs", blogsRouter);
+Router.use("/comments", commentRouter);
+
 export default Router;

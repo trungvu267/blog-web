@@ -1,7 +1,9 @@
 import Blog from "../models/blog.model.js";
+import Comment from "../models/comment.model.js";
 import { StatusCodes } from "http-status-codes";
 
 const getAllBlog = async (req, res, next) => {
+  // TODO: add sorting
   const blogs = await Blog.find();
   res.jsonp(blogs);
 };
@@ -14,6 +16,23 @@ const getAllBlogByAuthor = async (req, res) => {
 
 const getOne = async (req, res) => {
   res.json({ success: true, message: "find post success", blog: req.blog });
+};
+const getDetails = async (req, res) => {
+  const { blog } = req;
+  const [details, comments] = await Promise.all([
+    blog.populate("author", "-password"),
+    Comment.find({ blog: blog._id })
+      .populate("author", "-password")
+      .select("-blog"),
+  ]);
+  res.json({
+    success: true,
+    message: "blog details",
+    blog: {
+      details,
+      comments,
+    },
+  });
 };
 
 // Create a new blog
@@ -49,7 +68,7 @@ const updateBlog = async (req, res) => {
   let updatedBlog = {
     ...req.body,
   };
-  const published = req.body?.published;
+  const published = req.body.published || undefined;
   const blogUpdateCondition = { _id: req.blog._id, author: req.user.userId };
   const blog = await Blog.findOne(blogUpdateCondition);
   if (!blog) {
@@ -124,5 +143,6 @@ export {
   updateBlog,
   deleteBlog,
   getAllBlogByAuthor,
+  getDetails,
   getBlogById,
 };
