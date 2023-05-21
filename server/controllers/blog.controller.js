@@ -49,7 +49,7 @@ const updateBlog = async(req, res) => {
     let updatedBlog = {
         ...req.body,
     };
-    const published = req.body ? .published;
+    const published = req.body.published || undefined;
     const blogUpdateCondition = { _id: req.blog._id, author: req.user.userId };
     const blog = await Blog.findOne(blogUpdateCondition);
     if (!blog) {
