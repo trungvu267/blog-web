@@ -1,4 +1,7 @@
 import { Schema, model } from "mongoose";
+// TODO:  rename model name
+//  TODO: add page
+
 const BlogSchema = new Schema(
   {
     title: {
