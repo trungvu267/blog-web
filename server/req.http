@@ -24,7 +24,7 @@ Content-Type: application/json
 
 {
     "email": "dev1@gmail.com",
-    "password":"1234567",
+    "password":"1234567"
 }
 
 ###
@@ -39,13 +39,14 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzO
 
 
 ###
-GET  http://localhost:5556/blogs/getall
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzOWYyOTkwODI4ZTk0YmJlY2ZiNzYiLCJuYW1lIjoidHJ1b25nMyIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjg0MjU0OTI4LCJleHAiOjE3MTQyNTQ5Mjh9.bP1AdvLKwIePDY7jsE44h8ZokQ9N3yb_7q2yrNlKC_o
+GET  http://localhost:5556/blogs/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
 
 
 ###
-GET  http://localhost:5556/blogs/getone/6463a7277007a53b66ebaa30
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzOWYyOTkwODI4ZTk0YmJlY2ZiNzYiLCJuYW1lIjoidHJ1b25nMyIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjg0MjU0OTI4LCJleHAiOjE3MTQyNTQ5Mjh9.bP1AdvLKwIePDY7jsE44h8ZokQ9N3yb_7q2yrNlKC_o
+GET  http://localhost:5556/blogs/6463a7277007a53b66ebaa30
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
+
 
 
 ###
@@ -57,3 +58,42 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzO
     "title": "Hoc de ra truong 3 update", 
     "content": "BTL chuy nganh 01 update"
 }
+
+
+
+###
+GET  http://localhost:5556/comment/
+
+###
+POST  http://localhost:5556/comment/6463a7277007a53b66ebaa30
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
+
+{
+    "content" : " bai viet so 1 hay qua"
+}
+
+###
+GET  http://localhost:5556/comment/6463a7277007a53b66ebaa30
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
+
+
+
+
+
+###
+PUT  http://localhost:5556/comment/6463a7277007a53b66ebaa30/64690a8eeecbc25a71fd99ab
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
+
+{
+    "content" :"hay hay hay da update"
+}
+
+
+
+###
+DELETE   http://localhost:5556/comment/6463a7277007a53b66ebaa30/646980e0e16ef0811d19adcf
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
+

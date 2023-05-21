@@ -1,58 +1,48 @@
+import Comment from "../models/comment.model.js"
 import Blog from "../models/blog.model.js";
 import { StatusCodes } from "http-status-codes";
 
-const getAllBlog = async(req, res, next) => {
-    const blogs = await Blog.find();
-    res.jsonp(blogs);
+// get allcomments
+const getAllComments = async(req, res, next) => {
+    const comments = await Comment.find();
+    res.jsonp(comments)
 };
 
-const getAllBlogByAuthor = async(req, res) => {
-    const { userId } = req.params;
-    const blogs = await Blog.find({ author: userId });
-    res.json(blogs);
-};
 
-const getOne = async(req, res) => {
-    res.json({ success: true, message: "find post success", blog: req.blog });
-};
+// post create
+const createComment = async(req, res) => {
 
-// Create a new blog
-const createBlog = async(req, res) => {
-    const { title, content } = req.body;
+    const { content } = req.body;
 
-    if (!title) {
-        return res
-            .status(StatusCodes.BAD_REQUEST)
-            .json({ success: false, message: "you must be provide title" });
-    }
+
     if (!(content.length > 6)) {
         return res
             .status(StatusCodes.BAD_REQUEST)
             .json({ success: false, message: "you must be provide content" });
     }
 
-    const newBlog = new Blog({
-        title,
-        content,
+    const newContent = new Comment({
+        content: content,
         author: req.user.userId,
+        blog: req.blog._id,
+
     });
-
-    await newBlog.save();
-
+    await newContent.save();
     res.json({
         success: true,
         message: "you have successfully created",
-        blog: newBlog,
+        Comment: newContent,
     });
 };
-const updateBlog = async(req, res) => {
-    let updatedBlog = {
+// update comment.
+const updateComment = async(req, res) => {
+    let updateComment = {
         ...req.body,
-    };
-    const published = req.body ? .published;
-    const blogUpdateCondition = { _id: req.blog._id, author: req.user.userId };
-    const blog = await Blog.findOne(blogUpdateCondition);
-    if (!blog) {
+    }
+
+    const commentUpdateCondition = { _id: req.comment._id, author: req.user.userId };
+    const comment = await Comment.findOne(commentUpdateCondition);
+    if (!comment) {
         return res
             .status(StatusCodes.NOT_FOUND)
             .json({ success: false, message: "post not found" });
@@ -62,12 +52,12 @@ const updateBlog = async(req, res) => {
             .status(StatusCodes.NOT_MODIFIED)
             .json({ success: false, message: "you are not Permissions" });
     }
-    const newUpdatedBlog = await Blog.findOneAndUpdate(
-        blogUpdateCondition,
-        updatedBlog, { new: true }
+    const newUpdatecomment = await Comment.findOneAndUpdate(
+        commentUpdateCondition,
+        updateComment, { new: true }
     );
     // User not authorised to update post or post not found
-    if (!newUpdatedBlog)
+    if (!newUpdatecomment)
         return res.status(StatusCodes.FORBIDDEN).json({
             success: false,
             message: "Post not found or user not authorised",
@@ -76,22 +66,24 @@ const updateBlog = async(req, res) => {
     res.json({
         success: true,
         message: "updated post was successfully updated",
-        post: newUpdatedBlog,
+        post: newUpdatecomment,
     });
 };
-const deleteBlog = async(req, res) => {
-    const blogDeleteCondition = { _id: req.blog.id, author: req.user.userId };
-    const blog = await Blog.findOne(blogDeleteCondition);
 
-    if (!blog) {
+// deletecomment
+const deleteComment = async(req, res) => {
+    const commentDeleteCondition = { _id: req.comment.id, author: req.user.userId };
+    const comment = await Comment.findOne(commentDeleteCondition);
+
+    if (!comment) {
         return res
             .status(StatusCodes.NOT_FOUND)
             .json({ success: false, message: "post not found" });
     }
 
-    const deletedBlog = await Blog.findOneAndDelete(blogDeleteCondition);
+    const deletedComment = await Comment.findOneAndDelete(commentDeleteCondition);
 
-    if (!deletedBlog)
+    if (!deletedComment)
         return res.status(StatusCodes.NOT_FOUND).json({
             success: false,
             message: "Post not found or user not authorised",
@@ -100,9 +92,10 @@ const deleteBlog = async(req, res) => {
     res.json({
         success: true,
         message: "delete post success",
-        blog: deletedBlog,
+        blog: deletedComment,
     });
 };
+
 
 const getBlogById = (req, res, next, id) => {
     Blog.findById(id)
@@ -116,12 +109,28 @@ const getBlogById = (req, res, next, id) => {
             next(notFound);
         });
 };
+const getCommentId = (req, res, next, id) => {
+    Comment.findById(id)
+        .then((comment) => {
+            req.comment = comment;
+            next();
+        })
+        .catch((err) => {
+            console.log(err);
+            const notFound = new Error("Blog not found");
+            next(notFound);
+        });
+};
+
+
+
+
 export {
-    getAllBlog,
-    getOne,
-    createBlog,
-    updateBlog,
-    deleteBlog,
-    getAllBlogByAuthor,
-    getBlogById,
+    getAllComments,
+    createComment,
+    updateComment,
+    deleteComment,
+    getCommentId,
+    getBlogById
+
 };
