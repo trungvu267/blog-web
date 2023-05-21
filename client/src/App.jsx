@@ -1,5 +1,6 @@
 import { Theme } from "react-daisyui";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import {
   HomePage,
   NotFoundPage,
@@ -70,13 +71,16 @@ const router = createBrowserRouter([
     element: <NotFoundPage />,
   },
 ]);
+const queryClient = new QueryClient();
 const App = () => {
   const [isDarkTheme] = useAtom(darkThemeAtom);
   return (
-    <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
-      <RouterProvider router={router} />
-      <ToastContainerCustomer />
-    </Theme>
+    <QueryClientProvider client={queryClient}>
+      <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
+        <RouterProvider router={router} />
+        <ToastContainerCustomer />
+      </Theme>
+    </QueryClientProvider>
   );
 };
 
