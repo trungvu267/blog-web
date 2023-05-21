@@ -6,18 +6,18 @@ import commentRouter from "./comment.route.js";
 
 const Router = ExpressRouter();
 Router.get("/", (req, res) => {
-    res.json({ message: "Hello from Blog app 💓" });
+  res.json({ message: "Hello from Blog app 💓" });
 });
 // NOTE: test routers
 Router.get(
-    "/test",
-    passport.authenticate("bearer", { session: false }),
-    (req, res) => {
-        res.json(req.user);
-    }
+  "/test",
+  passport.authenticate("bearer", { session: false }),
+  (req, res) => {
+    res.json(req.user);
+  }
 );
 Router.use("/users", userRouter);
 Router.use("/blogs", blogsRouter);
-Router.use("/comment", commentRouter);
+Router.use("/comments", commentRouter);
 
 export default Router;
