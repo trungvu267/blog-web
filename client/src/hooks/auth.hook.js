@@ -1,11 +1,11 @@
 import { useMutation } from "react-query";
 import { useMemo, useCallback } from "react";
 import { useAtom } from "jotai";
-import { login } from "../api/auth.api.js";
+import { login, register } from "../api/auth.api.js";
 import { authAtom } from "../states/auth.state.js";
 import { RESET } from "jotai/utils";
 
-const useAuth = () => {
+export const useAuth = () => {
   const [auth, setAuth] = useAtom(authAtom);
   const mutation = useMutation(login, {
     mutationKey: "login",
@@ -31,4 +31,19 @@ const useAuth = () => {
   };
 };
 
-export default useAuth;
+export const useRegister = () => {
+  const [auth, setAuth] = useAtom(authAtom);
+  const mutation = useMutation(register, {
+    mutationKey: "register",
+  });
+  useMemo(() => {
+    setAuth(mutation.data ?? {});
+  }, [mutation.data]);
+  const handleRegister = useCallback(
+    ({ email, name, password }) => {
+      mutation.mutate({ email, name, password });
+    },
+    [mutation]
+  );
+  return { mutation, handleRegister };
+};
