@@ -2,18 +2,10 @@ import { Button, Input } from "react-daisyui";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useEffect } from "react";
-import useAuth from "../hooks/auth.hook";
+import { useAuth } from "../hooks/auth.hook";
 import { errorToast } from "../utils/toast";
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email("Email không hợp lệ")
-    .required("Chưa có địa chỉ email"),
-  password: yup.string().required("Chưa có mật khẩu"),
-});
+import { loginSchema } from "../utils/schema";
 
 const LoginPage = () => {
   const {
@@ -21,9 +13,8 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
-
   const {
     handleLogin,
     mutation: { isLoading, isError, isSuccess },

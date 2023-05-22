@@ -19,55 +19,56 @@ import Tags from "./pages/Tags";
 import LatestPage from "./pages/LatestPage";
 import TopPage from "./pages/TopPage";
 import ReadingListPage from "./pages/ReadingListPage";
+import { path } from "./utils/path";
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: path.home,
     element: <HomePage />,
   },
   {
-    path: "/latest",
+    path: path.latest,
     element: <LatestPage />,
   },
   {
-    path: "/top",
+    path: path.top,
     element: <TopPage />,
   },
   {
-    path: "/tags",
+    path: path.top,
     element: <Tags />,
   },
   {
-    path: "/posts/:postId",
+    path: path.details,
     element: <ViewPost />,
   },
   {
-    path: "/posts/create",
+    path: path.createPost,
     element: <CreatePost />,
   },
 
   {
-    path: "/dashboard",
+    path: path.dashboard,
     element: <DashboardPage />,
   },
   {
-    path: "/readinglist",
+    path: path.readingList,
     element: <ReadingListPage />,
   },
   {
-    path: "/login",
+    path: path.login,
     element: <LoginPage />,
   },
   {
-    path: "/signup",
+    path: path.signUp,
     element: <SignUpPage />,
   },
 
   {
-    path: "/setting",
+    path: path.setting,
     element: <Setting />,
   },
   {
-    path: "*",
+    path: path.notFound,
     element: <NotFoundPage />,
   },
 ]);
