@@ -52,7 +52,9 @@ async function post(url, params) {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
+    // TODO: cần kiểm tra lại
+    throw new Error(error.message);
   }
 }
 export { get, post };

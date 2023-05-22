@@ -17,12 +17,12 @@ const LoginPage = () => {
   });
   const {
     handleLogin,
-    mutation: { isLoading, isError, isSuccess },
+    mutation: { isLoading, isError, isSuccess, error },
   } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     isSuccess && navigate("/");
-    isError && errorToast(mutations.error.message);
+    isError && errorToast(error.message);
   }, [isSuccess, isError]);
   return (
     <div className="p-3">
