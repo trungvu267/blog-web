@@ -23,7 +23,6 @@ const LoginPage = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
   const {
     handleLogin,
     mutation: { isLoading, isError, isSuccess },
