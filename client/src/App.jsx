@@ -14,6 +14,7 @@ import {
   LatestPage,
   TopPage,
   ReadingListPage,
+  AdminPage,
   PrivateRoute,
 } from "./pages";
 import { ToastContainerCustomer } from "./components";
@@ -22,6 +23,7 @@ import { darkThemeAtom } from "./states/theme";
 import { useAtom } from "jotai/react";
 
 import { path } from "./utils/path";
+import { roles } from "./utils/role";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
     element: <TopPage />,
   },
   {
-    path: path.top,
+    path: path.tags,
     element: <Tags />,
   },
   {
@@ -51,12 +53,14 @@ const router = createBrowserRouter([
 
   {
     path: path.dashboard,
-
     element: <PrivateRoute component={<DashboardPage />} />,
   },
   {
+    path: path.admin,
+    element: <PrivateRoute component={<AdminPage />} role={roles.admin} />,
+  },
+  {
     path: path.readingList,
-
     element: <PrivateRoute component={<ReadingListPage />} />,
   },
   {

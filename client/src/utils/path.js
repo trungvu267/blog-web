@@ -2,7 +2,7 @@ export const path = {
   home: "/",
   latest: "/latest",
   top: "/top",
-  tag: "/tags",
+  tags: "/tags",
   details: "/posts/:postId",
   createPost: "/posts/create",
   dashboard: "/dashboard",
@@ -10,5 +10,6 @@ export const path = {
   login: "/login",
   signUp: "/signup",
   setting: "/setting",
+  admin: "/admin",
   notFound: "*",
 };
