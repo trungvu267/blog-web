@@ -5,11 +5,12 @@ import { darkThemeAtom } from "../states/theme";
 import { Logo, Avatar } from "./common";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/auth.hook";
+import { requestLoginModalAtom } from "../states/modal.state";
 
 const NavbarBlog = ({ children }) => {
   const navigate = useNavigate();
   const { auth } = useAuth();
-  console.log(auth);
+  const [, setRequestLoginModal] = useAtom(requestLoginModalAtom);
   return (
     <>
       <Navbar className="bg-primary px-28 space-x-4">
@@ -28,17 +29,15 @@ const NavbarBlog = ({ children }) => {
           </Form>
         </div>
         <div>
-          {auth && (
-            <Button
-              className="avatar border-2 border-base-300 text-base-300"
-              variant="outline"
-              onClick={() => {
-                navigate("/posts/create");
-              }}
-            >
-              Create Post
-            </Button>
-          )}
+          <Button
+            className="avatar border-2 border-base-300 text-base-300"
+            variant="outline"
+            onClick={() => {
+              auth ? navigate("/posts/create") : setRequestLoginModal(true);
+            }}
+          >
+            Tạo bài viết
+          </Button>
         </div>
         <div>
           <ToggleThemeBtn />

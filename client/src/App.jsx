@@ -83,7 +83,10 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
-        <RouterProvider router={router} />
+        <RouterProvider
+          router={router}
+          fallbackElement={<div>Loading route ...</div>}
+        />
         <ToastContainerCustomer />
       </Theme>
     </QueryClientProvider>
