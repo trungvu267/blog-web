@@ -1,15 +1,20 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../hooks/auth.hook";
 // TODO: create prop for private route
 
-const PrivateRoute = ({ component }) => {
+const PrivateRoute = ({ component, role }) => {
   const navigate = useNavigate();
+  const { auth } = useAuth();
 
   useEffect(() => {
-    const { auth } = useAuth();
     if (!auth) {
       navigate("/login");
+      return;
+    }
+    if (auth && auth.role !== role) {
+      // TODO: navigate to not permissions
+      navigate("/*");
       return;
     }
     const getPermission = async () => {
@@ -19,7 +24,11 @@ const PrivateRoute = ({ component }) => {
     getPermission();
   }, []);
 
-  return { component };
+  return component;
 };
 
 export default PrivateRoute;
+
+PrivateRoute.defaultProps = {
+  role: "editor",
+};

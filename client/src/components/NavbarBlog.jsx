@@ -4,10 +4,12 @@ import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
 import { Logo, Avatar } from "./common";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/auth.hook";
 
 const NavbarBlog = ({ children }) => {
   const navigate = useNavigate();
-
+  const { auth } = useAuth();
+  console.log(auth);
   return (
     <>
       <Navbar className="bg-primary px-28 space-x-4">
@@ -26,21 +28,33 @@ const NavbarBlog = ({ children }) => {
           </Form>
         </div>
         <div>
-          <Button
-            className="avatar border-2 border-base-300 text-base-300"
-            variant="outline"
-            onClick={() => {
-              navigate("/posts/create");
-            }}
-          >
-            Create Post
-          </Button>
+          {auth && (
+            <Button
+              className="avatar border-2 border-base-300 text-base-300"
+              variant="outline"
+              onClick={() => {
+                navigate("/posts/create");
+              }}
+            >
+              Create Post
+            </Button>
+          )}
         </div>
         <div>
           <ToggleThemeBtn />
         </div>
         <div>
-          <Avatar />
+          {!!auth ? (
+            <Avatar />
+          ) : (
+            <Button
+              className="avatar border-2 border-base-300 text-base-300"
+              variant="outline"
+              onClick={() => {}}
+            >
+              Đăng nhập
+            </Button>
+          )}
         </div>
       </Navbar>
       {children}
