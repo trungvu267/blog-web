@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, useEffect } from "react";
 import { useAtom } from "jotai";
 import { login, register } from "../api/auth.api.js";
 import { authAtom } from "../states/auth.state.js";
@@ -10,9 +10,9 @@ export const useAuth = () => {
   const mutation = useMutation(login, {
     mutationKey: "login",
   });
-  useMemo(() => {
-    setAuth(mutation.data ?? null);
-  }, [mutation.data]);
+  useEffect(() => {
+    mutation.isSuccess && setAuth(mutation.data);
+  }, [mutation.isSuccess]);
 
   const handleLogin = useCallback(
     ({ email, password }) => {

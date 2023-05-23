@@ -6,6 +6,7 @@ import { Logo, Avatar } from "./common";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/auth.hook";
 import { requestLoginModalAtom } from "../states/modal.state";
+import { path } from "../utils/path";
 
 const NavbarBlog = ({ children }) => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const NavbarBlog = ({ children }) => {
             <Button
               className="avatar border-2 border-base-300 text-base-300"
               variant="outline"
-              onClick={() => {}}
+              onClick={() => navigate(path.login)}
             >
               Đăng nhập
             </Button>

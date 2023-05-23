@@ -11,6 +11,7 @@ import LatestPage from "./LatestPage";
 import TopPage from "./TopPage";
 import ReadingListPage from "./ReadingListPage";
 import PrivateRoute from "./PrivateRoute";
+import AdminPage from "./AdminPage";
 
 export {
   HomePage,
@@ -25,5 +26,6 @@ export {
   LatestPage,
   TopPage,
   ReadingListPage,
+  AdminPage,
   PrivateRoute,
 };
