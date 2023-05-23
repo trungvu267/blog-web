@@ -11,7 +11,7 @@ export const useAuth = () => {
     mutationKey: "login",
   });
   useMemo(() => {
-    setAuth(mutation.data ?? {});
+    setAuth(mutation.data ?? null);
   }, [mutation.data]);
 
   const handleLogin = useCallback(
@@ -32,7 +32,7 @@ export const useAuth = () => {
 };
 
 export const useRegister = () => {
-  const [auth, setAuth] = useAtom(authAtom);
+  const [, setAuth] = useAtom(authAtom);
   const mutation = useMutation(register, {
     mutationKey: "register",
   });

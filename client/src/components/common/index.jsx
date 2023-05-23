@@ -1,3 +1,4 @@
 import Logo from "./Logo";
 import Avatar from "./Avatar";
-export { Logo, Avatar };
+import RequestLoginModal from "./RequestLoginModal";
+export { Logo, Avatar, RequestLoginModal };

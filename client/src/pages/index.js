@@ -6,6 +6,11 @@ import CreatePost from "./CreatePost";
 import Setting from "./Setting";
 import SignUpPage from "./SignUpPage";
 import DashboardPage from "./DashboardPage";
+import Tags from "./Tags";
+import LatestPage from "./LatestPage";
+import TopPage from "./TopPage";
+import ReadingListPage from "./ReadingListPage";
+import PrivateRoute from "./PrivateRoute";
 
 export {
   HomePage,
@@ -16,4 +21,9 @@ export {
   Setting,
   SignUpPage,
   DashboardPage,
+  Tags,
+  LatestPage,
+  TopPage,
+  ReadingListPage,
+  PrivateRoute,
 };
