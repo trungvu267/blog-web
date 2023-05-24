@@ -13,11 +13,11 @@ import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.get("/getalltag", asyncWrapper(getAllTags));
-router.get("/:tagId/getonetag", asyncWrapper(getOneTag));
+router.get("/", asyncWrapper(getAllTags));
 router.post("/", auth, asyncWrapper(createTag));
-router.put("/:tagId/updatetag", auth, asyncWrapper(updateTag));
-router.delete("/:tagId/delete", auth, asyncWrapper(deleteTag));
+router.get("/:tagId", asyncWrapper(getOneTag));
+router.put("/:tagId", auth, asyncWrapper(updateTag));
+router.delete("/:tagId", auth, asyncWrapper(deleteTag));
 
 router.param("tagId", getTagId);
 
