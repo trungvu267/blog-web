@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SuggestPost } from "./SuggestPost";
+import { TitleComment } from "./TitleComment";
 
 const TrendingPosts = () => {
   return (
@@ -10,10 +10,10 @@ const TrendingPosts = () => {
           DEV Community
         </Link>{" "}
       </h2>
-      <SuggestPost small></SuggestPost>
-      <SuggestPost small></SuggestPost>
-      <SuggestPost small></SuggestPost>
-      <SuggestPost small></SuggestPost>
+      <TitleComment small></TitleComment>
+      <TitleComment small></TitleComment>
+      <TitleComment small></TitleComment>
+      <TitleComment small></TitleComment>
     </div>
   );
 };
