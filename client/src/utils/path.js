@@ -1,0 +1,15 @@
+export const path = {
+  home: "/",
+  latest: "/latest",
+  top: "/top",
+  tags: "/tags",
+  details: "/posts/:postId",
+  createPost: "/posts/create",
+  dashboard: "/dashboard",
+  readingList: "/readinglist",
+  login: "/login",
+  signUp: "/signup",
+  setting: "/setting",
+  admin: "/admin",
+  notFound: "*",
+};

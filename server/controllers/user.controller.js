@@ -23,13 +23,22 @@ const login = async (req, res, next) => {
     .status(200)
     .json({ userName: user.name, email: user.email, token, role: user.role });
 };
+
 const register = async (req, res, next) => {
   const { email, password, name } = req.body;
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({ message: "Email already exists" });
+  }
   const user = new User({ email, name, password, role: "editor" });
+  await user.save();
   const token = user.createJWT();
-  res
-    .status(200)
-    .json({ userName: user.name, email: user.email, role: user.role, token });
+  res.status(201).json({
+    userName: user.name,
+    email: user.email,
+    role: user.role,
+    token,
+  });
 };
 
 export { login, register };

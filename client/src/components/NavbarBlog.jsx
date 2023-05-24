@@ -4,10 +4,14 @@ import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
 import { Logo, Avatar } from "./common";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/auth.hook";
+import { requestLoginModalAtom } from "../states/modal.state";
+import { path } from "../utils/path";
 
 const NavbarBlog = ({ children }) => {
   const navigate = useNavigate();
-
+  const { auth } = useAuth();
+  const [, setRequestLoginModal] = useAtom(requestLoginModalAtom);
   return (
     <>
       <Navbar className="bg-primary px-28 space-x-4">
@@ -30,17 +34,27 @@ const NavbarBlog = ({ children }) => {
             className="avatar border-2 border-base-300 text-base-300"
             variant="outline"
             onClick={() => {
-              navigate("/posts/create");
+              auth ? navigate("/posts/create") : setRequestLoginModal(true);
             }}
           >
-            Create Post
+            Tạo bài viết
           </Button>
         </div>
         <div>
           <ToggleThemeBtn />
         </div>
         <div>
-          <Avatar />
+          {!!auth ? (
+            <Avatar />
+          ) : (
+            <Button
+              className="avatar border-2 border-base-300 text-base-300"
+              variant="outline"
+              onClick={() => navigate(path.login)}
+            >
+              Đăng nhập
+            </Button>
+          )}
         </div>
       </Navbar>
       {children}

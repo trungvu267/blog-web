@@ -1,5 +1,6 @@
 import { Theme } from "react-daisyui";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import {
   HomePage,
   NotFoundPage,
@@ -9,78 +10,90 @@ import {
   Setting,
   SignUpPage,
   DashboardPage,
+  Tags,
+  LatestPage,
+  TopPage,
+  ReadingListPage,
+  AdminPage,
+  PrivateRoute,
 } from "./pages";
 import { ToastContainerCustomer } from "./components";
 import "react-toastify/dist/ReactToastify.css";
 import { darkThemeAtom } from "./states/theme";
 import { useAtom } from "jotai/react";
-import Tags from "./pages/Tags";
-import LatestPage from "./pages/LatestPage";
-import TopPage from "./pages/TopPage";
-import ReadingListPage from "./pages/ReadingListPage";
+
+import { path } from "./utils/path";
+import { roles } from "./utils/role";
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: path.home,
     element: <HomePage />,
   },
   {
-    path: "/latest",
+    path: path.latest,
     element: <LatestPage />,
   },
   {
-    path: "/top",
+    path: path.top,
     element: <TopPage />,
   },
   {
-    path: "/tags",
+    path: path.tags,
     element: <Tags />,
   },
   {
-    path: "/posts/:postId",
+    path: path.details,
     element: <ViewPost />,
   },
   {
-    path: "/posts/create",
-    element: <CreatePost />,
+    path: path.createPost,
+    element: <PrivateRoute component={<CreatePost />} />,
   },
 
   {
-    path: "/dashboard",
-    element: <DashboardPage />,
+    path: path.dashboard,
+    element: <PrivateRoute component={<DashboardPage />} />,
   },
   {
-    path: "/readinglist",
-    element: <ReadingListPage />,
+    path: path.admin,
+    element: <PrivateRoute component={<AdminPage />} role={roles.admin} />,
   },
   {
-    path: "/postdetails",
-    element: <ReadingListPage />,
+    path: path.readingList,
+    element: <PrivateRoute component={<ReadingListPage />} />,
   },
   {
-    path: "/login",
+    path: path.login,
     element: <LoginPage />,
   },
   {
-    path: "/signup",
+    path: path.signUp,
     element: <SignUpPage />,
   },
 
   {
-    path: "/setting",
+    path: path.setting,
     element: <Setting />,
   },
   {
-    path: "*",
+    path: path.notFound,
     element: <NotFoundPage />,
   },
 ]);
+const queryClient = new QueryClient();
 const App = () => {
   const [isDarkTheme] = useAtom(darkThemeAtom);
   return (
-    <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
-      <RouterProvider router={router} />
-      <ToastContainerCustomer />
-    </Theme>
+    <QueryClientProvider client={queryClient}>
+      <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
+        <RouterProvider
+          router={router}
+          fallbackElement={<div>Loading route ...</div>}
+        />
+        <ToastContainerCustomer />
+      </Theme>
+    </QueryClientProvider>
   );
 };
 

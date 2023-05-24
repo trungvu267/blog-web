@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = import.meta.env.VITE_API_URL || "https://localhost:5000";
+const apiUrl = import.meta.env.VITE_API_URL || "https://localhost:5556";
 const request = axios.create({
   baseURL: apiUrl,
   timeout: 1000,
@@ -52,7 +52,9 @@ async function post(url, params) {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
+    // TODO: cần kiểm tra lại
+    throw new Error(error.message);
   }
 }
 export { get, post };
