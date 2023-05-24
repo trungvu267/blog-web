@@ -10,16 +10,21 @@ import {
   Setting,
   SignUpPage,
   DashboardPage,
+  Tags,
+  LatestPage,
+  TopPage,
+  ReadingListPage,
+  AdminPage,
+  PrivateRoute,
 } from "./pages";
 import { ToastContainerCustomer } from "./components";
 import "react-toastify/dist/ReactToastify.css";
 import { darkThemeAtom } from "./states/theme";
 import { useAtom } from "jotai/react";
-import Tags from "./pages/Tags";
-import LatestPage from "./pages/LatestPage";
-import TopPage from "./pages/TopPage";
-import ReadingListPage from "./pages/ReadingListPage";
+
 import { path } from "./utils/path";
+import { roles } from "./utils/role";
+
 const router = createBrowserRouter([
   {
     path: path.home,
@@ -34,7 +39,7 @@ const router = createBrowserRouter([
     element: <TopPage />,
   },
   {
-    path: path.top,
+    path: path.tags,
     element: <Tags />,
   },
   {
@@ -43,16 +48,20 @@ const router = createBrowserRouter([
   },
   {
     path: path.createPost,
-    element: <CreatePost />,
+    element: <PrivateRoute component={<CreatePost />} />,
   },
 
   {
     path: path.dashboard,
-    element: <DashboardPage />,
+    element: <PrivateRoute component={<DashboardPage />} />,
+  },
+  {
+    path: path.admin,
+    element: <PrivateRoute component={<AdminPage />} role={roles.admin} />,
   },
   {
     path: path.readingList,
-    element: <ReadingListPage />,
+    element: <PrivateRoute component={<ReadingListPage />} />,
   },
   {
     path: path.login,
@@ -78,7 +87,10 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
-        <RouterProvider router={router} />
+        <RouterProvider
+          router={router}
+          fallbackElement={<div>Loading route ...</div>}
+        />
         <ToastContainerCustomer />
       </Theme>
     </QueryClientProvider>
