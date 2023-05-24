@@ -1,4 +1,7 @@
 import { Schema, model } from "mongoose";
+// TODO:  rename model name
+//  TODO: add page
+
 const BlogSchema = new Schema(
   {
     title: {
@@ -21,6 +24,11 @@ const BlogSchema = new Schema(
     published: {
       type: Boolean,
       default: false,
+    },
+    //NOTE: field này dùng để đặt tên không dấu cho bài viết, chỉ admin có quyền sửa
+    slug: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true }
