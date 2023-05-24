@@ -1,0 +1,62 @@
+[
+  {
+    "id": 6,
+    "name": "javascript",
+    "bg_color": "#f7df1e",
+    "text_color": "#000000"
+  },
+  {
+    "id": 8,
+    "name": "webdev",
+    "bg_color": "#562765",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": 555,
+    "name": "beginners",
+    "bg_color": "#008335",
+    "text_color": "#FFFFFF"
+  },
+  {
+    "id": 33,
+    "name": "programming",
+    "bg_color": "#890606",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": 297,
+    "name": "tutorial",
+    "bg_color": "#FEFFA5",
+    "text_color": "#b30047"
+  },
+  {
+    "id": 125,
+    "name": "react",
+    "bg_color": "#222222",
+    "text_color": "#61DAF6"
+  },
+  {
+    "id": 3371,
+    "name": "archlinux",
+    "bg_color": "#0099bd",
+    "text_color": "#FFFFFF"
+  },
+  {
+    "id": 44,
+    "name": "news",
+    "bg_color": "#111111",
+    "text_color": "#fff9ac"
+  },
+  {
+    "id": 25,
+    "name": "python",
+    "bg_color": "#1E38BB",
+    "text_color": "#FFDF5B"
+  },
+  {
+    "id": 112,
+    "name": "productivity",
+    "bg_color": "#2A0798",
+    "text_color": "#C8F7C5"
+  }
+]
