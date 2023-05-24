@@ -10,17 +10,17 @@ const getOneTag = async (req, res, next) => {
 };
 
 const createTag = async (req, res) => {
-  const { name, bg_color, text_color } = req.body;
-  if (!name) {
+  if (req.user.role === "editor") {
+    return res
+      .status(StatusCodes.NOT_MODIFIED)
+      .json({ success: false, message: "you are not Permissions" });
+  }
+  if (!req.body.name) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ success: false, message: "tag name must be required" });
   }
-  const newTag = new Tag({
-    name,
-    bg_color,
-    text_color,
-  });
+  const newTag = new Tag(req.body);
   await newTag.save();
 
   res.json({
@@ -35,22 +35,22 @@ const updateTag = async (req, res) => {
     ...req.body,
   };
 
-  const tagtUpdateCondition = {
+  const tagUpdateCondition = {
     _id: req.tag._id,
   };
-  const tag = await Tag.findOne(tagtUpdateCondition);
+  const tag = await Tag.findOne(tagUpdateCondition);
   if (!tag) {
     return res
       .status(StatusCodes.NOT_FOUND)
       .json({ success: false, message: "tag not found" });
   }
-  if (req.user.role === "editor" && !!published) {
+  if (req.user.role === "editor") {
     return res
       .status(StatusCodes.NOT_MODIFIED)
       .json({ success: false, message: "you are not Permissions" });
   }
   const newUpdateTag = await Tag.findOneAndUpdate(
-    tagtUpdateCondition,
+    tagUpdateCondition,
     updateTag,
     { new: true }
   );
@@ -68,6 +68,11 @@ const updateTag = async (req, res) => {
   });
 };
 const deleteTag = async (req, res) => {
+  if (req.user.role === "editor") {
+    return res
+      .status(StatusCodes.NOT_MODIFIED)
+      .json({ success: false, message: "you are not Permissions" });
+  }
   const TagDeleteCondition = { _id: req.tag.id };
   const tag = await Tag.findOne(TagDeleteCondition);
 
