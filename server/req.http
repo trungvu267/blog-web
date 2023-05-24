@@ -97,3 +97,51 @@ DELETE   http://localhost:5556/comment/6463a7277007a53b66ebaa30/646980e0e16ef081
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
 
+
+
+
+###
+POST http://localhost:5556/tag/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDkxOTE4OSwiZXhwIjozMDAwMDAwMDAwMTY4NDkyMDAwMH0.s8Piy_p0njB2SJM9k0s5asuLoyLK9xFa7hqWq4Zk6mA
+
+{
+    "name" : "test4",
+    "bg_color": "rgb(233,233,233",
+    "text_color": "rgb(233,233,233"
+    
+}
+
+
+###
+GET http://localhost:5556/tag/getalltag
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDkxOTE4OSwiZXhwIjozMDAwMDAwMDAwMTY4NDkyMDAwMH0.s8Piy_p0njB2SJM9k0s5asuLoyLK9xFa7hqWq4Zk6mA
+
+
+
+###
+GET http://localhost:5556/tag/646de05dc92432cb503df86f/getonetag
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDkxOTE4OSwiZXhwIjozMDAwMDAwMDAwMTY4NDkyMDAwMH0.s8Piy_p0njB2SJM9k0s5asuLoyLK9xFa7hqWq4Zk6mA
+
+
+###
+PUT http://localhost:5556/tag/646dd3b6489f546392158e7d/updatetag
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDkxOTE4OSwiZXhwIjozMDAwMDAwMDAwMTY4NDkyMDAwMH0.s8Piy_p0njB2SJM9k0s5asuLoyLK9xFa7hqWq4Zk6mA
+
+
+{
+    "name": "test update",
+    "bg_color": "#242424",
+    "text_color": "#242424"
+
+}
+
+
+###
+DELETE http://localhost:5556/tag/646dd3ec489f546392158e7f/delete
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDkxOTE4OSwiZXhwIjozMDAwMDAwMDAwMTY4NDkyMDAwMH0.s8Piy_p0njB2SJM9k0s5asuLoyLK9xFa7hqWq4Zk6mA
+
