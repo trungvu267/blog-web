@@ -7,7 +7,7 @@ const Posts = (props) => {
       <div className="flex gap-1">
         <Link
           to={"/"}
-          className="p-3 font-bold rounded-lg hover:text-[#3b49df] hover:bg-white"
+          className="p-3 font-bold rounded-lg hover:text-primary hover:bg-white"
         >
           Relevant
         </Link>
