@@ -5,6 +5,7 @@ const Tags = () => {
     <Layout>
       <div className="container">
         <Navbar />
+
         <ListTag />
       </div>
     </Layout>
