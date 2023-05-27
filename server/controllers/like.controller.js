@@ -54,4 +54,4 @@ const deleteLike = async (req, res) => {
   });
 };
 
-export { createLike, deleteLike, getBlogById, getAllBlogLike };
+export { createLike, deleteLike, getAllBlogLike };
