@@ -2,18 +2,16 @@ import express from "express";
 import asyncWrapper from "../middleware/asyncWrapper.js";
 
 import {
-    createBookmark,
-    getAllBlogbookmark,
-    deleteBookmark,
-    getBlogById
-} from "../controllers/bookmark.controller.js"
+  createBookmark,
+  getAllBookmarkByUser,
+  deleteBookmark,
+} from "../controllers/bookmark.controller.js";
 
 import { auth } from "../middleware/auth.js";
 const router = express.Router();
 
-router.get('/', auth, asyncWrapper(getAllBlogbookmark));
-router.post('/:blogId', auth, asyncWrapper(createBookmark));
-router.put('/:blogId', auth, asyncWrapper(deleteBookmark));
-router.param("blogId", getBlogById);
+router.get("/", auth, asyncWrapper(getAllBookmarkByUser));
+router.post("/", auth, asyncWrapper(createBookmark));
+router.delete("/", auth, asyncWrapper(deleteBookmark));
 
 export default router;
