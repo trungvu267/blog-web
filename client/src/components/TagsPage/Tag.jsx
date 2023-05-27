@@ -1,16 +1,17 @@
 import { Button } from "react-daisyui";
 const Tag = ({ data }) => {
-  console.log(data);
   const { name, bg_color, text_color } = data;
-  console.log(bg_color);
   return (
     <div
-      className={`w-[400px] h-[250px] rounded-lg shadow-md p-3 border-t-8 border-[${bg_color}] border-[#]`}
+      style={{ borderColor: bg_color }}
+      className={`w-[400px] h-[250px] rounded-lg shadow-md p-3 border-t-8 border-[#]`}
     >
       <div>
         <Button color="ghost">
-          <span className={`text-[${text_color}]  text-[#]`}>#</span>
-          {name}
+          <span style={{ color: text_color }} className="font-bold">
+            #
+          </span>
+          <span>{name}</span>
         </Button>
       </div>
       <div className="p-1 mb-2">
