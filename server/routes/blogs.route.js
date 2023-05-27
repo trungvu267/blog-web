@@ -1,13 +1,13 @@
 import express from "express";
 import asyncWrapper from "../middleware/asyncWrapper.js";
 import {
-  getAllBlog,
-  getOne,
-  createBlog,
-  updateBlog,
-  deleteBlog,
-  getBlogById,
-  getDetails,
+    getAllBlog,
+    getOne,
+    createBlog,
+    updateBlog,
+    deleteBlog,
+    getBlogById,
+    getDetails,
 } from "../controllers/blog.controller.js";
 import { auth } from "../middleware/auth.js";
 import { createComment } from "../controllers/comment.controller.js";

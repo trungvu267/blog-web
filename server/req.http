@@ -12,10 +12,10 @@ POST http://localhost:5556/users/sign-up
 Content-Type: application/json
 
 {
-    "name": "devphamtruong1",
-    "email": "dev1@gmail.com",
+    "name": "devphamtruong12",
+    "email": "dev13@gmail.com",
     "password":"1234567",
-    "role": "administrator"
+    "role": "editor"
 }
 
 ###
@@ -40,8 +40,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzO
 
 ###
 GET  http://localhost:5556/blogs/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
-
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NTExMTcyMywiZXhwIjozMDAwMDAwMDAwMTY4NTExMDAwMH0.IqNQ5pQ5K23z7SboLi1NIaiwdN3Ph2t2h1hiqJmG0vQ
 
 ###
 GET  http://localhost:5556/blogs/6463a7277007a53b66ebaa30
@@ -93,9 +92,9 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzY
 
 
 ###
-DELETE   http://localhost:5556/comment/6463a7277007a53b66ebaa30/646980e0e16ef0811d19adcf
+DELETE   http://localhost:5556/comments/64698110e16ef0811d19add5
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDYwMzEzMCwiZXhwIjozMDAwMDAwMDAwMTY4NDYwMzAwMH0.vNDh28JAVbFrAGbv5x_72GY9OW7ikn8BUjiaCATiEZU
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NTExMTcyMywiZXhwIjozMDAwMDAwMDAwMTY4NTExMDAwMH0.IqNQ5pQ5K23z7SboLi1NIaiwdN3Ph2t2h1hiqJmG0vQ
 
 
 
@@ -145,3 +144,37 @@ DELETE http://localhost:5556/tag/646dd3ec489f546392158e7f/delete
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NDkxOTE4OSwiZXhwIjozMDAwMDAwMDAwMTY4NDkyMDAwMH0.s8Piy_p0njB2SJM9k0s5asuLoyLK9xFa7hqWq4Zk6mA
 
+
+
+###
+POST http://localhost:5556/like/6463a7277007a53b66ebaa30
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDcxNGYzMWU3ZjFlMTI1NTllMmNmYzAiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEyIiwicm9sZSI6ImVkaXRvciIsImlhdCI6MTY4NTE0NzczMCwiZXhwIjozMDAwMDAwMDAwMTY4NTE0ODAwMH0.0c9vjMH5uZzCcEvWm8QVFIHJWqCBt-szdYkdptE5PHo
+
+
+###
+DELETE  http://localhost:5556/like/6463a7277007a53b66ebaa30
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NTExMTcyMywiZXhwIjozMDAwMDAwMDAwMTY4NTExMDAwMH0.IqNQ5pQ5K23z7SboLi1NIaiwdN3Ph2t2h1hiqJmG0vQ
+
+###
+GET http://localhost:5556/like/6463a7277007a53b66ebaa30
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDcxNGYzMWU3ZjFlMTI1NTllMmNmYzAiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEyIiwicm9sZSI6ImVkaXRvciIsImlhdCI6MTY4NTE0NzczMCwiZXhwIjozMDAwMDAwMDAwMTY4NTE0ODAwMH0.0c9vjMH5uZzCcEvWm8QVFIHJWqCBt-szdYkdptE5PHo
+
+
+
+###
+POST http://localhost:5556/bookmark/6463a899eea98ca93fa8de46
+Content-Type: application/json
+Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NTE0Nzk4NywiZXhwIjozMDAwMDAwMDAwMTY4NTE0ODAwMH0.ILWso1ok1J86Led60v0RZxipb_xkVkyXDw0X_wur9WQ
+
+###
+GET http://localhost:5556/bookmark/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NTE0Nzk4NywiZXhwIjozMDAwMDAwMDAwMTY4NTE0ODAwMH0.ILWso1ok1J86Led60v0RZxipb_xkVkyXDw0X_wur9WQ
+
+###
+PUT http://localhost:5556/bookmark/6463a7277007a53b66ebaa30
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYzYjVlZDVkYTFmNDY2ZWVhMjMzZmQiLCJuYW1lIjoiZGV2cGhhbXRydW9uZzEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTY4NTE0Nzk4NywiZXhwIjozMDAwMDAwMDAwMTY4NTE0ODAwMH0.ILWso1ok1J86Led60v0RZxipb_xkVkyXDw0X_wur9WQ
