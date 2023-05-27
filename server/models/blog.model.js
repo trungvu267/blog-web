@@ -15,6 +15,9 @@ const BlogSchema = new Schema(
       required: [true, "you must be provide content"],
       minlength: 6,
     },
+    imageLink: {
+      type: String,
+    },
     author: {
       type: Schema.Types.ObjectId,
       ref: "User",
