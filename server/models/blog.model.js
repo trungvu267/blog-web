@@ -10,16 +10,27 @@ const BlogSchema = new Schema(
       //   minLength: 6,
       //   maxLength: 20,
     },
-
     content: {
       type: String,
       required: [true, "you must be provide content"],
       minlength: 6,
     },
+    imageLink: {
+      type: String,
+    },
     author: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    tags: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Tag",
+        },
+      ],
+      minlength: [1, "Blog must contain at least one tag"],
     },
     published: {
       type: Boolean,
