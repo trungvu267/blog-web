@@ -11,6 +11,11 @@ const Like = new Schema(
       ref: "Blog",
       required: true,
     },
+    isLiked: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
   { timestamps: true }
 );

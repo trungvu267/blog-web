@@ -1,57 +1,33 @@
 import Like from "../models/like.model.js";
+import User from "../models/user.model.js";
+import Blog from "../models/blog.model.js";
 import { StatusCodes } from "http-status-codes";
-
-// TODO: SỬA LẠI SAU
-const getAllBlogLike = async (req, res, next) => {
-  const like = await Like.find({ blog: req.blog._id });
-
-  res.json({
-    success: true,
-    message: "get all like blog successfully",
-    like,
-  });
-};
-const createLike = async (req, res) => {
-  const checkLike = await Like.findOne({
-    author: req.user.userId,
-    blog: req.blog._id,
-  });
-  if (checkLike) {
-    return res.status(StatusCodes.BAD_REQUEST).json({
-      success: false,
-      message: "you already liked the post",
-    });
+// Like a blog
+export const likeBlog = async (req, res) => {
+  const { userId } = req.user;
+  const blogId = req.params;
+  // Check if the user exists
+  const user = await User.findById(userId);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
   }
-  const newLike = new Like({
-    author: req.user.userId,
-    blog: req.blog._id,
-  });
-  await newLike.save();
-  res.json({
-    success: true,
-    message: "you have successfully created",
-    like: newLike,
-  });
+
+  // Check if the blog exists
+  const blog = await Blog.findById(blogId);
+  if (!blog) {
+    const error = new Error("Không tìm thấy bài viết");
+    error.status = StatusCodes.NOT_FOUND;
+    throw error;
+  }
+  const existingLike = await Like.findOne({ user: userId, blog: blogId });
+  if (existingLike) {
+    existingLike.isLiked = !existingLike.isLiked;
+    await existingLike.save();
+  } else {
+    // If like does not exist, create a new like
+    const newLike = new Like({ user: userId, blog: blogId });
+    await newLike.save();
+  }
+
+  res.status(200).json({ message: "Like status toggled successfully" });
 };
-
-const deleteLike = async (req, res) => {
-  const likeDeleteCondition = {
-    author: req.user.userId,
-    blog: req.blog._id,
-  };
-  const deletedlike = await Like.findOneAndDelete(likeDeleteCondition);
-
-  if (!deletedlike)
-    return res.status(StatusCodes.NOT_FOUND).json({
-      success: false,
-      message: "Like not found or user not authorised",
-    });
-
-  res.json({
-    success: true,
-    message: "delete like success",
-    like: deletedlike,
-  });
-};
-
-export { createLike, deleteLike, getAllBlogLike };
