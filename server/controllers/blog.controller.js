@@ -37,28 +37,26 @@ const getDetails = async (req, res) => {
 
 // Create a new blog
 const createBlog = async (req, res) => {
-  const { title, content } = req.body;
-
+  const { title, content, tags } = req.body;
   if (!title) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ success: false, message: "you must be provide title" });
   }
-  if (!(content.length < 6)) {
+  if (content.length < 6) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ success: false, message: "content is too short" });
   }
 
-  if (!(tags.length === 0)) {
+  if (tags.length === 0) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ success: false, message: "you must be provide tags" });
   }
 
   const newBlog = new Blog({
-    title,
-    content,
+    ...req.body,
     author: req.user.userId,
   });
 
