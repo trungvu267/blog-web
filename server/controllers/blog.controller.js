@@ -44,10 +44,16 @@ const createBlog = async (req, res) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ success: false, message: "you must be provide title" });
   }
-  if (!(content.length > 6)) {
+  if (!(content.length < 6)) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ success: false, message: "you must be provide content" });
+      .json({ success: false, message: "content is too short" });
+  }
+
+  if (!(tags.length === 0)) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ success: false, message: "you must be provide tags" });
   }
 
   const newBlog = new Blog({
