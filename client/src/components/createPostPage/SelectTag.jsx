@@ -1,5 +1,10 @@
 import { Dropdown, Input } from "react-daisyui";
+import useTag from "../../hooks/tag.hook";
+import useTextEditor from "../../hooks/useTextEditor";
 const SelectTag = () => {
+  const { listTag } = useTag();
+  const { listTagArticle, handleAddTags } = useTextEditor();
+  console.log(listTagArticle);
   return (
     <Dropdown>
       <Dropdown.Toggle className="p-0 m-0 bg-base-200" color="ghost">
@@ -10,9 +15,19 @@ const SelectTag = () => {
           color="primary"
         />
       </Dropdown.Toggle>
-      <Dropdown.Menu className="w-52">
-        <Dropdown.Item>Item 1</Dropdown.Item>
-        <Dropdown.Item>Item 2</Dropdown.Item>
+      <Dropdown.Menu className="w-52 h-52 flex overflow-y-scrolls">
+        <ul className="w-52 h-52 overflow-y-scroll">
+          {listTag.map((tag) => (
+            <Dropdown.Item
+              key={tag._id}
+              onClick={() => {
+                handleAddTags(tag);
+              }}
+            >
+              {tag.name}
+            </Dropdown.Item>
+          ))}
+        </ul>
       </Dropdown.Menu>
     </Dropdown>
   );
