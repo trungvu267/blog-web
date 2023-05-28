@@ -1,4 +1,4 @@
-import { Logo } from "../components/common";
+import { Logo, ToggleThemeBtn } from "../components/common";
 import { Button, Input } from "react-daisyui";
 import { FiX } from "react-icons/fi";
 import { ConfirmModal } from "../components";
@@ -24,6 +24,7 @@ const CreatePost = () => {
         <div className="max-w-5xl mx-auto col-span-3 flex justify-between items-center mb-4 py-2 ">
           <Logo />
           <div className="ml-6 mr-auto">Tạo bài viết mới</div>
+          <ToggleThemeBtn />
           <CustomTabs />
           <ConfirmModal
             color="ghost"
