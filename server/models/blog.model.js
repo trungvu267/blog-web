@@ -7,8 +7,6 @@ const BlogSchema = new Schema(
     title: {
       type: String,
       required: [true, "you must be provide title"],
-      //   minLength: 6,
-      //   maxLength: 20,
     },
     content: {
       type: String,
@@ -21,7 +19,7 @@ const BlogSchema = new Schema(
     author: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: [true, "you must be provide content"],
     },
     tags: {
       type: [

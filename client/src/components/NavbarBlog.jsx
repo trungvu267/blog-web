@@ -2,7 +2,7 @@ import { Navbar, Button, Form, Input } from "react-daisyui";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
 import { darkThemeAtom } from "../states/theme";
-import { Logo, Avatar } from "./common";
+import { Logo, Avatar, ToggleThemeBtn } from "./common";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/auth.hook";
 import { requestLoginModalAtom } from "../states/modal.state";
@@ -62,27 +62,3 @@ const NavbarBlog = ({ children }) => {
   );
 };
 export default NavbarBlog;
-
-const ToggleThemeBtn = () => {
-  const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
-  const handleToggleTheme = () => {
-    setIsDarkTheme((preTheme) => !preTheme);
-  };
-  return (
-    <Button className="border-none  bg-transparent hover:bg-transparent focus:bg-transparent">
-      {isDarkTheme ? (
-        <FiMoon
-          size={"2rem"}
-          onClick={handleToggleTheme}
-          className="text-base-300"
-        />
-      ) : (
-        <FiSun
-          size={"2rem"}
-          onClick={handleToggleTheme}
-          className="text-base-300"
-        />
-      )}
-    </Button>
-  );
-};

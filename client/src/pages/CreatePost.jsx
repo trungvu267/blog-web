@@ -1,6 +1,8 @@
-import { Logo } from "../components/common";
 import { Button, Input } from "react-daisyui";
 import { FiX } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { isEmpty, map } from "lodash";
+import { Logo, ToggleThemeBtn, HtmlConverter } from "../components/common";
 import { ConfirmModal } from "../components";
 import {
   TextEditor,
@@ -9,9 +11,9 @@ import {
   SelectTag,
   Tooltips,
 } from "../components/createPostPage";
-import { useNavigate } from "react-router-dom";
 import useTextEditor from "../hooks/useTextEditor";
 import useSelectedPostVariant from "../hooks/useSelectedPostVariant";
+import { useEffect } from "react";
 const CreatePost = () => {
   const navigate = useNavigate();
   const handleAccess = () => {
@@ -24,6 +26,7 @@ const CreatePost = () => {
         <div className="max-w-5xl mx-auto col-span-3 flex justify-between items-center mb-4 py-2 ">
           <Logo />
           <div className="ml-6 mr-auto">Tạo bài viết mới</div>
+          <ToggleThemeBtn />
           <CustomTabs />
           <ConfirmModal
             color="ghost"
@@ -44,8 +47,25 @@ const CreatePost = () => {
 export default CreatePost;
 
 const EditVariant = () => {
-  const { handleToolTipEditor, setIsVisible } = useTextEditor();
-
+  const {
+    title,
+    content,
+    listTagArticle,
+    handleSetTitleArticle,
+    handleToolTipEditor,
+    setIsVisible,
+    handleCreateBlog,
+    mutation,
+  } = useTextEditor();
+  const navigation = useNavigate();
+  const handleAccess = () => {
+    const listTagArticleId = map(listTagArticle, "_id");
+    handleCreateBlog({ title, content, tags: listTagArticleId });
+  };
+  // TODO: REDIRECT TO DASHBOARD
+  useEffect(() => {
+    mutation.isSuccess && navigation("/");
+  }, [mutation.isSuccess]);
   return (
     <>
       <div className="col-span-2">
@@ -67,28 +87,35 @@ const EditVariant = () => {
             size="lg"
             color="primary"
             className="w-full bg-transparent focus:outline-none active:bg-transparent padding-0 margin-0 text-5xl border-none"
+            value={title}
+            onChange={(e) => handleSetTitleArticle(e.target.value)}
             onClick={() => {
               setIsVisible("title");
               handleToolTipEditor("title");
             }}
           />
           <div
-            className="mt-4 mx-8 py-2 flex space-x-2 items-center"
+            className="mt-4 mx-8 py-2 flex space-x-2 items-center flex-wrap"
             onClick={() => {
               setIsVisible("tag");
 
               handleToolTipEditor("tag");
             }}
           >
-            <Tag />
-            <Tag />
-            <Tag />
+            {!isEmpty(listTagArticle) &&
+              listTagArticle.map((tag) => <Tag tag={tag} key={tag._id} />)}
             <SelectTag />
           </div>
           <TextEditor />
         </div>
         <div className="space-x-2 flex mt-2">
-          <ConfirmModal color="primary" textHeader={"Xác nhận đăng bài viết"}>
+          <ConfirmModal
+            color="primary"
+            textHeader={"Xác nhận đăng bài viết"}
+            handleAccess={handleAccess}
+            isLoading={mutation.isLoading}
+            isSuccess={mutation.isSuccess}
+          >
             Đăng tải
           </ConfirmModal>
           <ConfirmModal
@@ -108,5 +135,24 @@ const EditVariant = () => {
 };
 
 const PreviewVariant = () => {
-  return <div>Preview</div>;
+  const { title, listTagArticle, content } = useTextEditor();
+  return (
+    <div className="min-h-[90vh]">
+      <div className="bg-base-200 w-[700px] min-h-[500px] rounded-md p-8">
+        <h1 className="text-6xl font-bold">{title}</h1>
+        <div
+          className="mt-4 py-2 flex space-x-2 items-center flex-wrap "
+          onClick={() => {
+            setIsVisible("tag");
+
+            handleToolTipEditor("tag");
+          }}
+        >
+          {!isEmpty(listTagArticle) &&
+            listTagArticle.map((tag) => <Tag tag={tag} key={tag._id} />)}
+        </div>
+        <HtmlConverter htmlString={content} />
+      </div>
+    </div>
+  );
 };
