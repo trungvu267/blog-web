@@ -39,20 +39,19 @@ const getDetails = async (req, res) => {
 const createBlog = async (req, res) => {
   const { title, content, tags } = req.body;
   if (!title) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ success: false, message: "you must be provide title" });
+    const error = new Error("Chưa có tiêu đề bài viết");
+    error.statusCode = StatusCodes.BAD_REQUEST;
+    throw error;
   }
   if (content.length < 6) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ success: false, message: "content is too short" });
+    const error = new Error("Nội dung bài viết quá ngắn");
+    error.statusCode = StatusCodes.BAD_REQUEST;
+    throw error;
   }
-
   if (tags.length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ success: false, message: "you must be provide tags" });
+    const error = new Error("Phải có ít nhất một danh mục bài viết");
+    error.statusCode = StatusCodes.BAD_REQUEST;
+    throw error;
   }
 
   const newBlog = new Blog({
