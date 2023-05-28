@@ -1,4 +1,5 @@
 import axios from "axios";
+import { errorToast } from "../utils/toast";
 const apiUrl = import.meta.env.VITE_API_URL || "https://localhost:5556";
 const request = axios.create({
   baseURL: apiUrl,
@@ -25,7 +26,19 @@ request.interceptors.request.use(async (config) => {
     },
   };
 });
-
+request.interceptors.response.use(
+  (response) => {
+    // Handle response data here
+    return response;
+  },
+  (error) => {
+    // Handle response error here
+    errorToast(
+      error?.response?.data?.message || "Có lỗi xảy ra vui lòng thử lại"
+    );
+    return Promise.reject(error);
+  }
+);
 async function get(url, params) {
   try {
     const { data, status } = await request.get(url, params);
