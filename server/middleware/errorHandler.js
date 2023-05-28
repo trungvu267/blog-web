@@ -4,7 +4,6 @@ const errorHandler = (err, req, res, next) => {
 
   // Default error message
   const message = err.message || "Something went wrong";
-  console.log(message);
   // Send error message as JSON response
   res.status(statusCode).json({ message });
 };
