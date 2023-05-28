@@ -1,7 +1,7 @@
 import { Button, Input } from "react-daisyui";
 import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { isEmpty } from "lodash";
+import { isEmpty, map } from "lodash";
 import { Logo, ToggleThemeBtn, HtmlConverter } from "../components/common";
 import { ConfirmModal } from "../components";
 import {
@@ -13,6 +13,7 @@ import {
 } from "../components/createPostPage";
 import useTextEditor from "../hooks/useTextEditor";
 import useSelectedPostVariant from "../hooks/useSelectedPostVariant";
+import { useEffect } from "react";
 const CreatePost = () => {
   const navigate = useNavigate();
   const handleAccess = () => {
@@ -48,12 +49,23 @@ export default CreatePost;
 const EditVariant = () => {
   const {
     title,
+    content,
     listTagArticle,
     handleSetTitleArticle,
     handleToolTipEditor,
     setIsVisible,
+    handleCreateBlog,
+    mutation,
   } = useTextEditor();
-
+  const navigation = useNavigate();
+  const handleAccess = () => {
+    const listTagArticleId = map(listTagArticle, "_id");
+    handleCreateBlog({ title, content, tags: listTagArticleId });
+  };
+  // TODO: REDIRECT TO DASHBOARD
+  useEffect(() => {
+    mutation.isSuccess && navigation("/");
+  }, [mutation.isSuccess]);
   return (
     <>
       <div className="col-span-2">
@@ -97,7 +109,13 @@ const EditVariant = () => {
           <TextEditor />
         </div>
         <div className="space-x-2 flex mt-2">
-          <ConfirmModal color="primary" textHeader={"Xác nhận đăng bài viết"}>
+          <ConfirmModal
+            color="primary"
+            textHeader={"Xác nhận đăng bài viết"}
+            handleAccess={handleAccess}
+            isLoading={mutation.isLoading}
+            isSuccess={mutation.isSuccess}
+          >
             Đăng tải
           </ConfirmModal>
           <ConfirmModal
@@ -118,7 +136,6 @@ const EditVariant = () => {
 
 const PreviewVariant = () => {
   const { title, listTagArticle, content } = useTextEditor();
-  console.log(content);
   return (
     <div className="min-h-[90vh]">
       <div className="bg-base-200 w-[700px] min-h-[500px] rounded-md p-8">

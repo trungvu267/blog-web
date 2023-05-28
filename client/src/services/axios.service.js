@@ -9,8 +9,8 @@ const request = axios.create({
 });
 request.interceptors.request.use(async (config) => {
   const customHeaders = {};
-  const jsonValue = localStorage.getItem("ACCESS_TOKEN");
-  const accessToken = JSON.parse(jsonValue);
+  const auth = localStorage.getItem("auth");
+  const accessToken = JSON.parse(auth)?.token;
   console.log({ accessToken: accessToken });
   if (accessToken) {
     customHeaders.authorization = `Bearer ${accessToken}`;

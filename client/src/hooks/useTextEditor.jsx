@@ -1,4 +1,6 @@
 import { reject } from "lodash";
+import { useMutation } from "react-query";
+import { useCallback } from "react";
 import {
   titleArticleAtom,
   contentArticleAtom,
@@ -8,6 +10,7 @@ import {
 } from "../states/textEditor";
 import { useAtom } from "jotai";
 import { errorToast } from "../utils/toast";
+import { createBlog } from "../api/post.api";
 
 const postHelper = {
   title:
@@ -23,6 +26,9 @@ const useTextEditor = () => {
   // TODO: ADD image link
   const [toolTipEditor, setToolTipEditor] = useAtom(toolTipEditorAtom);
   const [isVisible, setIsVisible] = useAtom(isVisibleAtom);
+  const mutation = useMutation(createBlog, {
+    mutationKey: "blogs/create",
+  });
   const handleToolTipEditor = (tooltip) => {
     setToolTipEditor(tooltip);
   };
@@ -49,6 +55,12 @@ const useTextEditor = () => {
       return reject(preTags, (tag) => tag._id === selectedTag._id);
     });
   };
+  const handleCreateBlog = useCallback(
+    (data) => {
+      mutation.mutate(data);
+    },
+    [mutation]
+  );
   return {
     toolTipEditor,
     postHelper,
@@ -62,6 +74,8 @@ const useTextEditor = () => {
     handleSetContentArticle,
     handleRemoveTag,
     handleAddTags,
+    handleCreateBlog,
+    mutation,
   };
 };
 

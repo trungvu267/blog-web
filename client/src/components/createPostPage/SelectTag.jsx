@@ -3,8 +3,7 @@ import useTag from "../../hooks/tag.hook";
 import useTextEditor from "../../hooks/useTextEditor";
 const SelectTag = () => {
   const { listTag } = useTag();
-  const { listTagArticle, handleAddTags } = useTextEditor();
-  console.log(listTagArticle);
+  const { handleAddTags } = useTextEditor();
   return (
     <Dropdown>
       <Dropdown.Toggle className="p-0 m-0 bg-base-200" color="ghost">
