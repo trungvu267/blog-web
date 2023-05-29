@@ -15,3 +15,8 @@ export const registerSchema = yup.object({
   name: yup.string().required("Chưa có tên người dùng"),
   password: yup.string().required("Chưa có mật khẩu"),
 });
+export const createTagSchema = yup.object({
+  name: yup.string().required("Chưa có tên danh mục"),
+  bg_color: yup.string(),
+  text_color: yup.string(),
+});
