@@ -14,7 +14,6 @@ export const usePublishPost = () => {
 };
 
 export const useDetailPost = (blogId) => {
-  console.log(blogId);
   const { data, isLoading, error } = useQuery({
     queryKey: [`blogs/${blogId}`],
     queryFn: () => getDetails(blogId),

@@ -1,5 +1,4 @@
 import Bookmark from "../models/bookmark.model.js";
-import Blog from "../models/blog.model.js";
 import { StatusCodes } from "http-status-codes";
 
 const getAllBookmarkByUser = async (req, res, next) => {
@@ -17,31 +16,43 @@ const getAllBookmarkByUser = async (req, res, next) => {
   });
 };
 
+const getAllBookmarkDetailByUser = async (req, res, next) => {
+  const bookmark = await Bookmark.find({
+    author: req.user.userId,
+    isBookmarked: true,
+  })
+    .populate({ path: "author", select: "name " })
+    .populate({ path: "blog", select: "title" })
+    .sort({
+      timestamp: -1,
+    });
+
+  res.json({
+    success: true,
+    message: "get all bookmark successfully",
+    bookmark,
+  });
+};
+
 const setBookmark = async (req, res) => {
   const checkBookmark = await Bookmark.findOne({
     author: req.user.userId,
     blog: req.body.blogId,
-    isBookmarked: true,
   });
+
   if (checkBookmark) {
-    Bookmark.updateOne(
-      {
-        _id: req.body.blogId,
-      },
-      {
-        $set: {
-          isBookmarked: false,
-        },
-      }
-    );
+    checkBookmark.isBookmarked = !checkBookmark.isBookmarked;
+    checkBookmark.save();
     return res.json({
       bookmark: checkBookmark,
     });
   }
-  const newBookmark = new Bookmark({
+
+  const newBookmark = await Bookmark.create({
     author: req.user.userId,
-    blog: req.blog._id,
+    blog: req.body.blogId,
   });
+
   await newBookmark.save();
   res.json({
     bookmark: newBookmark,
@@ -70,4 +81,9 @@ const deleteBookmark = async (req, res) => {
   });
 };
 
-export { setBookmark, getAllBookmarkByUser, deleteBookmark };
+export {
+  setBookmark,
+  getAllBookmarkByUser,
+  deleteBookmark,
+  getAllBookmarkDetailByUser,
+};
