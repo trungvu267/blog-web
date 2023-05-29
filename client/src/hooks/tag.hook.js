@@ -2,7 +2,8 @@ import { useAtom } from "jotai";
 import { listTagAtom } from "../states/tag.state";
 import { useMutation, useQuery } from "react-query";
 import { createTag, deleteTag, getListTag } from "../api/tag.api";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useEffect } from "react";
+import { successToast } from "../utils/toast";
 const useTag = () => {
   // TODO: Add caching
   const [listTag, setListTag] = useAtom(listTagAtom);
@@ -32,21 +33,16 @@ export const useCreateTag = () => {
   );
   return { mutation, handleCreateTag };
 };
-export const useDeletTag = ({ tagId }) => {
-  const [, setListTag] = useAtom(listTagAtom);
-
+export const useDeleteTag = (tagId) => {
   const mutation = useMutation(deleteTag, {
     mutationKey: `tags/${tagId}`,
   });
-  useMemo(() => {
-    setListTag(mutation.data ?? {});
-  }, [mutation.data]);
-  const handleDeleteTag = useCallback(
-    ({ tagId }) => {
-      mutation.mutate({ tagId });
-    },
-    [mutation]
-  );
+  useEffect(() => {
+    mutation.isSuccess && successToast("Xóa danh mục thành công");
+  }, [mutation.isSuccess]);
+  const handleDeleteTag = useCallback(() => {
+    mutation.mutate(tagId);
+  }, [mutation]);
   return { mutation, handleDeleteTag };
 };
 
