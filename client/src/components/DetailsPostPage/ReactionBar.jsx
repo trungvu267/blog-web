@@ -1,4 +1,23 @@
+import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
+import { useState, useLayoutEffect, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useListBookmark, useSetBookmark } from "../../hooks/bookmark.hook";
+import { find, get } from "lodash";
 const ReactionBar = () => {
+  const { postId } = useParams();
+  const { listBookmark } = useListBookmark();
+  const { mutation, handleSetBookmark } = useSetBookmark(postId);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  useEffect(() => {
+    const matchBookmark = find(
+      listBookmark,
+      (bookmark) => bookmark.blog === postId
+    );
+    const matchIsBookmark = matchBookmark && get(matchBookmark, "isBookmarked");
+    setIsBookmarked(matchIsBookmark);
+  }, [listBookmark, postId, mutation]);
+
   return (
     <div className="flex flex-col w-[5%] text-center  mt-32">
       <div className="text-center mx-auto mb-5">
@@ -35,38 +54,16 @@ const ReactionBar = () => {
         </svg>
         <span className="text-sm">8</span>
       </div>
-      <div className="text-center mx-auto mb-5">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-          />
-        </svg>
+      <div
+        className="text-center mx-auto mb-5 cursor-pointer"
+        onClick={handleSetBookmark}
+      >
+        {isBookmarked ? (
+          <IoBookmark size={"1.5rem"} />
+        ) : (
+          <IoBookmarkOutline size={"1.5rem"} />
+        )}
         <span className="text-sm">8</span>
-      </div>
-      <div className="text-center mx-auto mb-5">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-          />
-        </svg>
       </div>
     </div>
   );

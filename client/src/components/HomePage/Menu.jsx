@@ -3,33 +3,37 @@ import { iconFollow } from "../../utils/constant";
 import { Link } from "react-router-dom";
 import { MdAlternateEmail, MdOutlineHome } from "react-icons/md";
 const Menu = () => {
+  const isAuth = !!localStorage.getItem("auth");
+
   return (
     <div className="w-[22%] mt-5">
-      <div className=" bg-primary border  py-3 px-5 rounded-lg">
-        <h1 className="text-lg font-bold mb-3">
-          DEV Community is a community of 1,062,194 amazing developers
-        </h1>
-        <span>
-          We're a place where coders share, stay up-to-date and grow their
-          careers.
-        </span>
-        <Link to={"signup"}>
-          <Button
-            className="w-full bg-base-200 border hover:text-white hover:bg-base-300  font-semibold mt-3"
-            variant="outline"
-          >
-            Create account
-          </Button>
-        </Link>
-        <Link to={"/login"}>
-          <Button
-            color="ghost"
-            className="w-full hover:bg-slate-300 text-slate-800 hover:text-blue-800 border-2 mt-3"
-          >
-            Login
-          </Button>
-        </Link>
-      </div>
+      {!isAuth && (
+        <div className=" bg-primary border  py-3 px-5 rounded-lg">
+          <h1 className="text-lg font-bold mb-3">
+            DEV Community is a community of 1,062,194 amazing developers
+          </h1>
+          <span>
+            We're a place where coders share, stay up-to-date and grow their
+            careers.
+          </span>
+          <Link to={"signup"}>
+            <Button
+              className="w-full bg-base-200 border hover:text-white hover:bg-base-300  font-semibold mt-3"
+              variant="outline"
+            >
+              Đăng ký
+            </Button>
+          </Link>
+          <Link to={"/login"}>
+            <Button
+              color="ghost"
+              className="w-full hover:bg-slate-300 text-slate-800 hover:text-blue-800 border-2 mt-3"
+            >
+              Đăng nhập
+            </Button>
+          </Link>
+        </div>
+      )}
 
       <div className="flex flex-col mt-5 mb-5">
         <Button
