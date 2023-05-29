@@ -7,7 +7,14 @@ const getAllBlog = async (req, res, next) => {
   const blogs = await Blog.find();
   res.jsonp(blogs);
 };
-
+const getListPublishBlog = async (req, res, next) => {
+  // TODO: add sorting
+  const blogs = await Blog.find({ published: true })
+    .populate({ path: "author", select: "name email" })
+    .populate({ path: "tags" })
+    .select("-content");
+  res.jsonp(blogs);
+};
 const getAllBlogByAuthor = async (req, res) => {
   const { userId } = req.params;
   const blogs = await Blog.find({ author: userId });
@@ -19,20 +26,18 @@ const getOne = async (req, res) => {
 };
 const getDetails = async (req, res) => {
   const { blog } = req;
-  const [details, comments] = await Promise.all([
-    blog.populate("author", "-password"),
-    Comment.find({ blog: blog._id })
-      .populate("author", "-password")
-      .select("-blog"),
-  ]);
-  res.json({
-    success: true,
-    message: "blog details",
-    blog: {
-      details,
-      comments,
-    },
-  });
+
+  await blog.populate([
+    { path: "author", select: "name email" },
+    { path: "tags" },
+  ]),
+    res.json({
+      success: true,
+      message: "blog details",
+      blog: {
+        details: blog,
+      },
+    });
 };
 
 // Create a new blog
@@ -148,4 +153,5 @@ export {
   getAllBlogByAuthor,
   getDetails,
   getBlogById,
+  getListPublishBlog,
 };

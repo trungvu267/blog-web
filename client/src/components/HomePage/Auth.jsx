@@ -1,4 +1,4 @@
-const Auth = () => {
+const Auth = ({ author }) => {
   return (
     <div className="auth flex p-3 gap-2">
       <img
@@ -7,8 +7,8 @@ const Auth = () => {
         alt=""
       />
       <div>
-        <h2 className=" text-primary font-medium ">Daniel Reis</h2>
-        <span className=" text-start text-sm">May 8</span>
+        <h2 className=" text-primary font-medium ">{author?.name}</h2>
+        <span className=" text-start text-sm">{author?.email}</span>
       </div>
     </div>
   );

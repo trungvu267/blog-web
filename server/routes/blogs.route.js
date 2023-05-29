@@ -8,6 +8,7 @@ import {
   deleteBlog,
   getBlogById,
   getDetails,
+  getListPublishBlog,
 } from "../controllers/blog.controller.js";
 import { auth } from "../middleware/auth.js";
 import { createComment } from "../controllers/comment.controller.js";
@@ -15,6 +16,7 @@ import { likeBlog } from "../controllers/like.controller.js";
 const router = express.Router();
 
 router.get("/", asyncWrapper(getAllBlog));
+router.get("/published", asyncWrapper(getListPublishBlog));
 router.post("/", auth, asyncWrapper(createBlog));
 router.get("/:blogId", asyncWrapper(getOne));
 router.put("/:blogId", auth, asyncWrapper(updateBlog));
