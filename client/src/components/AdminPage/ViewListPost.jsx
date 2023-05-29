@@ -1,14 +1,13 @@
 import { Button } from "react-daisyui";
 import ConfirmModal from "../ConfirmModal";
+import usePost from "../../hooks/post.hook";
 const ViewListPost = () => {
+  const { listPost } = usePost();
+  console.log(listPost);
   return (
     <div className="p-12 space-y-4 h-[80vh] overflow-y-scroll">
-      <Post
-        post={{ title: "test", published: false, author: { name: "trung vu" } }}
-      />
-      <Post
-        post={{ title: "test", published: true, author: { name: "trung vu" } }}
-      />
+      {listPost.length > 0 &&
+        listPost.map((post) => <Post key={post.id} post={post} />)}
     </div>
   );
 };

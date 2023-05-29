@@ -11,3 +11,7 @@ export const createTag = async ({ name, text_color, bg_color }) => {
   });
   return data;
 };
+export const deleteTag = async ({ tagId }) => {
+  const data = await request.delete(`/tags/${tagId}`);
+  return data;
+};

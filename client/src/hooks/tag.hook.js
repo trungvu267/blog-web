@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { listTagAtom } from "../states/tag.state";
 import { useMutation, useQuery } from "react-query";
-import { createTag, getListTag } from "../api/tag.api";
+import { createTag, deleteTag, getListTag } from "../api/tag.api";
 import { useCallback, useMemo } from "react";
 const useTag = () => {
   // TODO: Add caching
@@ -31,6 +31,23 @@ export const useCreateTag = () => {
     [mutation]
   );
   return { mutation, handleCreateTag };
+};
+export const useDeletTag = ({ tagId }) => {
+  const [, setListTag] = useAtom(listTagAtom);
+
+  const mutation = useMutation(deleteTag, {
+    mutationKey: `tags/${tagId}`,
+  });
+  useMemo(() => {
+    setListTag(mutation.data ?? {});
+  }, [mutation.data]);
+  const handleDeleteTag = useCallback(
+    ({ tagId }) => {
+      mutation.mutate({ tagId });
+    },
+    [mutation]
+  );
+  return { mutation, handleDeleteTag };
 };
 
 export default useTag;
