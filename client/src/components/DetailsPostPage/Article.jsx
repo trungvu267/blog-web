@@ -3,7 +3,7 @@ import TagPost from "../HomePage/TagPost";
 import { HtmlConverter } from "../common";
 const Article = ({ blog }) => {
   return (
-    <div className="  bg-slate-50 border  rounded-lg mb-10">
+    <div className="bg-base-300 border rounded-lg mb-10">
       {blog.imageLink && (
         <div className="w-full h-[350px] rounded-lg ">
           <img

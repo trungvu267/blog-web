@@ -5,10 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDetailPost } from "../../hooks/post.hook";
 export const MainSection = () => {
   const { postId } = useParams();
-  const { detailBlog, isLoading, error } = useDetailPost(postId);
-  console.log(detailBlog);
-  console.log(error);
-
+  const { detailBlog, isLoading } = useDetailPost(postId);
   if (isLoading) {
     return <div className="w-[65%] mt-5 ">Loading</div>;
   }
