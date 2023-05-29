@@ -3,7 +3,10 @@ import Blog from "../models/blog.model.js";
 import { StatusCodes } from "http-status-codes";
 
 const getAllBookmarkByUser = async (req, res, next) => {
-  const bookmark = await Bookmark.find({ author: req.user.userId }).sort({
+  const bookmark = await Bookmark.find({
+    author: req.user.userId,
+    isBookmarked: true,
+  }).sort({
     timestamp: -1,
   });
 
@@ -14,15 +17,25 @@ const getAllBookmarkByUser = async (req, res, next) => {
   });
 };
 
-const createBookmark = async (req, res) => {
+const setBookmark = async (req, res) => {
   const checkBookmark = await Bookmark.findOne({
     author: req.user.userId,
     blog: req.body.blogId,
+    isBookmarked: true,
   });
   if (checkBookmark) {
-    return res.status(StatusCodes.BAD_REQUEST).json({
-      success: false,
-      message: "you already Bookmark the post",
+    Bookmark.updateOne(
+      {
+        _id: req.body.blogId,
+      },
+      {
+        $set: {
+          isBookmarked: false,
+        },
+      }
+    );
+    return res.json({
+      bookmark: checkBookmark,
     });
   }
   const newBookmark = new Bookmark({
@@ -31,8 +44,6 @@ const createBookmark = async (req, res) => {
   });
   await newBookmark.save();
   res.json({
-    success: true,
-    message: "you have successfully created",
     bookmark: newBookmark,
   });
 };
@@ -59,4 +70,4 @@ const deleteBookmark = async (req, res) => {
   });
 };
 
-export { createBookmark, getAllBookmarkByUser, deleteBookmark };
+export { setBookmark, getAllBookmarkByUser, deleteBookmark };
