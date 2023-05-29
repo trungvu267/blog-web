@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import Post from "./Post";
+import usePost from "../../hooks/post.hook";
 
 const Posts = (props) => {
+  const { listPost } = usePost();
+
   return (
     <div>
       <div className="flex gap-1">
@@ -74,10 +77,9 @@ const Posts = (props) => {
           <div className="mt-5">Happy coding ❤️</div>
         </div>
       </div>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
+      {listPost.map((post) => (
+        <Post key={post.id} data={post}></Post>
+      ))}
     </div>
   );
 };

@@ -1,18 +1,20 @@
 import Auth from "./Auth";
 import TagPost from "./TagPost";
 
-const Post = () => {
+const Post = ({ data }) => {
+  const { tags } = { data };
+  console.log(data);
+  if (!data) return;
   return (
     <div className="border rounded-lg mb-3 border-slate-200">
       <Auth></Auth>
       <h1 className="px-8 text-2xl mb-2 font-bold hover:text-primary cursor-pointer">
-        Database 101: How social media “likes” are stored in a database
+        {data.title}
       </h1>
       <div className="flex px-8 mb-3">
-        <TagPost />
-        <TagPost />
-        <TagPost />
-        <TagPost />
+        {data.tags.map((tag) => (
+          <TagPost key={tag.id} tag={tag} />
+        ))}
       </div>
       <div className="flex  px-8 mb-5 justify-between">
         <div className="flex gap-3  text-sm">

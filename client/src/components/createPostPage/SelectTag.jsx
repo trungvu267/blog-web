@@ -4,6 +4,7 @@ import useTextEditor from "../../hooks/useTextEditor";
 const SelectTag = () => {
   const { listTag } = useTag();
   const { handleAddTags } = useTextEditor();
+  // if (!listTag) return;
   return (
     <Dropdown>
       <Dropdown.Toggle className="p-0 m-0 bg-base-200" color="ghost">

@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { createTagSchema } from "../../utils/schema";
 import { TwitterPicker } from "react-color";
+import { useCreateTag } from "../../hooks/tag.hook";
 const CreateTag = () => {
   const {
     register,
@@ -12,15 +13,16 @@ const CreateTag = () => {
   } = useForm({
     resolver: yupResolver(createTagSchema),
   });
+  const { handleCreateTag } = useCreateTag();
   //   TODO: xử lý logic ở đây
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  // const handleCreateTag = (data) => {
+  //   console.log(data);
+  // };
   return (
     <div className="flex justify-center items-center h-full">
       <div>
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleCreateTag)}
           className="w-[640px] rounded-lg border p-10 pt-3 flex flex-col border-slate-300 bg-base-300 mx-auto"
         >
           <div className="mx-auto text-center mt-10 mb-5">
