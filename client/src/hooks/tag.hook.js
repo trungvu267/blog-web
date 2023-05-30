@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { listTagAtom } from "../states/tag.state";
 import { useMutation, useQuery } from "react-query";
-import { createTag, deleteTag, getListTag } from "../api/tag.api";
+import { createTag, deleteTag, getListTag, updateTag } from "../api/tag.api";
 import { useCallback, useMemo, useEffect } from "react";
 import { successToast } from "../utils/toast";
 const useTag = () => {
@@ -22,6 +22,7 @@ export const useCreateTag = () => {
   const mutation = useMutation(createTag, {
     mutationKey: "tags",
   });
+
   useMemo(() => {
     setListTag(mutation.data ?? {});
   }, [mutation.data]);
@@ -32,6 +33,22 @@ export const useCreateTag = () => {
     [mutation]
   );
   return { mutation, handleCreateTag };
+};
+export const useUpdateTag = (tagId) => {
+  const mutation = useMutation(updateTag, {
+    mutationKey: `tags/${tagId}`,
+  });
+  console.log(tagId);
+  useEffect(() => {
+    mutation.isSuccess && successToast("Sửa danh mục thành công");
+  }, [mutation.isSuccess]);
+  const handleUpdateTag = useCallback(
+    ({ tagId, name, text_color, bg_color }) => {
+      mutation.mutate({ tagId, name, text_color, bg_color });
+    },
+    [mutation]
+  );
+  return { mutation, handleUpdateTag };
 };
 export const useDeleteTag = (tagId) => {
   const mutation = useMutation(deleteTag, {

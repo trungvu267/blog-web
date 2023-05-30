@@ -12,7 +12,14 @@ export const createTag = async ({ name, text_color, bg_color }) => {
   return data;
 };
 export const deleteTag = async (tagId) => {
-  console.log(tagId);
   const data = await request.delete(`/tags/${tagId}`);
+  return data;
+};
+export const updateTag = async ({ tagId, name, text_color, bg_color }) => {
+  const data = await request.put(`/tags/${tagId}`, {
+    name,
+    text_color,
+    bg_color,
+  });
   return data;
 };

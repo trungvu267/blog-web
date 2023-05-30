@@ -21,7 +21,7 @@ const ConfirmModal = ({
       <Button onClick={toggleVisible} {...rest}>
         {children}
       </Button>
-      <Modal open={visible} onClickBackdrop={toggleVisible}>
+      <Modal className="w-full" open={visible} onClickBackdrop={toggleVisible}>
         <Modal.Header className="font-bold">{textHeader}</Modal.Header>
         <Modal.Body>{textBody}</Modal.Body>
         <Modal.Actions>
