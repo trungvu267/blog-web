@@ -28,28 +28,34 @@ const Tag = ({ tag }) => {
   } = useForm({
     resolver: yupResolver(createTagSchema),
   });
-  const { mutation, handleDeleteTag } = useDeleteTag(tag._id);
-  const { handleUpdateTag } = useUpdateTag(tag._id);
+  const { refetch } = useTag();
+  const { mutation, handleDeleteTag } = useDeleteTag(tag._id, refetch);
+  const { mutation: updateMutation, handleUpdateTag } = useUpdateTag(
+    tag._id,
+    refetch
+  );
 
   return (
     <div className="flex flex-row space-x-2 bg-base-300 items-center p-2 rounded-sm">
       <div className="flex-1">{tag.name}</div>
       <ConfirmModal
-        handleAccess={handleUpdateTag}
-        textHeader={"Xác nhận sửa bài viết"}
+        hiddenModalActions
+        textHeader={"Sửa danh mục bài viết"}
         textBody={
           <div className="flex justify-center items-center w-full h-full">
             <div>
               <form
-                onSubmit={handleSubmit(handleUpdateTag)}
-                className="w-[500px] rounded-lg border p-10 pt-3 flex flex-col border-slate-300 bg-base-300 mx-auto"
+                onSubmit={handleSubmit((data) => {
+                  handleUpdateTag(data);
+                })}
+                className="w-[px] rounded-lg flex flex-col mx-auto"
               >
-                <div className="mx-auto text-center mt-10 mb-5">
-                  <h2 className="text-3xl font-bold">Sửa danh mục bài viết</h2>
-                </div>
                 <div className="mb-1 gap-y-5  mx-auto justify-center  flex flex-col">
                   <label className="font-medium text-xl">Tên danh mục</label>
-                  <Input className="max-w-[400px]" {...register("name")} />
+                  <Input
+                    className="max-w-[400px]"
+                    {...register("name", { value: tag.name })}
+                  />
                   <label className="my-0 py-0 text-red-500">
                     {errors?.name?.message}
                   </label>
@@ -61,7 +67,7 @@ const Tag = ({ tag }) => {
                   <Controller
                     name="text_color"
                     control={control}
-                    defaultValue="#ffffff"
+                    defaultValue={tag.text_color}
                     render={({ field }) => (
                       <TwitterPicker
                         color={field.value}
@@ -77,7 +83,7 @@ const Tag = ({ tag }) => {
                   <Controller
                     name="bg_color"
                     control={control}
-                    defaultValue="#ffffff"
+                    defaultValue={tag.bg_color}
                     render={({ field }) => (
                       <TwitterPicker
                         color={field.value}
@@ -86,7 +92,6 @@ const Tag = ({ tag }) => {
                     )}
                   />
                 </div>
-
                 <Button className={"bg-primary"}>
                   <span className="text-center p-3"> Xác nhận </span>
                 </Button>
@@ -96,8 +101,8 @@ const Tag = ({ tag }) => {
         }
         color="success"
         variant="outline"
-        isSuccess={mutation.isSuccess}
-        isLoading={mutation.isLoading}
+        isSuccess={updateMutation.isSuccess}
+        isLoading={updateMutation.isLoading}
       >
         Sửa
       </ConfirmModal>

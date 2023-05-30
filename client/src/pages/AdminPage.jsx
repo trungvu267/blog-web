@@ -30,6 +30,7 @@ const AdminPage = () => {
             onClick={() => {
               setSelectedTag(tags[0]);
             }}
+            variant={selectedTag.value === "createTag" && "outline"}
           >
             Tạo danh mục bài viết
           </Button>
@@ -38,6 +39,7 @@ const AdminPage = () => {
             onClick={() => {
               setSelectedTag(tags[1]);
             }}
+            variant={selectedTag.value === "viewListTag" && "outline"}
           >
             Xem danh mục bài viết
           </Button>
@@ -46,6 +48,7 @@ const AdminPage = () => {
             onClick={() => {
               setSelectedTag(tags[2]);
             }}
+            variant={selectedTag.value === "viewListPost" && "outline"}
           >
             Quản lý các bài viết
           </Button>

@@ -7,14 +7,14 @@ import { successToast } from "../utils/toast";
 const useTag = () => {
   // TODO: Add caching
   const [listTag, setListTag] = useAtom(listTagAtom);
-  const { isLoading, error } = useQuery({
+  const { isLoading, error, refetch } = useQuery({
     queryKey: ["tags"],
     queryFn: getListTag,
     onSuccess: (res) => {
       setListTag(res.data);
     },
   });
-  return { isLoading, error, listTag };
+  return { isLoading, error, listTag, refetch };
 };
 export const useCreateTag = () => {
   const [, setListTag] = useAtom(listTagAtom);
@@ -34,31 +34,40 @@ export const useCreateTag = () => {
   );
   return { mutation, handleCreateTag };
 };
-export const useUpdateTag = (tagId) => {
+export const useUpdateTag = (tagId, refetch) => {
   const mutation = useMutation(updateTag, {
     mutationKey: `tags/${tagId}`,
   });
-  console.log(tagId);
-  useEffect(() => {
-    mutation.isSuccess && successToast("Sửa danh mục thành công");
-  }, [mutation.isSuccess]);
+
   const handleUpdateTag = useCallback(
-    ({ tagId, name, text_color, bg_color }) => {
-      mutation.mutate({ tagId, name, text_color, bg_color });
+    ({ name, text_color, bg_color }) => {
+      mutation.mutate(
+        { tagId, name, text_color, bg_color },
+        {
+          onSuccess: () => {
+            refetch();
+            successToast("Sửa danh mục thành công");
+          },
+        }
+      );
     },
     [mutation]
   );
   return { mutation, handleUpdateTag };
 };
-export const useDeleteTag = (tagId) => {
+export const useDeleteTag = (tagId, refetch) => {
   const mutation = useMutation(deleteTag, {
-    mutationKey: `tags/${tagId}`,
+    mutationKey: "tags",
   });
   useEffect(() => {
     mutation.isSuccess && successToast("Xóa danh mục thành công");
   }, [mutation.isSuccess]);
   const handleDeleteTag = useCallback(() => {
-    mutation.mutate(tagId);
+    mutation.mutate(tagId, {
+      onSuccess: () => {
+        refetch();
+      },
+    });
   }, [mutation]);
   return { mutation, handleDeleteTag };
 };
