@@ -1,10 +1,12 @@
 import Blog from "../models/blog.model.js";
-import Comment from "../models/comment.model.js";
 import { StatusCodes } from "http-status-codes";
 
 const getAllBlog = async (req, res, next) => {
   // TODO: add sorting
-  const blogs = await Blog.find();
+  const blogs = await Blog.find().populate({
+    path: "author",
+    select: "name email",
+  });
   res.jsonp(blogs);
 };
 const getListPublishBlog = async (req, res, next) => {
