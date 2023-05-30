@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { usePublishPost } from "../../hooks/post.hook";
 import Post from "./Post";
-import usePost from "../../hooks/post.hook";
 
 const Posts = () => {
   const { publishBlogs, isLoading, error } = usePublishPost();
