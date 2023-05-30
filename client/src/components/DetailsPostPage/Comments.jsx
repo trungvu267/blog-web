@@ -1,11 +1,12 @@
 import { Button } from "react-daisyui";
 import { ImageComment } from "./ImageComment";
 import { Comment } from "./Comment";
-import useComment from "../../hooks/comment.hook";
+import { useCreateComment, useListComment } from "../../hooks/comment.hook";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { isEmpty } from "lodash";
 
 const schema = yup.object({
   content: yup.string().required("Chưa nhập comment"),
@@ -20,7 +21,9 @@ const Comments = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { handleCreateComment } = useComment();
+  const { refetch } = useListComment(postId);
+  const { handleCreateComment } = useCreateComment(refetch);
+
   return (
     <div className="bg-slate-50 border p-5 mb-10">
       <div className="flex justify-between text-center mb-10">
@@ -34,7 +37,7 @@ const Comments = () => {
         <ImageComment></ImageComment>
         <form
           onSubmit={handleSubmit((data) =>
-            handleCreateComment({ data, blogId: postId })
+            handleCreateComment({ ...data, blogId: postId })
           )}
           className="flex flex-col flex-1"
         >
@@ -58,12 +61,23 @@ const Comments = () => {
           </div>
         </form>
       </div>
-
-      <Comment />
-      <Comment />
-      <Comment />
+      <ListComment />
     </div>
   );
 };
 
 export default Comments;
+
+const ListComment = () => {
+  const { postId } = useParams();
+  const { listComment, isLoading } = useListComment(postId);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <>
+      {!isEmpty(listComment) &&
+        listComment.map((comment) => <Comment comment={comment} />)}
+    </>
+  );
+};

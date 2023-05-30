@@ -10,7 +10,7 @@ import {
 import { auth } from "../middleware/auth.js";
 const router = express.Router();
 
-router.get("/", asyncWrapper(getListCommentByBlog));
+router.get("/all/:blogId", asyncWrapper(getListCommentByBlog));
 router.post("/", auth, asyncWrapper(createComment));
 router.put("/:commentId", auth, asyncWrapper(updateComment));
 router.delete("/:commentId", auth, asyncWrapper(deleteComment));

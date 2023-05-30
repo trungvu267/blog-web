@@ -6,7 +6,7 @@ const Post = ({ blog }) => {
   const navigate = useNavigate();
   return (
     <div className="border rounded-lg mb-3 border-slate-200">
-      {blog.imageLink && (
+      {blog?.imageLink && (
         <img
           className="rounded-lg"
           src="https://res.cloudinary.com/practicaldev/image/fetch/s--Rsd1j1dG--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x57e86jykz6x759rvf9c.png"

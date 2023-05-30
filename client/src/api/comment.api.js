@@ -4,7 +4,7 @@ export const createComment = async (data) => {
   const res = await request.post("/comments/", data);
   return res;
 };
-export const getListComment = async (data) => {
-  const res = await request.get("/comments", data);
+export const getListComment = async (blogId) => {
+  const res = await request.get(`/comments/all/${blogId}`);
   return res;
 };

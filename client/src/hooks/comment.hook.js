@@ -1,19 +1,28 @@
-import { useMutation } from "react-query";
-import { createComment } from "../api/comment.api";
+import { useMutation, useQuery } from "react-query";
+import { createComment, getListComment } from "../api/comment.api";
 import { useCallback } from "react";
 
-const useComment = () => {
+export const useCreateComment = (refetch) => {
   const mutation = useMutation(createComment, {
     mutationKey: "comments",
   });
 
   const handleCreateComment = useCallback(
     (data) => {
-      console.log(data);
-      mutation.mutate(data);
+      mutation.mutate(data, {
+        onSuccess: () => {
+          refetch();
+        },
+      });
     },
     [mutation]
   );
   return { mutation, handleCreateComment };
 };
-export default useComment;
+export const useListComment = (blogId) => {
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["list-comment"],
+    queryFn: () => getListComment(blogId),
+  });
+  return { listComment: data?.data, isLoading, refetch };
+};

@@ -19,11 +19,13 @@ const createComment = async (req, res) => {
   });
 };
 const getListCommentByBlog = async (req, res) => {
-  const { blogId } = req.body;
-  const listCommentByBlog = await Comment.find({ blog: blogId }).populate({
-    path: "author",
-    select: "name email",
-  });
+  const { blogId } = req.params;
+  const listCommentByBlog = await Comment.find({ blog: blogId })
+    .populate({
+      path: "author",
+      select: "name email",
+    })
+    .sort({ _id: -1 });
   res.json(listCommentByBlog);
 };
 // update comment.
