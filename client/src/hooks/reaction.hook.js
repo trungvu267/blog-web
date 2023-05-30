@@ -10,7 +10,6 @@ export const useListReaction = () => {
     queryKey: ["/reactions"],
     queryFn: getListReaction,
     onSuccess: (res) => {
-      console.log(res);
       setListReaction(res.data.listLiked);
     },
   });
