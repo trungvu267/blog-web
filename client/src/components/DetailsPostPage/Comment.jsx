@@ -1,6 +1,5 @@
-import { Button } from "react-daisyui";
 import { ImageComment } from "./ImageComment";
-export const Comment = () => {
+export const Comment = ({ comment }) => {
   return (
     <div className="flex flex-col mb-5">
       <div className="flex space-x-5">
@@ -8,7 +7,7 @@ export const Comment = () => {
         <div className="flex flex-col gap-y-5 flex-1 mb-5 border rounded-lg p-5">
           <div className="flex justify-between">
             <h2 className="text-xl font-bold text-slate-700">
-              Nikolay Nelidov
+              {comment?.author?.name}
             </h2>
             <span className=" cursor-pointer p-1 rounded-lg hover:bg-slate-200">
               <svg
@@ -27,15 +26,10 @@ export const Comment = () => {
               </svg>
             </span>
           </div>
-          <div className="text-lg tracking-normal">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, ipsa
-            ratione magni officia tenetur cum ullam? Rem, quibusdam quae, nam,
-            officiis doloremque beatae laborum a excepturi aut harum iure
-            cumque?
-          </div>
+          <div className="text-lg tracking-normal">{comment?.content}</div>
         </div>
       </div>
-      <div className="flex gap-1 translate-x-16">
+      {/* <div className="flex gap-1 translate-x-16">
         <Button color="ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +64,7 @@ export const Comment = () => {
           </svg>
           Reply
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

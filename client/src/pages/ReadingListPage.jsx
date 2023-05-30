@@ -56,9 +56,9 @@ const Bookmark = ({ bookmark }) => {
         navigate(`../posts/${bookmark.blog._id}`);
       }}
     >
-      <div className="col-span-4 text-left">{bookmark.blog.title}</div>
+      <div className="col-span-4 text-left">{bookmark?.blog?.title}</div>
       <div className="col-span-2">
-        Tác giả: <span className="font-bold">{bookmark.author.name}</span>
+        Tác giả: <span className="font-bold">{bookmark?.author?.name}</span>
       </div>
     </div>
   );

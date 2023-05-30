@@ -4,7 +4,7 @@ import { HtmlConverter } from "../common";
 const Article = ({ blog }) => {
   return (
     <div className="bg-base-300 border rounded-lg mb-10">
-      {blog.imageLink && (
+      {blog?.imageLink && (
         <div className="w-full h-[350px] rounded-lg ">
           <img
             className="w-full h-full object-cover"
