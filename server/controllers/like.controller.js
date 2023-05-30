@@ -23,19 +23,16 @@ export const likeBlog = async (req, res) => {
   if (existingLike) {
     existingLike.isLiked = !existingLike.isLiked;
     await existingLike.save();
-    res
-      .status(200)
-      .json({
-        message: "Like status toggled successfully",
-        like: existingLike,
-      });
+    return res.status(200).json({
+      message: "Like status toggled successfully",
+      like: existingLike,
+    });
   } else {
     // If like does not exist, create a new like
     const newLike = new Like({ user: userId, blog: blogId });
     await newLike.save();
   }
-
-  res
+  return res
     .status(200)
     .json({ message: "Like status toggled successfully", like: newLike });
 };
