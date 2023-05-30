@@ -5,6 +5,7 @@ import blogsRouter from "./blogs.route.js";
 import commentRouter from "./comment.route.js";
 import tagRouter from "./tag.route.js";
 import bookmarkRouter from "./bookmark.route.js";
+import reactionRouter from "./reaction.route.js";
 
 const Router = ExpressRouter();
 Router.get("/", (req, res) => {
@@ -23,5 +24,6 @@ Router.use("/blogs", blogsRouter);
 Router.use("/comments", commentRouter);
 Router.use("/tags", tagRouter);
 Router.use("/bookmark", bookmarkRouter);
+Router.use("/reactions", reactionRouter);
 
 export default Router;
