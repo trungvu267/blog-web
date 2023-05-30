@@ -25,11 +25,11 @@ const Comments = () => {
   const { handleCreateComment } = useCreateComment(refetch);
 
   return (
-    <div className="bg-slate-50 border p-5 mb-10">
+    <div className="bg-base-100 border p-5 mb-10">
       <div className="flex justify-between text-center mb-10">
-        <h2 className="text-3xl font-bold text-black">Bình luận</h2>
+        <h2 className="text-3xl font-bold ">Bình luận</h2>
 
-        <Button color="ghost" className="border bg-slate-300">
+        <Button color="ghost" className="border bg-base-300">
           Subscribe
         </Button>
       </div>
