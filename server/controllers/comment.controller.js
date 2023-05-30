@@ -20,7 +20,10 @@ const createComment = async (req, res) => {
 };
 const getListCommentByBlog = async (req, res) => {
   const { blogId } = req.body;
-  const listCommentByBlog = await Comment.find({ blog: blogId });
+  const listCommentByBlog = await Comment.find({ blog: blogId }).populate({
+    path: "author",
+    select: "name email",
+  });
   res.json(listCommentByBlog);
 };
 // update comment.
