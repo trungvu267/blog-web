@@ -1,9 +1,11 @@
 import Bookmark from "../models/bookmark.model.js";
-import Blog from "../models/blog.model.js";
 import { StatusCodes } from "http-status-codes";
 
 const getAllBookmarkByUser = async (req, res, next) => {
-  const bookmark = await Bookmark.find({ author: req.user.userId }).sort({
+  const bookmark = await Bookmark.find({
+    author: req.user.userId,
+    isBookmarked: true,
+  }).sort({
     timestamp: -1,
   });
 
@@ -14,25 +16,45 @@ const getAllBookmarkByUser = async (req, res, next) => {
   });
 };
 
-const createBookmark = async (req, res) => {
+const getAllBookmarkDetailByUser = async (req, res, next) => {
+  const bookmark = await Bookmark.find({
+    author: req.user.userId,
+    isBookmarked: true,
+  })
+    .populate({ path: "author", select: "name " })
+    .populate({ path: "blog", select: "title" })
+    .sort({
+      timestamp: -1,
+    });
+
+  res.json({
+    success: true,
+    message: "get all bookmark successfully",
+    bookmark,
+  });
+};
+
+const setBookmark = async (req, res) => {
   const checkBookmark = await Bookmark.findOne({
     author: req.user.userId,
     blog: req.body.blogId,
   });
+
   if (checkBookmark) {
-    return res.status(StatusCodes.BAD_REQUEST).json({
-      success: false,
-      message: "you already Bookmark the post",
+    checkBookmark.isBookmarked = !checkBookmark.isBookmarked;
+    checkBookmark.save();
+    return res.json({
+      bookmark: checkBookmark,
     });
   }
-  const newBookmark = new Bookmark({
+
+  const newBookmark = await Bookmark.create({
     author: req.user.userId,
-    blog: req.blog._id,
+    blog: req.body.blogId,
   });
+
   await newBookmark.save();
   res.json({
-    success: true,
-    message: "you have successfully created",
     bookmark: newBookmark,
   });
 };
@@ -59,4 +81,9 @@ const deleteBookmark = async (req, res) => {
   });
 };
 
-export { createBookmark, getAllBookmarkByUser, deleteBookmark };
+export {
+  setBookmark,
+  getAllBookmarkByUser,
+  deleteBookmark,
+  getAllBookmarkDetailByUser,
+};

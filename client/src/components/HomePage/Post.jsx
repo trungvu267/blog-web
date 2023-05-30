@@ -1,19 +1,30 @@
 import Auth from "./Auth";
 import TagPost from "./TagPost";
+import { useNavigate } from "react-router";
 
-const Post = ({ data }) => {
-  const { tags } = { data };
-  console.log(data);
-  if (!data) return;
+const Post = ({ blog }) => {
+  const navigate = useNavigate();
   return (
     <div className="border rounded-lg mb-3 border-slate-200">
-      <Auth></Auth>
-      <h1 className="px-8 text-2xl mb-2 font-bold hover:text-primary cursor-pointer">
-        {data.title}
+      {blog.imageLink && (
+        <img
+          className="rounded-lg"
+          src="https://res.cloudinary.com/practicaldev/image/fetch/s--Rsd1j1dG--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x57e86jykz6x759rvf9c.png"
+          alt="imgbanner"
+        />
+      )}
+      <Auth author={blog.author}></Auth>
+      <h1
+        className="px-8 text-2xl mb-2 font-bold hover:text-primary cursor-pointer"
+        onClick={() => {
+          navigate(`/posts/${blog._id}`);
+        }}
+      >
+        {blog.title}
       </h1>
-      <div className="flex px-8 mb-3">
-        {data.tags.map((tag) => (
-          <TagPost key={tag.id} tag={tag} />
+      <div className="flex px-8 mb-3 space-x-1">
+        {blog.tags.map((tag) => (
+          <TagPost tag={tag} />
         ))}
       </div>
       <div className="flex  px-8 mb-5 justify-between">

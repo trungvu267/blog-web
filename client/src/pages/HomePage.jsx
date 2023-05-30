@@ -1,7 +1,5 @@
-import { useQuery } from "react-query";
 import { Layout } from "../components";
 import { Menu, Posts, TitlePost } from "../components/HomePage";
-import request from "../services/axios.service";
 
 const HomePage = () => {
   return (

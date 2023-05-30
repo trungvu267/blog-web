@@ -11,6 +11,10 @@ const Bookmark = new Schema(
       ref: "Blog",
       required: true,
     },
+    isBookmarked: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );
