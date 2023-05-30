@@ -3,13 +3,16 @@ import { ImageComment } from "./ImageComment";
 import { Comment } from "./Comment";
 import useComment from "../../hooks/comment.hook";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
 const schema = yup.object({
-  comment: yup.string().required("Chưa nhập comment"),
+  content: yup.string().required("Chưa nhập comment"),
 });
 
 const Comments = () => {
+  const { postId } = useParams();
   const {
     register,
     handleSubmit,
@@ -17,8 +20,7 @@ const Comments = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { handleCreateBlog } = useComment();
-  console.log(errors.comment);
+  const { handleCreateComment } = useComment();
   return (
     <div className="bg-slate-50 border p-5 mb-10">
       <div className="flex justify-between text-center mb-10">
@@ -31,7 +33,9 @@ const Comments = () => {
       <div className="flex space-x-5 mb-10">
         <ImageComment></ImageComment>
         <form
-          onSubmit={handleSubmit(handleCreateBlog)}
+          onSubmit={handleSubmit((data) =>
+            handleCreateComment({ data, blogId: postId })
+          )}
           className="flex flex-col flex-1"
         >
           <textarea
@@ -39,7 +43,7 @@ const Comments = () => {
             className="w-full h-[100px] border rounded-lg p-3 mb-5"
             name=""
             id=""
-            {...register("comment")}
+            {...register("content")}
             cols="30"
             rows="10"
           ></textarea>

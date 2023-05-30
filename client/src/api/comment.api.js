@@ -5,6 +5,6 @@ export const createComment = async (data) => {
   return res;
 };
 export const getListComment = async (data) => {
-  const res = await request.get("/comments", { data });
+  const res = await request.get("/comments", data);
   return res;
 };

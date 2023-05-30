@@ -7,13 +7,13 @@ const useComment = () => {
     mutationKey: "comments",
   });
 
-  const handleCreateBlog = useCallback(
+  const handleCreateComment = useCallback(
     (data) => {
       console.log(data);
       mutation.mutate(data);
     },
     [mutation]
   );
-  return { mutation, handleCreateBlog };
+  return { mutation, handleCreateComment };
 };
 export default useComment;
