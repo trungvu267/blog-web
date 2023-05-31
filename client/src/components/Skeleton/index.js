@@ -1,2 +1,3 @@
 import TagSkeleton from "./TagSkeleton";
-export { TagSkeleton };
+import PostSkeleton from "./PostSkeleton";
+export { TagSkeleton, PostSkeleton };
