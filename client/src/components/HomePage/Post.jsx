@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 const Post = ({ blog }) => {
   const navigate = useNavigate();
   return (
-    <div className="border rounded-lg mb-3 border-slate-200">
+    <div className="border rounded-lg mb-3 border-base-300 bg-base-200">
       {blog?.imageLink && (
         <img
           className="rounded-lg"

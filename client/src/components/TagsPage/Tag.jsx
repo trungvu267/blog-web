@@ -4,14 +4,14 @@ const Tag = ({ data }) => {
   return (
     <div
       style={{ borderColor: bg_color }}
-      className={`w-[400px] h-[250px] rounded-lg shadow-md p-3 border-t-8 border-[#]`}
+      className={`w-[400px] h-[250px] rounded-lg shadow-md p-3 border-t-[16px] bg-base-300`}
     >
       <div>
         <Button color="ghost">
-          <span style={{ color: text_color }} className="font-bold">
+          <span style={{ color: bg_color }} className="font-bold">
             #
           </span>
-          <span>{name}</span>
+          <span>{`${name}`}</span>
         </Button>
       </div>
       <div className="p-1 mb-2">
