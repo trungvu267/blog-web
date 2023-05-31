@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { usePublishPost } from "../../hooks/post.hook";
 import Post from "./Post";
+import { PostSkeleton } from "../Skeleton";
 
 const Posts = () => {
   const { publishBlogs, isLoading, error } = usePublishPost();
-  console.log(publishBlogs);
   return (
     <div>
       <div className="flex gap-1">
@@ -27,7 +27,7 @@ const Posts = () => {
           Top
         </Link>
       </div>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <PostsSkeleton />}
       {publishBlogs?.map((publishBlog) => (
         <Post blog={publishBlog} key={publishBlog._id} />
       ))}
@@ -36,3 +36,13 @@ const Posts = () => {
 };
 
 export default Posts;
+
+const PostsSkeleton = () => {
+  return (
+    <>
+      <PostSkeleton />
+      <PostSkeleton />
+      <PostSkeleton />
+    </>
+  );
+};

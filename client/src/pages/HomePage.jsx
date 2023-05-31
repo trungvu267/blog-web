@@ -6,7 +6,7 @@ const HomePage = () => {
     <Layout>
       <div className="flex">
         <Menu></Menu>
-        <div className="w-[56%]   p-5">
+        <div className="w-[56%] p-5">
           <Posts></Posts>
         </div>
         <TitlePost></TitlePost>

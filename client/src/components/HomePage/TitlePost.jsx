@@ -4,7 +4,7 @@ import TitleInformation from "./TitleInformation";
 const TitlePost = () => {
   return (
     <div className="w-[25%] mt-5">
-      <div className=" bg-slate-100 border mb-3  py-3 px-5 rounded-lg">
+      {/* <div className=" bg-slate-100 border mb-3  py-3 px-5 rounded-lg">
         <div className="flex justify-between  mb-3">
           <h2 className=" text-base translate-y-1"> DEV Community</h2>
           <span className=" hover:bg-slate-200 p-2 rounded-lg">
@@ -36,9 +36,9 @@ const TitlePost = () => {
           Utilize GitHub Actions or Codespaces, benefit open-source, and win up
           to $1,500 USD by sharing your project on DEV.
         </div>
-      </div>
+      </div> */}
 
-      <div className=" bg-slate-100 border mb-3  py-3  rounded-lg">
+      {/* <div className=" bg-slate-100 border mb-3  py-3  rounded-lg">
         <div className="flex justify-between px-5  mb-3">
           <h2 className=" text-base translate-y-1"> Listings</h2>
           <span className="text-sm font-medium text-[#3b49df]">See all</span>
@@ -70,8 +70,8 @@ const TitlePost = () => {
             Create a Listing
           </span>
         </Button>
-      </div>
-      <div className=" bg-slate-100 border mb-3    rounded-lg">
+      </div> */}
+      {/* <div className=" bg-slate-100 border mb-3    rounded-lg">
         <div className=" px-5 pt-3 text-black text-xl font-bold mb-3">
           #discuss
         </div>
@@ -112,7 +112,7 @@ const TitlePost = () => {
           title={"Team or Solo: Which Path Leads to Project Success?"}
           comment={"3 comment"}
         ></TitleInformation>
-      </div>
+      </div> */}
     </div>
   );
 };

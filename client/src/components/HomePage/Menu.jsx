@@ -78,7 +78,7 @@ const Menu = () => {
           </div>
         ))}
       </div>
-      <div className=" bg-slate-100 border mb-3  py-3 px-5 rounded-lg">
+      {/* <div className=" bg-slate-100 border mb-3  py-3 px-5 rounded-lg">
         <div className="flex justify-between  mb-3">
           <h2 className=" text-base translate-y-1"> DEV Community</h2>
           <span className=" hover:bg-slate-200 p-2 rounded-lg">
@@ -113,11 +113,11 @@ const Menu = () => {
           </a>
           in.
         </div>
-      </div>
-      <div className=" bg-slate-100 border mb-3  py-3 px-5 rounded-lg">
+      </div> */}
+      <div className=" bg-base-300 border border-base-200 mb-3 py-3 px-5 rounded-lg">
         <div className="flex justify-between  mb-3">
           <h2 className=" text-base translate-y-1"> DEV Community</h2>
-          <span className=" hover:bg-slate-200 p-2 rounded-lg">
+          <span className=" hover:bg-base-200 p-2 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
