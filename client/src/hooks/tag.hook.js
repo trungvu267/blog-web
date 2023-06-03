@@ -4,17 +4,19 @@ import { useMutation, useQuery } from "react-query";
 import { createTag, deleteTag, getListTag, updateTag } from "../api/tag.api";
 import { useCallback, useMemo, useEffect } from "react";
 import { successToast } from "../utils/toast";
-const useTag = () => {
+import { useQueryClient } from "react-query";
+import { QUERY_KEYS } from "../utils/queryKeys";
+export const useTag = () => {
   // TODO: Add caching
   const [listTag, setListTag] = useAtom(listTagAtom);
-  const { isLoading, error, refetch } = useQuery({
-    queryKey: ["tags"],
+  const { isLoading, error } = useQuery({
+    queryKey: [QUERY_KEYS.tags],
     queryFn: getListTag,
     onSuccess: (res) => {
       setListTag(res.data);
     },
   });
-  return { isLoading, error, listTag, refetch };
+  return { isLoading, error, listTag };
 };
 export const useCreateTag = () => {
   const [, setListTag] = useAtom(listTagAtom);
@@ -34,18 +36,18 @@ export const useCreateTag = () => {
   );
   return { mutation, handleCreateTag };
 };
-export const useUpdateTag = (tagId, refetch) => {
+export const useUpdateTag = (tagId) => {
   const mutation = useMutation(updateTag, {
     mutationKey: `tags/${tagId}`,
   });
-
+  const client = useQueryClient();
   const handleUpdateTag = useCallback(
     ({ name, text_color, bg_color }) => {
       mutation.mutate(
         { tagId, name, text_color, bg_color },
         {
           onSuccess: () => {
-            refetch();
+            client.invalidateQueries(QUERY_KEYS.tags);
             successToast("Sửa danh mục thành công");
           },
         }
@@ -55,21 +57,18 @@ export const useUpdateTag = (tagId, refetch) => {
   );
   return { mutation, handleUpdateTag };
 };
-export const useDeleteTag = (tagId, refetch) => {
+export const useDeleteTag = (tagId) => {
   const mutation = useMutation(deleteTag, {
     mutationKey: "tags",
   });
-  useEffect(() => {
-    mutation.isSuccess && successToast("Xóa danh mục thành công");
-  }, [mutation.isSuccess]);
+  const client = useQueryClient();
   const handleDeleteTag = useCallback(() => {
     mutation.mutate(tagId, {
       onSuccess: () => {
-        refetch();
+        client.invalidateQueries(QUERY_KEYS.tags);
+        successToast("Xóa danh mục thành công");
       },
     });
   }, [mutation]);
   return { mutation, handleDeleteTag };
 };
-
-export default useTag;

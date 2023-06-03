@@ -1,5 +1,5 @@
 import Tag from "./Tag";
-import useTag from "../../hooks/tag.hook";
+import { useTag } from "../../hooks/tag.hook";
 import { TagSkeleton } from "../Skeleton";
 const ListTag = () => {
   const { listTag, isLoading } = useTag();

@@ -15,15 +15,11 @@ export default ViewListPost;
 
 const Post = ({ post }) => {
   const navigate = useNavigate();
-  const { refetch } = usePost();
 
-  const { mutation, handleUpdateBlog } = useUpdatePost(
-    {
-      blogId: post._id,
-      published: !post.published,
-    },
-    refetch
-  );
+  const { mutation, handleUpdateBlog } = useUpdatePost({
+    blogId: post._id,
+    published: !post.published,
+  });
   return (
     <div className="flex flex-row space-x-2 bg-base-300 items-center p-2 rounded-sm hover:bg-base-100">
       <div

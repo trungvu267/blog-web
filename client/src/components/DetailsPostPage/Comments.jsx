@@ -18,12 +18,11 @@ const Comments = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { refetch } = useListComment(postId);
-  const { handleCreateComment } = useCreateComment(refetch);
-
+  const { handleCreateComment } = useCreateComment();
   return (
     <div className="bg-base-100 border p-5 mb-10">
       <div className="flex justify-between text-center mb-10">
@@ -36,9 +35,10 @@ const Comments = () => {
       <div className="flex space-x-5 mb-10">
         <ImageComment></ImageComment>
         <form
-          onSubmit={handleSubmit((data) =>
-            handleCreateComment({ ...data, blogId: postId })
-          )}
+          onSubmit={handleSubmit((data) => {
+            handleCreateComment({ ...data, blogId: postId });
+            reset();
+          })}
           className="flex flex-col flex-1"
         >
           <textarea
