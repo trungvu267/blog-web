@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { listPostAtom } from "../states/post.state";
 import {
   getAllBlog,
@@ -8,27 +8,28 @@ import {
   updateBlog,
 } from "../api/post.api";
 import { successToast } from "../utils/toast";
+import { QUERY_KEYS } from "../utils/queryKeys";
 export const usePost = () => {
-  // TODO: Add caching
   const [listPost, setListPost] = useAtom(listPostAtom);
-  const { isLoading, error, refetch } = useQuery({
-    queryKey: ["blogs"],
+  const { isLoading, error } = useQuery({
+    queryKey: [QUERY_KEYS.posts],
     queryFn: getAllBlog,
     onSuccess: (res) => {
       setListPost(res.data);
     },
   });
-  return { isLoading, error, listPost, refetch };
+  return { isLoading, error, listPost };
 };
 
-export const useUpdatePost = (data, refetch) => {
+export const useUpdatePost = (data) => {
   const mutation = useMutation(updateBlog, {
     mutationKey: [`blogs/${data.blogId}`],
   });
+  const client = useQueryClient();
   const handleUpdateBlog = () => {
     mutation.mutate(data, {
       onSuccess: () => {
-        refetch();
+        client.invalidateQueries(QUERY_KEYS.posts);
         successToast("Cập nhật bài viết thành công");
       },
     });
