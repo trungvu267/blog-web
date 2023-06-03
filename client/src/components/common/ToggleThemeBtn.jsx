@@ -1,10 +1,9 @@
 import { Button } from "react-daisyui";
 import { FiMoon, FiSun } from "react-icons/fi";
-import { useAtom } from "jotai";
-import { darkThemeAtom } from "../../states/theme";
+import { useTheme } from "../../hooks/theme.hook";
 
 const ToggleThemeBtn = () => {
-  const [isDarkTheme, setIsDarkTheme] = useAtom(darkThemeAtom);
+  const { isDarkTheme, setIsDarkTheme } = useTheme();
   const handleToggleTheme = () => {
     setIsDarkTheme((preTheme) => !preTheme);
   };
