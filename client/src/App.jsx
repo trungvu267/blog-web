@@ -24,6 +24,7 @@ import { useAtom } from "jotai/react";
 
 import { path } from "./utils/path";
 import { roles } from "./utils/role";
+import { useTheme } from "./hooks/theme.hook";
 
 const router = createBrowserRouter([
   {
@@ -83,7 +84,7 @@ const router = createBrowserRouter([
 ]);
 const queryClient = new QueryClient();
 const App = () => {
-  const [isDarkTheme] = useAtom(darkThemeAtom);
+  const { isDarkTheme } = useTheme();
   return (
     <QueryClientProvider client={queryClient}>
       <Theme dataTheme={isDarkTheme ? "dark" : "light"}>
