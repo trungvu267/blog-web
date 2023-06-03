@@ -1,6 +1,6 @@
 import { Button, Input } from "react-daisyui";
 import ConfirmModal from "../ConfirmModal";
-import useTag, { useDeleteTag, useUpdateTag } from "../../hooks/tag.hook";
+import { useTag, useDeleteTag, useUpdateTag } from "../../hooks/tag.hook";
 import { register } from "../../api/auth.api";
 import { Controller, useForm } from "react-hook-form";
 import { TwitterPicker } from "react-color";
@@ -28,12 +28,8 @@ const Tag = ({ tag }) => {
   } = useForm({
     resolver: yupResolver(createTagSchema),
   });
-  const { refetch } = useTag();
-  const { mutation, handleDeleteTag } = useDeleteTag(tag._id, refetch);
-  const { mutation: updateMutation, handleUpdateTag } = useUpdateTag(
-    tag._id,
-    refetch
-  );
+  const { mutation, handleDeleteTag } = useDeleteTag(tag._id);
+  const { mutation: updateMutation, handleUpdateTag } = useUpdateTag(tag._id);
 
   return (
     <div className="flex flex-row space-x-2 bg-base-300 items-center p-2 rounded-sm">

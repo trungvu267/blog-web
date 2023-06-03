@@ -1,5 +1,5 @@
 import { Dropdown, Input } from "react-daisyui";
-import useTag from "../../hooks/tag.hook";
+import { useTag } from "../../hooks/tag.hook";
 import useTextEditor from "../../hooks/useTextEditor";
 const SelectTag = () => {
   const { listTag } = useTag();
