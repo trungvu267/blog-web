@@ -26,9 +26,6 @@ const Avatar = () => {
           </Dropdown.Item>
         )}
         <Dropdown.Item>
-          <Link to={"/posts/create"}>Tạo bài viết</Link>
-        </Dropdown.Item>
-        <Dropdown.Item>
           <Link to={"/readinglist"}>Danh sách bài viết</Link>
         </Dropdown.Item>
         <Dropdown.Item onClick={logout}>Đăng xuất</Dropdown.Item>
