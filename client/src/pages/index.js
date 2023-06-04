@@ -1,5 +1,5 @@
 import { lazy } from "react";
-
+import LoadingPage from "./LoadingPage";
 const HomePage = lazy(() => import("./HomePage"));
 const NotFoundPage = lazy(() => import("./NotFoundPage"));
 const LoginPage = lazy(() => import("./LoginPage"));
@@ -30,4 +30,5 @@ export {
   ReadingListPage,
   AdminPage,
   PrivateRoute,
+  LoadingPage,
 };

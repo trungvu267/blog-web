@@ -17,12 +17,10 @@ import {
   ReadingListPage,
   AdminPage,
   PrivateRoute,
+  LoadingPage,
 } from "./pages";
 import { ToastContainerCustomer } from "./components";
 import "react-toastify/dist/ReactToastify.css";
-import { darkThemeAtom } from "./states/theme";
-import { useAtom } from "jotai/react";
-
 import { path } from "./utils/path";
 import { roles } from "./utils/role";
 import { useTheme } from "./hooks/theme.hook";
@@ -31,7 +29,7 @@ const router = createBrowserRouter([
   {
     path: path.home,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <HomePage />
       </Suspense>
     ),
@@ -39,7 +37,7 @@ const router = createBrowserRouter([
   {
     path: path.latest,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <LatestPage />
       </Suspense>
     ),
@@ -47,7 +45,7 @@ const router = createBrowserRouter([
   {
     path: path.top,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <TopPage />
       </Suspense>
     ),
@@ -55,7 +53,7 @@ const router = createBrowserRouter([
   {
     path: path.tags,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <Tags />
       </Suspense>
     ),
@@ -63,7 +61,7 @@ const router = createBrowserRouter([
   {
     path: path.details,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <ViewPost />
       </Suspense>
     ),
@@ -71,7 +69,7 @@ const router = createBrowserRouter([
   {
     path: path.createPost,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <PrivateRoute component={<CreatePost />} />
       </Suspense>
     ),
@@ -79,7 +77,7 @@ const router = createBrowserRouter([
   {
     path: path.dashboard,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <PrivateRoute component={<DashboardPage />} />
       </Suspense>
     ),
@@ -87,7 +85,7 @@ const router = createBrowserRouter([
   {
     path: path.admin,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <PrivateRoute component={<AdminPage />} role={roles.admin} />
       </Suspense>
     ),
@@ -95,7 +93,7 @@ const router = createBrowserRouter([
   {
     path: path.readingList,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <PrivateRoute component={<ReadingListPage />} />
       </Suspense>
     ),
@@ -103,7 +101,7 @@ const router = createBrowserRouter([
   {
     path: path.login,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <LoginPage />
       </Suspense>
     ),
@@ -111,7 +109,7 @@ const router = createBrowserRouter([
   {
     path: path.signUp,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <SignUpPage />
       </Suspense>
     ),
@@ -119,7 +117,7 @@ const router = createBrowserRouter([
   {
     path: path.setting,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <Setting />
       </Suspense>
     ),
@@ -127,7 +125,7 @@ const router = createBrowserRouter([
   {
     path: path.notFound,
     element: (
-      <Suspense fallback={<>Loading app...</>}>
+      <Suspense fallback={<LoadingPage />}>
         <NotFoundPage />
       </Suspense>
     ),

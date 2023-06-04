@@ -24,7 +24,10 @@ const Comments = () => {
   });
   const { handleCreateComment } = useCreateComment();
   return (
-    <div className="bg-base-100 border p-5 mb-10">
+    <div
+      id="#comments"
+      className="bg-base-300 border border-base-200 p-5 mb-10"
+    >
       <div className="flex justify-between text-center mb-10">
         <h2 className="text-3xl font-bold ">Bình luận</h2>
 
@@ -43,7 +46,7 @@ const Comments = () => {
         >
           <textarea
             placeholder="Add to the discussion"
-            className="w-full h-[100px] border rounded-lg p-3 mb-5"
+            className="w-full h-[100px] border border-base-200 rounded-lg p-3 mb-5"
             name=""
             id=""
             {...register("content")}

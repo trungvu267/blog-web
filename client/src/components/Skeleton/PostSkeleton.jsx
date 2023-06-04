@@ -2,10 +2,10 @@ import React from "react";
 
 const PostSkeleton = () => {
   return (
-    <div className="border rounded-lg mb-3 border-slate-200 px-4">
+    <div className="border rounded-lg mb-3 border-base-300 px-4">
       <div className="flex items-center mt-4 space-x-3">
         <svg
-          className="text-gray-200 w-12 h-12 dark:text-gray-700"
+          className=" w-12 h-12 text-base-300"
           aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -18,15 +18,15 @@ const PostSkeleton = () => {
           ></path>
         </svg>
         <div>
-          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-          <div className="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+          <div className="h-2.5 rounded-full bg-base-300 w-32 mb-2"></div>
+          <div className="w-48 h-2 rounded-full bg-base-300"></div>
         </div>
       </div>
-      <div className="mx-5 h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-48 my-4"></div>
+      <div className="mx-5 h-4 rounded-full bg-base-300 w-48 my-4"></div>
       <div className="flex mx-5 space-x-2">
-        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-md w-24 mb-4"></div>
-        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-md w-24 mb-4"></div>
-        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-md w-24 mb-4"></div>
+        <div className="h-8 bg-base-300 rounded-md w-24 mb-4"></div>
+        <div className="h-8 bg-base-300 rounded-md w-24 mb-4"></div>
+        <div className="h-8 bg-base-300 rounded-md w-24 mb-4"></div>
       </div>
     </div>
   );
