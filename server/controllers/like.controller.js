@@ -31,10 +31,10 @@ export const likeBlog = async (req, res) => {
     // If like does not exist, create a new like
     const newLike = new Like({ user: userId, blog: blogId });
     await newLike.save();
+    return res
+      .status(200)
+      .json({ message: "Like status toggled successfully", like: newLike });
   }
-  return res
-    .status(200)
-    .json({ message: "Like status toggled successfully", like: newLike });
 };
 export const getListLikedByUser = async (req, res, next) => {
   const listLiked = await Like.find({
