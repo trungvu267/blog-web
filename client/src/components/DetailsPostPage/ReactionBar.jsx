@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { find, get } from "lodash";
 import { useListBookmark, useSetBookmark } from "../../hooks/bookmark.hook";
 import { useListReaction, useReaction } from "../../hooks/reaction.hook";
+import { ReqAuthBtn } from "../common";
 const ReactionBar = () => {
   const { postId } = useParams();
   const { listBookmark } = useListBookmark();
@@ -37,16 +38,16 @@ const ReactionBar = () => {
 
   return (
     <div className="flex flex-col w-[5%] text-center  mt-32">
-      <div
-        className="text-center mx-auto mb-5 cursor-pointer"
-        onClick={handleSetReaction}
+      <ReqAuthBtn
+        className="text-center mx-auto mb-5 cursor-pointer bg-transparent border-none hover:bg-transparent hover:border-none text-red-500"
+        handleLogic={handleSetReaction}
       >
         {isReaction ? (
           <IoHeart size={"1.5rem"} className="text-red-400" />
         ) : (
           <IoHeartOutline size={"1.5rem"} />
         )}
-      </div>
+      </ReqAuthBtn>
       <div className="text-center mx-auto mb-5 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -63,16 +64,16 @@ const ReactionBar = () => {
           />
         </svg>
       </div>
-      <div
-        className="text-center mx-auto mb-5 cursor-pointer"
-        onClick={handleSetBookmark}
+      <ReqAuthBtn
+        className="text-center mx-auto mb-5 cursor-pointer bg-transparent border-none hover:bg-transparent hover:border-none text-primary"
+        handleLogic={handleSetBookmark}
       >
         {isBookmarked ? (
           <IoBookmark size={"1.5rem"} className="text-primary" />
         ) : (
           <IoBookmarkOutline size={"1.5rem"} />
         )}
-      </div>
+      </ReqAuthBtn>
     </div>
   );
 };
