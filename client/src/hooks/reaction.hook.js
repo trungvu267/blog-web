@@ -4,14 +4,17 @@ import { useAtom } from "jotai";
 import { setReaction, getListReaction } from "../api/reaction.api";
 import { listReactionAtom } from "../states/reaction.state";
 import { find } from "lodash";
+import { useAuth } from "./auth.hook";
 export const useListReaction = () => {
   const [listReaction, setListReaction] = useAtom(listReactionAtom);
+  const auth = useAuth();
   const { isLoading, error } = useQuery({
     queryKey: ["/reactions"],
     queryFn: getListReaction,
     onSuccess: (res) => {
       setListReaction(res.data.listLiked);
     },
+    enabled: !!auth === false,
   });
   return { listReaction, isLoading, error };
 };

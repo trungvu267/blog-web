@@ -11,9 +11,11 @@ import { find, get } from "lodash";
 import { useListBookmark, useSetBookmark } from "../../hooks/bookmark.hook";
 import { useListReaction, useReaction } from "../../hooks/reaction.hook";
 import { ReqAuthBtn } from "../common";
+import { useAuth } from "../../hooks/auth.hook";
 const ReactionBar = () => {
   const { postId } = useParams();
   const { listBookmark } = useListBookmark();
+  const { auth } = useAuth();
   const { listReaction } = useListReaction();
   const { mutation, handleSetBookmark } = useSetBookmark(postId);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -42,7 +44,7 @@ const ReactionBar = () => {
         className="text-center mx-auto mb-5 cursor-pointer bg-transparent border-none hover:bg-transparent hover:border-none text-red-500"
         handleLogic={handleSetReaction}
       >
-        {isReaction ? (
+        {isReaction && auth ? (
           <IoHeart size={"1.5rem"} className="text-red-400" />
         ) : (
           <IoHeartOutline size={"1.5rem"} />
@@ -68,7 +70,7 @@ const ReactionBar = () => {
         className="text-center mx-auto mb-5 cursor-pointer bg-transparent border-none hover:bg-transparent hover:border-none text-primary"
         handleLogic={handleSetBookmark}
       >
-        {isBookmarked ? (
+        {isBookmarked && auth ? (
           <IoBookmark size={"1.5rem"} className="text-primary" />
         ) : (
           <IoBookmarkOutline size={"1.5rem"} />
