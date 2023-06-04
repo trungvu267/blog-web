@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Theme } from "react-daisyui";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
@@ -29,59 +30,110 @@ import { useTheme } from "./hooks/theme.hook";
 const router = createBrowserRouter([
   {
     path: path.home,
-    element: <HomePage />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <HomePage />
+      </Suspense>
+    ),
   },
   {
     path: path.latest,
-    element: <LatestPage />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <LatestPage />
+      </Suspense>
+    ),
   },
   {
     path: path.top,
-    element: <TopPage />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <TopPage />
+      </Suspense>
+    ),
   },
   {
     path: path.tags,
-    element: <Tags />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <Tags />
+      </Suspense>
+    ),
   },
   {
     path: path.details,
-    element: <ViewPost />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <ViewPost />
+      </Suspense>
+    ),
   },
   {
     path: path.createPost,
-    element: <PrivateRoute component={<CreatePost />} />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <PrivateRoute component={<CreatePost />} />
+      </Suspense>
+    ),
   },
-
   {
     path: path.dashboard,
-    element: <PrivateRoute component={<DashboardPage />} />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <PrivateRoute component={<DashboardPage />} />
+      </Suspense>
+    ),
   },
   {
     path: path.admin,
-    element: <PrivateRoute component={<AdminPage />} role={roles.admin} />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <PrivateRoute component={<AdminPage />} role={roles.admin} />
+      </Suspense>
+    ),
   },
   {
     path: path.readingList,
-    element: <PrivateRoute component={<ReadingListPage />} />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <PrivateRoute component={<ReadingListPage />} />
+      </Suspense>
+    ),
   },
   {
     path: path.login,
-    element: <LoginPage />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <LoginPage />
+      </Suspense>
+    ),
   },
   {
     path: path.signUp,
-    element: <SignUpPage />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <SignUpPage />
+      </Suspense>
+    ),
   },
-
   {
     path: path.setting,
-    element: <Setting />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <Setting />
+      </Suspense>
+    ),
   },
   {
     path: path.notFound,
-    element: <NotFoundPage />,
+    element: (
+      <Suspense fallback={<>Loading app...</>}>
+        <NotFoundPage />
+      </Suspense>
+    ),
   },
 ]);
+
 const queryClient = new QueryClient();
 const App = () => {
   const { isDarkTheme } = useTheme();
