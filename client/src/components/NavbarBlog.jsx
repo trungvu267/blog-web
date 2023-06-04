@@ -1,17 +1,15 @@
 import { Navbar, Button, Form, Input } from "react-daisyui";
-import { FiMoon, FiSun } from "react-icons/fi";
 import { useAtom } from "jotai/react";
-import { darkThemeAtom } from "../states/theme";
 import { Logo, Avatar, ToggleThemeBtn } from "./common";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/auth.hook";
 import { requestLoginModalAtom } from "../states/modal.state";
 import { path } from "../utils/path";
+import { ReqAuthBtn } from "./common";
 
 const NavbarBlog = ({ children }) => {
   const navigate = useNavigate();
   const { auth } = useAuth();
-  const [, setRequestLoginModal] = useAtom(requestLoginModalAtom);
   return (
     <>
       <Navbar className="bg-primary px-28 space-x-4">
@@ -30,15 +28,13 @@ const NavbarBlog = ({ children }) => {
           </Form>
         </div>
         <div>
-          <Button
+          <ReqAuthBtn
             className="avatar border-2 border-base-300 text-base-300"
             variant="outline"
-            onClick={() => {
-              auth ? navigate("/posts/create") : setRequestLoginModal(true);
-            }}
+            handleLogic={() => navigate("/posts/create")}
           >
             Tạo bài viết
-          </Button>
+          </ReqAuthBtn>
         </div>
         <div>
           <ToggleThemeBtn />

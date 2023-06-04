@@ -1,4 +1,5 @@
 import { Button } from "react-daisyui";
+import { ReqAuthBtn } from "../common";
 import { ImageComment } from "./ImageComment";
 import { Comment } from "./Comment";
 import { useCreateComment, useListComment } from "../../hooks/comment.hook";
@@ -7,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { isEmpty } from "lodash";
+import { useAuth } from "../../hooks/auth.hook";
 
 const schema = yup.object({
   content: yup.string().required("Chưa nhập comment"),
@@ -23,6 +25,7 @@ const Comments = () => {
     resolver: yupResolver(schema),
   });
   const { handleCreateComment } = useCreateComment();
+  const { auth } = useAuth();
   return (
     <div
       id="#comments"
@@ -30,17 +33,15 @@ const Comments = () => {
     >
       <div className="flex justify-between text-center mb-10">
         <h2 className="text-3xl font-bold ">Bình luận</h2>
-
-        <Button color="ghost" className="border bg-base-300">
-          Subscribe
-        </Button>
       </div>
       <div className="flex space-x-5 mb-10">
         <ImageComment></ImageComment>
         <form
           onSubmit={handleSubmit((data) => {
-            handleCreateComment({ ...data, blogId: postId });
-            reset();
+            if (auth) {
+              handleCreateComment({ ...data, blogId: postId });
+              reset();
+            }
           })}
           className="flex flex-col flex-1"
         >
@@ -55,12 +56,13 @@ const Comments = () => {
           ></textarea>
 
           <div className="flex gap-5">
-            <Button
+            <ReqAuthBtn
               color="ghost"
               className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white"
+              type="submit"
             >
               Bình luận
-            </Button>
+            </ReqAuthBtn>
           </div>
         </form>
       </div>
