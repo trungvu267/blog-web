@@ -4,6 +4,7 @@ import {
   IoHeart,
   IoHeartOutline,
 } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { find, get } from "lodash";
@@ -46,7 +47,7 @@ const ReactionBar = () => {
           <IoHeartOutline size={"1.5rem"} />
         )}
       </div>
-      <div className="text-center mx-auto mb-5">
+      <div className="text-center mx-auto mb-5 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

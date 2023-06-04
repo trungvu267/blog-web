@@ -8,7 +8,7 @@ export const path = {
   dashboard: "/dashboard",
   readingList: "/readinglist",
   login: "/login",
-  signUp: "/signup",
+  signUp: "/sign-up",
   setting: "/setting",
   admin: "/admin",
   notFound: "*",

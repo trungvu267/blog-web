@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { usePublishPost } from "../../hooks/post.hook";
 import Post from "./Post";
 import { PostSkeleton } from "../Skeleton";
+import { useDelayRendering } from "../../hooks/delayRendering";
 
 const Posts = () => {
-  const { publishBlogs, isLoading, error } = usePublishPost();
+  const { publishBlogs, isLoading } = usePublishPost();
+  const loading = useDelayRendering({ isLoading });
   return (
     <div>
       <div className="flex gap-1">
@@ -27,7 +30,7 @@ const Posts = () => {
           Top
         </Link>
       </div>
-      {isLoading && <PostsSkeleton />}
+      {loading && <PostsSkeleton />}
       {publishBlogs?.map((publishBlog) => (
         <Post blog={publishBlog} key={publishBlog._id} />
       ))}
@@ -38,8 +41,16 @@ const Posts = () => {
 export default Posts;
 
 const PostsSkeleton = () => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
+      <PostSkeleton />
+      <PostSkeleton />
       <PostSkeleton />
       <PostSkeleton />
       <PostSkeleton />

@@ -1,17 +1,19 @@
-import HomePage from "./HomePage";
-import NotFoundPage from "./NotFoundPage";
-import LoginPage from "./LoginPage";
-import ViewPost from "./ViewPost";
-import CreatePost from "./CreatePost";
-import Setting from "./Setting";
-import SignUpPage from "./SignUpPage";
-import DashboardPage from "./DashboardPage";
-import Tags from "./Tags";
-import LatestPage from "./LatestPage";
-import TopPage from "./TopPage";
-import ReadingListPage from "./ReadingListPage";
-import PrivateRoute from "./PrivateRoute";
-import AdminPage from "./AdminPage";
+import { lazy } from "react";
+import LoadingPage from "./LoadingPage";
+const HomePage = lazy(() => import("./HomePage"));
+const NotFoundPage = lazy(() => import("./NotFoundPage"));
+const LoginPage = lazy(() => import("./LoginPage"));
+const ViewPost = lazy(() => import("./ViewPost"));
+const CreatePost = lazy(() => import("./CreatePost"));
+const Setting = lazy(() => import("./Setting"));
+const SignUpPage = lazy(() => import("./SignUpPage"));
+const DashboardPage = lazy(() => import("./DashboardPage"));
+const Tags = lazy(() => import("./Tags"));
+const LatestPage = lazy(() => import("./LatestPage"));
+const TopPage = lazy(() => import("./TopPage"));
+const ReadingListPage = lazy(() => import("./ReadingListPage"));
+const AdminPage = lazy(() => import("./AdminPage"));
+const PrivateRoute = lazy(() => import("./PrivateRoute"));
 
 export {
   HomePage,
@@ -28,4 +30,5 @@ export {
   ReadingListPage,
   AdminPage,
   PrivateRoute,
+  LoadingPage,
 };
