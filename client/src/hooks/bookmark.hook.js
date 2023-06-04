@@ -9,21 +9,30 @@ import {
 import { listBookmarkAtom } from "../states/bookmark.state";
 import { successToast } from "../utils/toast";
 import { find } from "lodash";
+import { useAuth } from "./auth.hook";
 export const useListBookmark = () => {
   const [listBookmark, setListBookmark] = useAtom(listBookmarkAtom);
+  const { auth } = useAuth();
+  console.log(!!auth);
+
   const { isLoading, error } = useQuery({
     queryKey: ["/bookmark"],
     queryFn: getListBookmark,
     onSuccess: (res) => {
       setListBookmark(res.data.bookmark);
     },
+    enabled: !!auth,
   });
   return { listBookmark, isLoading, error };
 };
 export const useListBookmarkDetails = () => {
+  const { auth } = useAuth();
+  console.log(!!auth);
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["/bookmark/details"],
     queryFn: getListBookmarkDetails,
+    enabled: !!auth,
   });
   return { listBookmarkDetails: data?.data?.bookmark, isLoading, error };
 };

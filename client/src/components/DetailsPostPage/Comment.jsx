@@ -1,10 +1,10 @@
 import { ImageComment } from "./ImageComment";
 export const Comment = ({ comment }) => {
   return (
-    <div className="flex flex-col mb-5">
+    <div className="flex flex-col mb-5 ">
       <div className="flex space-x-5">
         <ImageComment></ImageComment>
-        <div className="flex flex-col gap-y-5 flex-1 mb-5 border rounded-lg p-5">
+        <div className="flex flex-col gap-y-5 flex-1 mb-5 border rounded-lg p-5 bg-base-100">
           <div className="flex justify-between">
             <h2 className="text-xl font-bold text-slate-700">
               {comment?.author?.name}
