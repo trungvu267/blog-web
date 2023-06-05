@@ -33,6 +33,7 @@ request.interceptors.response.use(
   },
   (error) => {
     // Handle response error here
+    console.log(error);
     errorToast(
       error?.response?.data?.message || "Có lỗi xảy ra vui lòng thử lại"
     );

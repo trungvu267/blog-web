@@ -1,4 +1,4 @@
-import { Button, Input } from "react-daisyui";
+import { Button, Input, Link } from "react-daisyui";
 import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { isEmpty, map } from "lodash";
@@ -14,6 +14,9 @@ import {
 import useTextEditor from "../hooks/useTextEditor";
 import useSelectedPostVariant from "../hooks/useSelectedPostVariant";
 import { useEffect } from "react";
+import { FileInput } from "react-daisyui";
+import { motion } from "framer-motion";
+import { useUploadTitleImage } from "../hooks/post.hook";
 const CreatePost = () => {
   const navigate = useNavigate();
   const handleAccess = () => {
@@ -57,11 +60,19 @@ const EditVariant = () => {
     handleCreateBlog,
     mutation,
   } = useTextEditor();
+  const { titleImageLink, resetImage } = useUploadTitleImage();
   const navigation = useNavigate();
   const handleAccess = () => {
     const listTagArticleId = map(listTagArticle, "_id");
-    handleCreateBlog({ title, content, tags: listTagArticleId });
+    handleCreateBlog({
+      title,
+      content,
+      tags: listTagArticleId,
+      imageLink: titleImageLink || undefined,
+    });
+    resetImage();
   };
+
   // TODO: REDIRECT TO DASHBOARD
   useEffect(() => {
     mutation.isSuccess && navigation("/");
@@ -73,14 +84,12 @@ const EditVariant = () => {
           className="overflow-y-scroll rounded-md space-y-1 bg-base-200"
           style={{ height: " 80vh" }}
         >
-          <Button
-            variant="outline"
-            size="sm"
-            className="my-4 mx-8"
-            color="primary"
-          >
-            Thêm ảnh chủ đề bài viết
-          </Button>
+          <div className="my-4 mx-8">
+            <label htmlFor="imageTitleUpLoad" className="label">
+              Thêm ảnh chủ đề bài viết
+            </label>
+            <UpLoadImage />
+          </div>
           <Input
             placeholder="Title"
             border="false"
@@ -122,6 +131,7 @@ const EditVariant = () => {
             color="error"
             variant="outline"
             textHeader={"Xác nhận xóa bài viết"}
+            handleAccess={resetImage}
           >
             Xóa
           </ConfirmModal>
@@ -136,9 +146,11 @@ const EditVariant = () => {
 
 const PreviewVariant = () => {
   const { title, listTagArticle, content } = useTextEditor();
+  const { titleImageLink } = useUploadTitleImage();
   return (
     <div className="min-h-[90vh]">
       <div className="bg-base-200 w-[700px] min-h-[500px] rounded-md p-8">
+        <img src={titleImageLink} alt="" />
         <h1 className="text-6xl font-bold">{title}</h1>
         <div
           className="mt-4 py-2 flex space-x-2 items-center flex-wrap "
@@ -154,5 +166,56 @@ const PreviewVariant = () => {
         <HtmlConverter htmlString={content} />
       </div>
     </div>
+  );
+};
+
+const UpLoadImage = () => {
+  const { titleImageLink, mutation, handleUploadTitleImage } =
+    useUploadTitleImage();
+  const handleFileUpload = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log(formData.get("image"));
+    handleUploadTitleImage(formData);
+  };
+  if (mutation.isLoading)
+    return (
+      <motion.div
+        initial={{ y: "50%" }}
+        animate={{ y: "0" }}
+        transition={{
+          duration: 0.25,
+        }}
+      >
+        <Button loading className="w-full" size="sm" color="primary" />
+      </motion.div>
+    );
+  if (mutation.isSuccess || titleImageLink)
+    return (
+      <motion.div
+        initial={{ y: "50%" }}
+        animate={{ y: "0" }}
+        transition={{
+          duration: 0.25,
+        }}
+      >
+        <Link>
+          <span>{titleImageLink}</span>
+        </Link>
+      </motion.div>
+    );
+  return (
+    <FileInput
+      color="primary"
+      id="imageTitleUpLoad"
+      name="image" // Add the name attribute
+      accept="image/*"
+      size="sm"
+      className="w-30"
+      onChange={handleFileUpload}
+    />
   );
 };

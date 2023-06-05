@@ -4,6 +4,7 @@ import RequestLoginModal from "./RequestLoginModal";
 import ToggleThemeBtn from "./ToggleThemeBtn";
 import HtmlConverter from "./HtmlConverter";
 import ReqAuthBtn from "./ReqAuthBtn";
+import FileInput from "./FileInput";
 export {
   Logo,
   Avatar,
@@ -11,4 +12,5 @@ export {
   ToggleThemeBtn,
   HtmlConverter,
   ReqAuthBtn,
+  FileInput,
 };
