@@ -8,7 +8,6 @@ import dotenv from "dotenv";
 import passport from "passport";
 import { bearerAuth } from "./config/passport.js";
 import route from "./routes/index.js";
-import s3 from "./config/s3.js";
 import multer from "multer";
 dotenv.config();
 // config upload image
