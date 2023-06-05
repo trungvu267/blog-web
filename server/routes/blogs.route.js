@@ -26,7 +26,7 @@ router.delete("/:blogId", auth, asyncWrapper(deleteBlog));
 router.get("/:blogId/details", asyncWrapper(getDetails));
 router.put("/:blogId/like", asyncWrapper(likeBlog));
 router.post(
-  "/:blogId/upload-title-image",
+  "/upload-title-image",
   upload.single("image"),
   asyncWrapper(upLoadTitleImage)
 );
