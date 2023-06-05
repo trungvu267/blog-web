@@ -1,6 +1,8 @@
-import Blog from "../models/blog.model.js";
 import { StatusCodes } from "http-status-codes";
-
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import Blog from "../models/blog.model.js";
+import { randomImageName } from "../helper.js";
+import s3 from "../config/s3.js";
 const getAllBlog = async (req, res, next) => {
   // TODO: add sorting
   const blogs = await Blog.find().populate({
@@ -133,7 +135,19 @@ const deleteBlog = async (req, res) => {
     blog: deletedBlog,
   });
 };
-
+const upLoadTitleImage = async (req, res) => {
+  const folder = "blog-title";
+  const imageName = randomImageName();
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: folder + "/" + imageName,
+    Body: req.file.buffer,
+    ContentType: req.file.mimetype,
+  };
+  const command = new PutObjectCommand(params);
+  await s3.send(command);
+  res.json(imageName);
+};
 const getBlogById = (req, res, next, id) => {
   Blog.findById(id)
     .then((blog) => {
@@ -156,4 +170,5 @@ export {
   getDetails,
   getBlogById,
   getListPublishBlog,
+  upLoadTitleImage,
 };
