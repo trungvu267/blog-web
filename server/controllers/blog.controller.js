@@ -154,11 +154,11 @@ const upLoadTitleImage = async (req, res) => {
   };
   const command = new PutObjectCommand(params);
   await s3.send(command);
-  const imageUrl = await getImageUrl(key);
+  const imageLink = await getImageUrl(key);
 
-  blog.imageLink = imageUrl;
+  blog.imageLink = imageLink;
   await blog.save();
-  res.json({ imageUrl });
+  res.json({ imageLink });
 };
 const getBlogById = (req, res, next, id) => {
   Blog.findById(id)
