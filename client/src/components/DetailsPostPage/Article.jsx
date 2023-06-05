@@ -8,8 +8,8 @@ const Article = ({ blog }) => {
         <div className="w-full h-[350px] rounded-lg ">
           <img
             className="w-full h-full object-cover"
-            src="https://res.cloudinary.com/practicaldev/image/fetch/s--FrnIjvQs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u38xf3x32fama9g1klku.png"
-            alt=""
+            src={blog.imageLink}
+            alt={blog.title}
           />
         </div>
       )}
