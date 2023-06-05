@@ -1,4 +1,3 @@
-import createError from "http-errors";
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
@@ -9,7 +8,9 @@ import dotenv from "dotenv";
 import passport from "passport";
 import { bearerAuth } from "./config/passport.js";
 import route from "./routes/index.js";
+import multer from "multer";
 dotenv.config();
+// config upload image
 
 const app = express();
 app.use(passport.initialize());
@@ -19,10 +20,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   next(createError(404));
-// });
 passport.use(bearerAuth);
 app.use("/", route);
 
