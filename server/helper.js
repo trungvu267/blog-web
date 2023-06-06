@@ -11,6 +11,6 @@ export const getImageUrl = async (imageName) => {
     Key: imageName,
   };
   const command = new GetObjectCommand(getObjectParams);
-  const imageUrl = await getSignedUrl(s3, command, { expires: "1y" });
+  const imageUrl = await getSignedUrl(s3, command, { expiresIn: "1y" });
   return imageUrl;
 };
