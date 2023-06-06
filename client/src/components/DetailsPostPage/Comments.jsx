@@ -9,6 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { isEmpty } from "lodash";
 import { useAuth } from "../../hooks/auth.hook";
+import socket from "../../services/socket.service";
+import { useEffect } from "react";
 
 const schema = yup.object({
   content: yup.string().required("Chưa nhập comment"),
@@ -26,6 +28,14 @@ const Comments = () => {
   });
   const { handleCreateComment } = useCreateComment();
   const { auth } = useAuth();
+  useEffect(() => {
+    socket.emit("join", {
+      name: "hello",
+    });
+    return () => {
+      socket.off();
+    };
+  }, []);
   return (
     <div
       id="#comments"
@@ -53,7 +63,7 @@ const Comments = () => {
             {...register("content")}
             cols="30"
             rows="10"
-          ></textarea>
+          />
 
           <div className="flex gap-5">
             <ReqAuthBtn
