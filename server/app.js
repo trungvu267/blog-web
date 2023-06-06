@@ -8,11 +8,11 @@ import dotenv from "dotenv";
 import passport from "passport";
 import { bearerAuth } from "./config/passport.js";
 import route from "./routes/index.js";
-import multer from "multer";
 dotenv.config();
 // config upload image
 
 const app = express();
+
 app.use(passport.initialize());
 app.use(logger("dev"));
 app.use(cors());
