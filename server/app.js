@@ -34,19 +34,15 @@ app.use(cookieParser());
 passport.use(bearerAuth);
 passport.use(googleAuth);
 app.use("/", route);
-app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+
 app.get(
   "/api/auth/callback/google",
   passport.authenticate("google", {
-    failureRedirect: "/login",
-    failureMessage: false,
+    failureRedirect: "/",
+    failureMessage: true,
   }),
   function (req, res) {
-    console.log("run 😃");
-    res.json({ message: "login success" });
+    res.json(req.user);
   }
 );
 // error handler
