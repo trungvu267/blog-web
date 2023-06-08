@@ -17,7 +17,7 @@ export default {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     bucketName: process.env.AWS_BUCKET_NAME,
-    region: process.env.AWS_REGION,
+    region: process.env.AWS_BUCKET_REGION,
   },
   port: process.env.PORT,
   client: {
