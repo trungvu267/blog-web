@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import config from "../config/config.js";
 
 // NOTE: cần kiểm tra lại
 const UserSchema = new Schema(
@@ -55,14 +56,14 @@ UserSchema.methods.createJWT = function () {
   if (this.googleId) {
     return jwt.sign(
       { userId: this._id, name: this.name, googleId: this.googleId },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_TIME_LIFE }
+      config.jwt.secret,
+      { expiresIn: config.jwt.timeLife }
     );
   }
   return jwt.sign(
     { userId: this._id, name: this.name, role: this.role },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_TIME_LIFE }
+    config.jwt.secret,
+    { expiresIn: config.jwt.timeLife }
   );
 };
 UserSchema.methods.comparePassword = async function (isComingPassword) {

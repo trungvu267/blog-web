@@ -2,9 +2,10 @@ import app from "../app.js";
 import debug from "debug";
 import http from "http";
 import db from "../config/db.js";
+import config from "../config/config.js";
 
 const server = http.createServer(app);
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(config.port || "3000");
 app.set("port", port);
 
 const debugServer = debug("server:server");
