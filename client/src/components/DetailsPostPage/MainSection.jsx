@@ -5,9 +5,15 @@ import { useParams } from "react-router-dom";
 import { useDetailPost } from "../../hooks/post.hook";
 import { PostDetailSkeleton } from "../Skeleton";
 import { useDelayRendering } from "../../hooks/delayRendering";
+import { useWindowScroll } from "@uidotdev/usehooks";
+import { useEffect } from "react";
 export const MainSection = () => {
   const { postId } = useParams();
   const { detailBlog, isLoading } = useDetailPost(postId);
+  const [{ x, y }, scrollTo] = useWindowScroll();
+  useEffect(() => {
+    scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  }, []);
   const loading = useDelayRendering({ isLoading });
   if (loading) {
     return <PostDetailSkeleton />;
