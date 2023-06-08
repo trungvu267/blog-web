@@ -5,6 +5,7 @@ import { randomImageName } from "../helper.js";
 import s3 from "../config/s3.js";
 import sharp from "sharp";
 import { getImageUrl } from "../helper.js";
+import config from "../config/config.js";
 
 const getAllBlog = async (req, res, next) => {
   // TODO: add sorting
@@ -146,7 +147,7 @@ const upLoadTitleImage = async (req, res) => {
     .resize({ width: 1200, fit: "contain" })
     .toBuffer();
   const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
+    Bucket: config.aws.bucketName,
     Key: key,
     Body: buffer,
     ContentType: req.file.mimetype,

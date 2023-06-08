@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import config from "../config/config.js";
 
 // NOTE: cần kiểm tra lại
 const UserSchema = new Schema(
@@ -20,9 +21,17 @@ const UserSchema = new Schema(
       ],
       unique: true,
     },
+    googleId: {
+      type: String,
+      default: null,
+    },
+    avatarLink: {
+      type: String,
+      default: null,
+    },
     password: {
       type: String,
-      required: [true, "you must be provide password"],
+      // required: [true, "you must be provide password"],
       minlength: 6,
     },
     role: {
@@ -35,16 +44,26 @@ const UserSchema = new Schema(
 );
 
 UserSchema.pre("save", async function (next) {
+  if (this.googleId) {
+    next();
+  }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
 UserSchema.methods.createJWT = function () {
+  if (this.googleId) {
+    return jwt.sign(
+      { userId: this._id, name: this.name, googleId: this.googleId },
+      config.jwt.secret,
+      { expiresIn: config.jwt.timeLife }
+    );
+  }
   return jwt.sign(
     { userId: this._id, name: this.name, role: this.role },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_TIME_LIFE }
+    config.jwt.secret,
+    { expiresIn: config.jwt.timeLife }
   );
 };
 UserSchema.methods.comparePassword = async function (isComingPassword) {

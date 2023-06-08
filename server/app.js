@@ -4,16 +4,24 @@ import logger from "morgan";
 import cors from "cors";
 import notFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
-import dotenv from "dotenv";
 import passport from "passport";
-import { bearerAuth } from "./config/passport.js";
+import { bearerAuth, googleAuth } from "./config/passport.js";
 import route from "./routes/index.js";
-dotenv.config();
+import session from "express-session";
 // config upload image
 
 const app = express();
-
+app.set("trust proxy", 1); // trust first proxy
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 app.use(passport.initialize());
+
 app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
@@ -21,8 +29,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 passport.use(bearerAuth);
+passport.use(googleAuth);
 app.use("/", route);
 
+app.get(
+  "/api/auth/callback/google",
+  passport.authenticate("google", {
+    failureRedirect: "/",
+    failureMessage: true,
+  }),
+  function (req, res) {
+    res.json(req.user);
+  }
+);
 // error handler
 app.use(notFound);
 app.use(errorHandler);
@@ -35,5 +54,12 @@ app.use(errorHandler);
 //   res.status(err.status || 500);
 //   res.render("error");
 // });
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
 
 export default app;

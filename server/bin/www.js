@@ -3,7 +3,10 @@ import debug from "debug";
 import db from "../config/db.js";
 import httpServer from "../config/httpServer.js";
 import io from "../config/socket.js";
-const port = normalizePort(process.env.PORT || "3000");
+import config from "../config/config.js";
+
+const server = http.createServer(app);
+const port = normalizePort(config.port || "3000");
 app.set("port", port);
 
 const debugServer = debug("server:server");
