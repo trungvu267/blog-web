@@ -3,7 +3,7 @@ import TrendingPosts from "./TrendingPosts";
 const RightBar = () => {
   return (
     <div className="flex flex-1 flex-col">
-      <AuthorPost />
+      {/* <AuthorPost /> */}
       <TrendingPosts />
     </div>
   );
