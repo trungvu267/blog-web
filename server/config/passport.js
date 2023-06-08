@@ -1,11 +1,10 @@
 import { Strategy } from "passport-http-bearer";
 import GoogleStrategy from "passport-google-oauth20";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import User from "../models/user.model.js";
-dotenv.config();
+import config from "./config.js";
 export const bearerAuth = new Strategy(function (token, done) {
-  const user = jwt.verify(token, process.env.JWT_SECRET);
+  const user = jwt.verify(token, config.jwt.secret);
   if (!user) {
     return done(null, false);
   }
@@ -14,9 +13,9 @@ export const bearerAuth = new Strategy(function (token, done) {
 
 export const googleAuth = new GoogleStrategy(
   {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
+    callbackURL: config.google.callbackURL,
     scope: ["profile"],
     state: true,
   },

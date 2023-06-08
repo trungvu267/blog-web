@@ -4,13 +4,11 @@ import logger from "morgan";
 import cors from "cors";
 import notFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
-import dotenv from "dotenv";
 import passport from "passport";
 import { bearerAuth, googleAuth } from "./config/passport.js";
 import route from "./routes/index.js";
 import multer from "multer";
 import session from "express-session";
-dotenv.config();
 // config upload image
 
 const app = express();
