@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
-import { useAuth } from "../hooks/auth.hook";
+import { useAuth, useAuthWithGoogle } from "../hooks/auth.hook";
 import { errorToast } from "../utils/toast";
 import { loginSchema } from "../utils/schema";
-
+import { authWithGoogle } from "../api/auth.api";
 const LoginPage = () => {
   const {
     register,
@@ -19,7 +19,10 @@ const LoginPage = () => {
     handleLogin,
     mutation: { isLoading, isError, isSuccess, error },
   } = useAuth();
+  const { isLoading: isLoadingWithGoogle, handleGoogleLogin } =
+    useAuthWithGoogle();
   const navigate = useNavigate();
+  // NOTE: sửa lại useEffect
   useEffect(() => {
     isSuccess && navigate("/");
     isError && errorToast(error.message);
@@ -38,6 +41,10 @@ const LoginPage = () => {
           <Button
             type="button"
             className="border-none text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
+            // onClick={handleGoogleLogin}
+            onClick={async () => {
+              await authWithGoogle();
+            }}
           >
             <svg
               className="w-4 h-4 mr-2 -ml-1"
@@ -54,9 +61,9 @@ const LoginPage = () => {
                 d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
               ></path>
             </svg>
-            Sign in with Google
+            Đăng nhập với Google
           </Button>
-          <Button
+          {/* <Button
             type="button"
             className="text-white border-none text-center bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center mr-2 mb-2"
           >
@@ -76,7 +83,7 @@ const LoginPage = () => {
               ></path>
             </svg>
             Sign in with Facebook
-          </Button>
+          </Button> */}
         </div>
         <div className="text-center relative p-3 ">
           <span className="">

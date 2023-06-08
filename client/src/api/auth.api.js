@@ -16,3 +16,7 @@ export const register = async ({ email, name, password }) => {
   });
   return data;
 };
+export const authWithGoogle = async () => {
+  const data = await request.get("/users/auth/google");
+  return data;
+};

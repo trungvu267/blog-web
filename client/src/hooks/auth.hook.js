@@ -1,7 +1,7 @@
-import { useMutation } from "react-query";
-import { useMemo, useCallback, useEffect } from "react";
+import { useMutation, useQuery } from "react-query";
+import { useMemo, useCallback, useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { login, register } from "../api/auth.api.js";
+import { login, register, authWithGoogle } from "../api/auth.api.js";
 import { authAtom } from "../states/auth.state.js";
 import { RESET } from "jotai/utils";
 
@@ -46,4 +46,29 @@ export const useRegister = () => {
     [mutation]
   );
   return { mutation, handleRegister };
+};
+
+export const useAuthWithGoogle = () => {
+  const [, setAuth] = useAtom(authAtom);
+  const [enabled, setEnable] = useState(false);
+  const handleGoogleLogin = useCallback(() => {
+    setEnable(true);
+  }, []);
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["/auth/google"],
+    queryFn: authWithGoogle,
+    onSuccess: (res) => {
+      console.log(res);
+      // set(res.data.bookmark);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+    enabled,
+  });
+  return {
+    handleGoogleLogin,
+    isLoading,
+    error,
+  };
 };

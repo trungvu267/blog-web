@@ -13,7 +13,6 @@ import { useAuth } from "./auth.hook";
 export const useListBookmark = () => {
   const [listBookmark, setListBookmark] = useAtom(listBookmarkAtom);
   const { auth } = useAuth();
-  console.log(!!auth);
 
   const { isLoading, error } = useQuery({
     queryKey: ["/bookmark"],
