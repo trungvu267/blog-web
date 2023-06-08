@@ -5,7 +5,6 @@ import httpServer from "../config/httpServer.js";
 import io from "../config/socket.js";
 import config from "../config/config.js";
 
-const server = http.createServer(app);
 const port = normalizePort(config.port || "3000");
 app.set("port", port);
 
