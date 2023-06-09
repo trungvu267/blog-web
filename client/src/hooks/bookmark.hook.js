@@ -27,7 +27,6 @@ export const useListBookmark = () => {
 };
 export const useListBookmarkDetails = () => {
   const { auth } = useAuth();
-  console.log(!!auth);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["/bookmark/details"],
