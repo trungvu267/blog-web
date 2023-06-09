@@ -1,5 +1,5 @@
-import { Layout } from "../components";
-import { Menu, Posts, TitlePost } from "../components/HomePage";
+import { Layout } from "@components";
+import { Menu, Posts, TitlePost } from "@components/HomePage";
 
 const HomePage = () => {
   return (
