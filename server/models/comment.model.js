@@ -4,7 +4,7 @@ const CommentSchema = new Schema(
     content: {
       type: String,
       required: [true, "you must be provide content"],
-      minlength: 6,
+      // minlength: 6,
     },
     author: {
       type: Schema.Types.ObjectId,
