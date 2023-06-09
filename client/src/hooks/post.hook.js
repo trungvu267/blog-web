@@ -10,6 +10,7 @@ import {
   getPublishedBlogs,
   updateBlog,
   upLoadTitleImage,
+  publishBlog,
 } from "../api/post.api";
 import { successToast } from "../utils/toast";
 import { QUERY_KEYS } from "../utils/queryKeys";
@@ -43,8 +44,26 @@ export const useUpdatePost = (data) => {
     handleUpdateBlog,
   };
 };
+export const usePublishPost = (data) => {
+  const mutation = useMutation(publishBlog, {
+    mutationKey: [`blogs/${data.blogId}/publish`],
+  });
+  const client = useQueryClient();
+  const handleUpdateBlog = () => {
+    mutation.mutate(data, {
+      onSuccess: () => {
+        client.invalidateQueries(QUERY_KEYS.posts);
+        successToast("Cập nhật bài viết thành công");
+      },
+    });
+  };
+  return {
+    mutation,
+    handleUpdateBlog,
+  };
+};
 
-export const usePublishPost = () => {
+export const useGetPublishPost = () => {
   //   const [listTag, setListTag] = useAtom(listTagAtom);
   const { data, isLoading, error } = useQuery({
     queryKey: ["blogs/published"],
