@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { usePublishPost } from "../../hooks/post.hook";
+import { useGetPublishPost } from "../../hooks/post.hook";
 import Post from "./Post";
 import { PostSkeleton } from "../Skeleton";
 import { useDelayRendering } from "../../hooks/delayRendering";
 
 const Posts = () => {
-  const { publishBlogs, isLoading } = usePublishPost();
+  const { publishBlogs, isLoading } = useGetPublishPost();
   const loading = useDelayRendering({ isLoading });
   return (
     <div>

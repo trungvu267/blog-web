@@ -7,6 +7,10 @@ export const updateBlog = async (data) => {
   const res = await request.put(`/blogs/${data.blogId}`, data);
   return res;
 };
+export const publishBlog = async (data) => {
+  const res = await request.put(`/blogs/${data.blogId}/publish`, data);
+  return res;
+};
 export const getAllBlog = async () => {
   const res = await request.get("/blogs");
   return res;

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "../ConfirmModal";
-import { usePost, useUpdatePost } from "../../hooks/post.hook";
+import { usePost, usePublishPost } from "../../hooks/post.hook";
 const ViewListPost = () => {
   const { listPost } = usePost();
   return (
@@ -16,7 +16,7 @@ export default ViewListPost;
 const Post = ({ post }) => {
   const navigate = useNavigate();
 
-  const { mutation, handleUpdateBlog } = useUpdatePost({
+  const { mutation, handleUpdateBlog } = usePublishPost({
     blogId: post._id,
     published: !post.published,
   });
