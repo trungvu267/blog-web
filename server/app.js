@@ -1,4 +1,6 @@
 import express from "express";
+import http from "http";
+import db from "./config/db.js";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
@@ -8,9 +10,20 @@ import passport from "passport";
 import { bearerAuth, googleAuth } from "./config/passport.js";
 import route from "./routes/index.js";
 import session from "express-session";
+import { configureSocket } from "./config/socket.js";
+import config from "./config/config.js";
 // config upload image
 
 const app = express();
+const httpServer = http.createServer(app);
+export const io = configureSocket(httpServer);
+io.on("connection", (socket) => {
+  console.log("A user connected.");
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected.");
+  });
+});
 app.set("trust proxy", 1); // trust first proxy
 app.use(
   session({
@@ -21,6 +34,9 @@ app.use(
   })
 );
 app.use(passport.initialize());
+io.on("join", (data) => {
+  console.log(data);
+});
 
 app.use(logger("dev"));
 app.use(cors());
@@ -61,5 +77,15 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
   done(null, user);
 });
+
+db.connect()
+  .then(() => {
+    httpServer.listen(config.port, () => {
+      console.log(`Server is listening to port ${config.port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 export default app;

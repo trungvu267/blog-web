@@ -1,21 +1,23 @@
 import Comment from "../models/comment.model.js";
 import { StatusCodes } from "http-status-codes";
 import { getBlogById } from "./blog.controller.js";
-
+import { io } from "../app.js";
 // post create
 const createComment = async (req, res) => {
   const { content, blogId } = req.body;
 
-  const newContent = new Comment({
+  const newComment = new Comment({
     content: content,
     author: req.user.userId,
     blog: blogId,
   });
-  await newContent.save();
+  await newComment.save();
+  const newCommentWithPopulate = await newComment.populate("author");
+  socket.emit("newComment", newCommentWithPopulate);
   res.json({
     success: true,
     message: "you have successfully created",
-    Comment: newContent,
+    comment: newCommentWithPopulate,
   });
 };
 const getListCommentByBlog = async (req, res) => {

@@ -13,6 +13,10 @@ const debugServer = debug("server:server");
 io.on("connection", (socket) => {
   console.log("A user connected");
   socket.on("join", (data) => {
+    // socket.join(data.room);
+    // io.to(data.room).emit("project updated");
+  });
+  socket.on("hello", (data) => {
     console.log(data);
   });
 });
