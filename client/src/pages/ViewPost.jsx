@@ -10,7 +10,7 @@ const ViewPost = () => {
       <div className="container flex gap-x-5 ">
         <ReactionBar />
         <MainSection />
-        <RightBar />
+        {/* <RightBar /> */}
       </div>
     </Layout>
   );
