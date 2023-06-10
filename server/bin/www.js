@@ -1,25 +1,38 @@
 import app from "../app.js";
 import debug from "debug";
-import http from "http";
 import db from "../config/db.js";
+import httpServer from "../config/httpServer.js";
+import io from "../config/socket.js";
 import config from "../config/config.js";
 
-const server = http.createServer(app);
 const port = normalizePort(config.port || "3000");
 app.set("port", port);
 
 const debugServer = debug("server:server");
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+  socket.on("join", (data) => {
+    // socket.join(data.room);
+    // io.to(data.room).emit("project updated");
+  });
+  socket.on("hello", (data) => {
+    console.log(data);
+  });
+});
+
 db.connect()
   .then(() => {
-    server.listen(port, () => {
+    httpServer.listen(port, () => {
       console.log(`Server is listening to port ${port}`);
     });
   })
   .catch((err) => {
     console.log(err);
   });
-server.on("error", onError);
-server.on("listening", onListening);
+
+httpServer.on("error", onError);
+httpServer.on("listening", onListening);
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
@@ -52,7 +65,7 @@ function onError(error) {
 }
 
 function onListening() {
-  const addr = server.address();
+  const addr = httpServer.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debugServer("Listening on " + bind);
 }

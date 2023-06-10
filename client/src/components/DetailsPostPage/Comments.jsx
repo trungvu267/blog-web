@@ -9,6 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { isEmpty } from "lodash";
 import { useAuth } from "../../hooks/auth.hook";
+import socket from "../../services/socket.service";
+import { useEffect } from "react";
 
 const schema = yup.object({
   content: yup.string().required("Chưa nhập comment"),
@@ -24,8 +26,18 @@ const Comments = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { handleCreateComment } = useCreateComment();
+  const { mutation, handleCreateComment } = useCreateComment(postId);
+  // const handleCreateComment = (data) => {
+  //   socket.to(postId).emit("writeComment", data);
+  //   console.log(data);
+  // };
   const { auth } = useAuth();
+  useEffect(() => {
+    socket.on("connect", () => {});
+    return () => {
+      socket.off();
+    };
+  }, []);
   return (
     <div
       id="#comments"
@@ -35,12 +47,12 @@ const Comments = () => {
         <h2 className="text-3xl font-bold ">Bình luận</h2>
       </div>
       <div className="flex space-x-5 mb-10">
-        <ImageComment></ImageComment>
+        <ImageComment />
         <form
           onSubmit={handleSubmit((data) => {
             if (auth) {
               handleCreateComment({ ...data, blogId: postId });
-              reset();
+              // reset();
             }
           })}
           className="flex flex-col flex-1"
@@ -53,13 +65,14 @@ const Comments = () => {
             {...register("content")}
             cols="30"
             rows="10"
-          ></textarea>
+          />
 
           <div className="flex gap-5">
             <ReqAuthBtn
               color="ghost"
               className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white"
               type="submit"
+              handleLogic={() => {}}
             >
               Bình luận
             </ReqAuthBtn>
@@ -79,10 +92,13 @@ const ListComment = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  // thêm key cho map
   return (
     <>
       {!isEmpty(listComment) &&
-        listComment.map((comment) => <Comment comment={comment} />)}
+        listComment.map((comment) => (
+          <Comment comment={comment} key={comment?._id} />
+        ))}
     </>
   );
 };

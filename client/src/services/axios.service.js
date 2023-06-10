@@ -12,11 +12,11 @@ request.interceptors.request.use(async (config) => {
   const customHeaders = {};
   const auth = localStorage.getItem("auth");
   const accessToken = JSON.parse(auth)?.token;
-  console.log({ accessToken: accessToken });
+  // console.log({ accessToken: accessToken });
   if (accessToken) {
     customHeaders.authorization = `Bearer ${accessToken}`;
   }
-  console.log("run interceptor");
+  // console.log("run interceptor");
 
   return {
     ...config,

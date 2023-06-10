@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Comments from "./Comments";
 import Article from "./Article";
 import SuggestPosts from "./SuggestPosts";
@@ -6,7 +7,6 @@ import { useDetailPost } from "../../hooks/post.hook";
 import { PostDetailSkeleton } from "../Skeleton";
 import { useDelayRendering } from "../../hooks/delayRendering";
 import { useWindowScroll } from "@uidotdev/usehooks";
-import { useEffect } from "react";
 export const MainSection = () => {
   const { postId } = useParams();
   const { detailBlog, isLoading } = useDetailPost(postId);
