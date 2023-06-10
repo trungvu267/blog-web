@@ -1,6 +1,5 @@
 import Comment from "../models/comment.model.js";
 import { StatusCodes } from "http-status-codes";
-import { getBlogById } from "./blog.controller.js";
 
 // post create
 const createComment = async (req, res) => {
