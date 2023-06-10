@@ -6,12 +6,12 @@ import config from "./config/config.js";
 export const randomImageName = (bytes = 32) =>
   crypto.randomBytes(bytes).toString("hex");
 export const getImageUrl = async (imageName) => {
+  const OneYear = 31536000;
   const getObjectParams = {
     Bucket: config.aws.bucketName,
     Key: imageName,
-    Expires: 31536000,
   };
   const command = new GetObjectCommand(getObjectParams);
-  const imageUrl = await getSignedUrl(s3, command);
+  const imageUrl = await getSignedUrl(s3, command, { expiresIn: OneYear });
   return imageUrl;
 };
