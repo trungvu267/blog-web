@@ -10,6 +10,7 @@ import {
   getDetails,
   getListPublishBlog,
   upLoadTitleImage,
+  publish,
 } from "../controllers/blog.controller.js";
 import { auth } from "../middleware/auth.js";
 import { upload } from "../middleware/upload.js";
@@ -25,6 +26,7 @@ router.put("/:blogId", auth, asyncWrapper(updateBlog));
 router.delete("/:blogId", auth, asyncWrapper(deleteBlog));
 router.get("/:blogId/details", asyncWrapper(getDetails));
 router.put("/:blogId/like", asyncWrapper(likeBlog));
+router.put("/:blogId/publish", auth, asyncWrapper(publish));
 router.post(
   "/upload-title-image",
   upload.single("image"),

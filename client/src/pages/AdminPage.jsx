@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "react-daisyui";
-import { Layout } from "../components";
-import { ViewListPost, ViewListTag, CreateTag } from "../components/AdminPage";
+import { Layout } from "@components";
+import { ViewListPost, ViewListTag, CreateTag } from "@components/AdminPage";
 const tags = [
   {
     label: "Tạo danh mục bài viết",

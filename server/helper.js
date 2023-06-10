@@ -9,7 +9,7 @@ export const getImageUrl = async (imageName) => {
   const getObjectParams = {
     Bucket: config.aws.bucketName,
     Key: imageName,
-    Expires: "1y",
+    Expires: 31536000,
   };
   const command = new GetObjectCommand(getObjectParams);
   const imageUrl = await getSignedUrl(s3, command);

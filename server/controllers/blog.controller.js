@@ -158,6 +158,28 @@ const upLoadTitleImage = async (req, res) => {
 
   res.json({ imageLink });
 };
+const publish = async (req, res) => {
+  let updatedBlog = {
+    ...req.body,
+  };
+  const published = req.body.published || undefined;
+  const blogUpdateCondition = { _id: req.blog._id };
+  if (req.user.role === "editor" && !!published) {
+    return res
+      .status(StatusCodes.NOT_MODIFIED)
+      .json({ success: false, message: "you are not Permissions" });
+  }
+  const newUpdatedBlog = await Blog.findOneAndUpdate(
+    blogUpdateCondition,
+    updatedBlog,
+    { new: true }
+  );
+  res.json({
+    success: true,
+    message: "updated post was successfully updated",
+    post: newUpdatedBlog,
+  });
+};
 const getBlogById = (req, res, next, id) => {
   Blog.findById(id)
     .then((blog) => {
@@ -170,6 +192,7 @@ const getBlogById = (req, res, next, id) => {
       next(notFound);
     });
 };
+
 export {
   getAllBlog,
   getOne,
@@ -181,4 +204,5 @@ export {
   getBlogById,
   getListPublishBlog,
   upLoadTitleImage,
+  publish,
 };
