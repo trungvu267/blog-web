@@ -3,7 +3,6 @@ import asyncWrapper from "../middleware/asyncWrapper.js";
 import blogController from "../controllers/blog.controller.js";
 import { auth } from "../middleware/auth.js";
 import { upload } from "../middleware/upload.js";
-import reactionController from "../controllers/reaction.controller.js";
 
 const router = express.Router();
 
@@ -14,7 +13,6 @@ router.get("/:blogId", asyncWrapper(blogController.getOne));
 router.put("/:blogId", auth, asyncWrapper(blogController.update));
 router.delete("/:blogId", auth, asyncWrapper(blogController.delete));
 router.get("/:blogId/details", asyncWrapper(blogController.getDetails));
-router.put("/:blogId/like", asyncWrapper(reactionController.reaction));
 router.put("/:blogId/publish", auth, asyncWrapper(blogController.publish));
 router.post(
   "/upload-title-image",
