@@ -1,24 +1,17 @@
 import express from "express";
 import asyncWrapper from "../middleware/asyncWrapper.js";
 
-import {
-  getAllTags,
-  getOneTag,
-  createTag,
-  updateTag,
-  deleteTag,
-  getTagId,
-} from "../controllers/tag.controller.js";
+import tagController from "../controllers/tag.controller.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.get("/", asyncWrapper(getAllTags));
-router.post("/", auth, asyncWrapper(createTag));
-router.get("/:tagId", asyncWrapper(getOneTag));
-router.put("/:tagId", auth, asyncWrapper(updateTag));
-router.delete("/:tagId", auth, asyncWrapper(deleteTag));
+router.get("/", asyncWrapper(tagController.getAll));
+router.post("/", auth, asyncWrapper(tagController.create));
+router.get("/:tagId", asyncWrapper(tagController.getOne));
+router.put("/:tagId", auth, asyncWrapper(tagController.update));
+router.delete("/:tagId", auth, asyncWrapper(tagController.delete));
 
-router.param("tagId", getTagId);
+router.param("tagId", tagController.getTagId);
 
 export default router;
