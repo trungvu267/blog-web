@@ -26,7 +26,7 @@ const SignUpPage = () => {
     !!isError && errorToast("Có lỗi xảy ra vui lòng thử lại");
   }, [isSuccess]);
   return (
-    <div className=" p-3 max-h-full">
+    <div className=" p-3 h-screen flex justify-center">
       <form
         onSubmit={handleSubmit(handleRegister)}
         className="w-[640px] rounded-lg border p-10 flex justify-center flex-col border-base-300 bg-base-300 mx-auto"
@@ -56,7 +56,7 @@ const SignUpPage = () => {
             <Button className={"bg-[#39b0d4]"}>
               <span className="text-center p-3"> Continue with Twitter</span>
             </Button> */}
-          <Button
+          {/* <Button
             type="button"
             className="border-none text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
           >
@@ -76,8 +76,8 @@ const SignUpPage = () => {
               ></path>
             </svg>
             Sign in with Google
-          </Button>
-          <Button
+          </Button> */}
+          {/* <Button
             type="button"
             className="text-white border-none text-center bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center mr-2 mb-2"
           >
@@ -97,7 +97,7 @@ const SignUpPage = () => {
               ></path>
             </svg>
             Sign in with Facebook
-          </Button>
+          </Button> */}
         </div>
         <div className="text-center relative p-3 ">
           <span className="">

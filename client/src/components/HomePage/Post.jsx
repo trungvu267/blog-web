@@ -31,7 +31,7 @@ const Post = ({ blog }) => {
           <TagPost tag={tag} />
         ))}
       </div>
-      <div className="flex  px-8 mb-5 justify-between">
+      {/* <div className="flex  px-8 mb-5 justify-between">
         <div className="flex gap-3  text-sm">
           <span className="px-5 py-2 rounded-lg hover:bg-base-200 cursor-pointer">
             325 reactions
@@ -75,7 +75,7 @@ const Post = ({ blog }) => {
             </svg>
           </span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
