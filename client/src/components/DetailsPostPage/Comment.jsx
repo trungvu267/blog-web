@@ -6,9 +6,7 @@ export const Comment = ({ comment }) => {
         <ImageComment></ImageComment>
         <div className="flex flex-col gap-y-5 flex-1 mb-5 border rounded-lg p-5 bg-base-100">
           <div className="flex justify-between">
-            <h2 className="text-xl font-bold text-slate-700">
-              {comment?.author?.name}
-            </h2>
+            <h2 className="text-xl font-bold ">{comment?.author?.name}</h2>
             <span className=" cursor-pointer p-1 rounded-lg hover:bg-slate-200">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +24,7 @@ export const Comment = ({ comment }) => {
               </svg>
             </span>
           </div>
-          <div className="text-lg tracking-normal">{comment?.content}</div>
+          <div className="text-lg tracking-normal ">{comment?.content}</div>
         </div>
       </div>
       {/* <div className="flex gap-1 translate-x-16">

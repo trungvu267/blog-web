@@ -1,6 +1,6 @@
+import { useNavigate } from "react-router";
 import Auth from "./Auth";
 import TagPost from "./TagPost";
-import { useNavigate } from "react-router";
 
 const Post = ({ blog }) => {
   const navigate = useNavigate();
@@ -9,8 +9,12 @@ const Post = ({ blog }) => {
       {blog?.imageLink && (
         <img
           className="rounded-lg"
-          src="https://res.cloudinary.com/practicaldev/image/fetch/s--Rsd1j1dG--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x57e86jykz6x759rvf9c.png"
-          alt="imgbanner"
+          src={blog.imageLink}
+          alt={blog.title}
+          style={{
+            width: "100%",
+            height: "300px",
+          }}
         />
       )}
       <Auth author={blog.author}></Auth>
@@ -27,7 +31,7 @@ const Post = ({ blog }) => {
           <TagPost tag={tag} />
         ))}
       </div>
-      <div className="flex  px-8 mb-5 justify-between">
+      {/* <div className="flex  px-8 mb-5 justify-between">
         <div className="flex gap-3  text-sm">
           <span className="px-5 py-2 rounded-lg hover:bg-base-200 cursor-pointer">
             325 reactions
@@ -71,7 +75,7 @@ const Post = ({ blog }) => {
             </svg>
           </span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
