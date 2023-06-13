@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    env_file:
+      - ./client/.env
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 5556:5556
+    env_file:
+      - ./server/.env
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+volumes:
+  mongodb_data:
+  # app:
+  #   image: blog-app/server
+  #   volumes:
+  #     - ./:/app # mount từ môi trường gốc vào trong để nếu các bạn thay đổi code thì bên trong sẽ tự động cập nhật
+  #   environment: # phần này ta định nghĩa ở file .env nhé
+  #     # - DB_HOST=${DB_HOST}
+  #     # - DB_NAME=${DB_NAME}
+  #     # - PORT=${PORT}
+  #     # - JWT_SECRET=caigicungdc
+  #     # - JWT_TIME_LIFE=1y
+  #     # - MONGODB_URI=mongodb://127.0.0.1:27017/my-data
+  #     # - PORT=5556
+  #     # - AWS_ACCESS_KEY_ID=AKIASV3Z5N6W6O5LR3UD
+  #     # - AWS_SECRET_ACCESS_KEY=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
+  #     # - AWS_BUCKET_NAME=trung-storage
+  #     # - AWS_BUCKET_REGION=ap-southeast-1
+  #     # - GOOGLE_CALLBACK_URL=http://localhost:5556/api/auth/callback/google
+  #     # - GOOGLE_CLIENT_ID=214913274720-n72udqv20lus7jrrq9aajgbb09ls1cl2.apps.googleusercontent.com
+  #     # - GOOGLE_CLIENT_SECRET=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
+  #     # - CLIENT_URL=http://127.0.0.1:5173
+  #   ports:
+  #     - "${PORT}:${PORT}" # phần này ta định nghĩa ở file .env nhé
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - db
+
+  # db:
+  #   image: mongo
+  #   volumes:
+  #     - .docker/data/db:/data/db
+  #   restart: unless-stopped
