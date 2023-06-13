@@ -1,0 +1,10 @@
+# Files and directories to ignore when building the Docker image
+node_modules
+build
+dist
+
+# Files and directories to ignore when copying to the Docker container
+.git
+.gitignore
+.dockerignore
+README.md
