@@ -28,7 +28,9 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "^4.0.1",
-    "sharp": "^0.32.1"
+    "sharp": "^0.32.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

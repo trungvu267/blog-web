@@ -9,6 +9,7 @@ import { bearerAuth, googleAuth } from "./config/passport.js";
 import route from "./routes/index.js";
 import multer from "multer";
 import session from "express-session";
+import swaggerDocs from "./config/swagger.js";
 // config upload image
 
 const app = express();
@@ -28,7 +29,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+swaggerDocs(app);
 passport.use(bearerAuth);
 passport.use(googleAuth);
 app.use("/", route);
