@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import Blog from "../models/blog.model.js";
+import Article from "../models/article.model.js";
 import { randomImageName } from "../helper.js";
 import s3 from "../config/s3.js";
 import sharp from "sharp";
@@ -10,7 +10,7 @@ import config from "../config/config.js";
 export default {
   getAll: async (req, res, next) => {
     // TODO: add sorting
-    const blogs = await Blog.find().populate({
+    const blogs = await Article.find().populate({
       path: "author",
       select: "name email",
     });
@@ -18,15 +18,16 @@ export default {
   },
   getListPublished: async (req, res, next) => {
     // TODO: add sorting
-    const blogs = await Blog.find({ published: true })
+    const blogs = await Article.find({ published: true })
       .populate({ path: "author", select: "name email" })
       .populate({ path: "tags" })
       .select("-content");
     res.jsonp(blogs);
+    res.jsonp({ message: "Hello" });
   },
-  getAllBlogByAuthor: async (req, res) => {
+  getAllArticleByAuthor: async (req, res) => {
     const { userId } = req.params;
-    const blogs = await Blog.find({ author: userId });
+    const blogs = await Article.find({ author: userId });
     res.json(blogs);
   },
   getOne: async (req, res) => {
@@ -66,26 +67,26 @@ export default {
       throw error;
     }
 
-    const newBlog = new Blog({
+    const newArticle = new Article({
       ...req.body,
       author: req.user.userId,
     });
 
-    await newBlog.save();
+    await newArticle.save();
 
     res.json({
       success: true,
       message: "you have successfully created",
-      blog: newBlog,
+      blog: newArticle,
     });
   },
   update: async (req, res) => {
-    let updatedBlog = {
+    let updatedArticle = {
       ...req.body,
     };
     const published = req.body.published || undefined;
     const blogUpdateCondition = { _id: req.blog._id, author: req.user.userId };
-    const blog = await Blog.findOne(blogUpdateCondition);
+    const blog = await Article.findOne(blogUpdateCondition);
     if (!blog) {
       return res
         .status(StatusCodes.NOT_FOUND)
@@ -96,13 +97,13 @@ export default {
         .status(StatusCodes.NOT_MODIFIED)
         .json({ success: false, message: "you are not Permissions" });
     }
-    const newUpdatedBlog = await Blog.findOneAndUpdate(
+    const newUpdatedArticle = await Article.findOneAndUpdate(
       blogUpdateCondition,
-      updatedBlog,
+      updatedArticle,
       { new: true }
     );
     // User not authorised to update post or post not found
-    if (!newUpdatedBlog)
+    if (!newUpdatedArticle)
       return res.status(StatusCodes.FORBIDDEN).json({
         success: false,
         message: "Post not found or user not authorised",
@@ -111,12 +112,12 @@ export default {
     res.json({
       success: true,
       message: "updated post was successfully updated",
-      post: newUpdatedBlog,
+      post: newUpdatedArticle,
     });
   },
   delete: async (req, res) => {
     const blogDeleteCondition = { _id: req.blog.id, author: req.user.userId };
-    const blog = await Blog.findOne(blogDeleteCondition);
+    const blog = await Article.findOne(blogDeleteCondition);
 
     if (!blog) {
       return res
@@ -124,9 +125,9 @@ export default {
         .json({ success: false, message: "post not found" });
     }
 
-    const deletedBlog = await Blog.findOneAndDelete(blogDeleteCondition);
+    const deletedArticle = await Article.findOneAndDelete(blogDeleteCondition);
 
-    if (!deletedBlog)
+    if (!deletedArticle)
       return res.status(StatusCodes.NOT_FOUND).json({
         success: false,
         message: "Post not found or user not authorised",
@@ -135,7 +136,7 @@ export default {
     res.json({
       success: true,
       message: "delete post success",
-      blog: deletedBlog,
+      blog: deletedArticle,
     });
   },
   upLoadTitleImage: async (req, res) => {
@@ -158,7 +159,7 @@ export default {
     res.json({ imageLink });
   },
   publish: async (req, res) => {
-    let updatedBlog = {
+    let updatedArticle = {
       ...req.body,
     };
     const published = req.body.published || undefined;
@@ -168,26 +169,26 @@ export default {
         .status(StatusCodes.NOT_MODIFIED)
         .json({ success: false, message: "you are not Permissions" });
     }
-    const newUpdatedBlog = await Blog.findOneAndUpdate(
+    const newUpdatedArticle = await Article.findOneAndUpdate(
       blogUpdateCondition,
-      updatedBlog,
+      updatedArticle,
       { new: true }
     );
     res.json({
       success: true,
       message: "updated post was successfully updated",
-      post: newUpdatedBlog,
+      post: newUpdatedArticle,
     });
   },
-  getBlogById: (req, res, next, id) => {
-    Blog.findById(id)
+  getArticleById: (req, res, next, id) => {
+    Article.findById(id)
       .then((blog) => {
         req.blog = blog;
         next();
       })
       .catch((err) => {
         console.log(err);
-        const notFound = new Error("Blog not found");
+        const notFound = new Error("Article not found");
         next(notFound);
       });
   },

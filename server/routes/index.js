@@ -1,7 +1,7 @@
 import { Router as ExpressRouter } from "express";
 import passport from "passport";
 import userRouter from "./user.route.js";
-import blogsRouter from "./blogs.route.js";
+import articlesRouter from "./articles.route.js";
 import commentRouter from "./comment.route.js";
 import tagRouter from "./tag.route.js";
 import bookmarkRouter from "./bookmark.route.js";
@@ -20,7 +20,7 @@ Router.get(
   }
 );
 Router.use("/users", userRouter);
-Router.use("/blogs", blogsRouter);
+Router.use("/articles", articlesRouter);
 Router.use("/comments", commentRouter);
 Router.use("/tags", tagRouter);
 Router.use("/bookmark", bookmarkRouter);

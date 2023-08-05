@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 // TODO:  rename model name
 //  TODO: add page
 
-const BlogSchema = new Schema(
+const ArticleSchema = new Schema(
   {
     title: {
       type: String,
@@ -44,4 +44,4 @@ const BlogSchema = new Schema(
 );
 
 //TODO: create preSave fn that return timeToRead
-export default model("Blog", BlogSchema);
+export default model("Article", ArticleSchema);

@@ -1,26 +1,29 @@
 import Like from "../models/like.model.js";
 import User from "../models/user.model.js";
-import Blog from "../models/blog.model.js";
+import Article from "../models/article.model.js";
 import { StatusCodes } from "http-status-codes";
-// Like a blog
+// Like a article
 export default {
   reaction: async (req, res) => {
     const { userId } = req.user;
-    const { blogId } = req.body;
+    const { articleId } = req.body;
     // Check if the user exists
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if the blog exists
-    const blog = await Blog.findById(blogId);
-    if (!blog) {
+    // Check if the article exists
+    const article = await Article.findById(articleId);
+    if (!article) {
       const error = new Error("Không tìm thấy bài viết");
       error.status = StatusCodes.NOT_FOUND;
       throw error;
     }
-    const existingLike = await Like.findOne({ user: userId, blog: blogId });
+    const existingLike = await Like.findOne({
+      user: userId,
+      article: articleId,
+    });
     if (existingLike) {
       existingLike.isLiked = !existingLike.isLiked;
       await existingLike.save();
@@ -30,7 +33,7 @@ export default {
       });
     } else {
       // If like does not exist, create a new like
-      const newLike = new Like({ user: userId, blog: blogId });
+      const newLike = new Like({ user: userId, article: articleId });
       await newLike.save();
       return res
         .status(200)
